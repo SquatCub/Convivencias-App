@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSolicitudTable extends Migration
+class CreateCategoriaTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSolicitudTable extends Migration
      */
     public function up()
     {
-        Schema::create('solicitud', function (Blueprint $table) {
+        Schema::create('categoria', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('username');
-            $table->string('img_url');
+            $table->string("nombre");
+            $table->string("descripcion");
+            $table->string("imagen");
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateSolicitudTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('solicitud');
+        Schema::dropIfExists('categoria');
     }
 }
