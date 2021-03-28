@@ -10,30 +10,35 @@ class User extends Authenticatable
 {
     use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = 'users';
+    protected $primaryKey = 'id';
+
     protected $fillable = [
-        'name', 'email', 'password',
+        'nombre', 'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
-    ];
+    public function usuario(){
+        return $this->hasOne('App\Models\Usuario', 'id_usuario');
+    }
+    public function admin(){
+        return $this->hasOne('App\Models\Admin', 'id_usuario');
+    }
+    public function root(){
+        return $this->hasOne('App\Models\Root', 'id_usuario');
+    }
+
+    public function tipoUsuario(){
+        if ($this->root){
+            return 'R';
+        } else if ($this->admin) {
+            return 'A';
+        } else if ($this->usuario) {
+            return 'U';
+        }
+        return 'O';
+    }
 }
