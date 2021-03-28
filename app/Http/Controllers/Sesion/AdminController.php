@@ -9,7 +9,7 @@ use Auth;
 class AdminController extends Controller
 {
     public function inicio() {
-        $admin = Auth::user()->admin;
+        $admin = Auth::user();
         return view('admin.index', compact('admin'));
     }
 }

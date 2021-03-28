@@ -8,8 +8,9 @@
     <title>@yield('titulo')</title>
 </head>
 <body>
+    @yield('navigation')
+    <br>
     <div class="container">
-        @yield('navigation')
         @yield('section')
     </div>
 </body>

@@ -2,6 +2,10 @@
 @section('titulo') Panel Super-Usuario @endsection
 @section('section')
 @include('root.navigation')
-<h1>Principal</h1>
-<h1>Iniciaste sesion como root</h1>
+<h1>Administradores</h1>
+<br>
+@foreach($admins as $admins)
+    <h1>Admin</h1>
+@endforeach
+
 @endsection

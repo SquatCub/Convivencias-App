@@ -9,7 +9,7 @@ use Auth;
 class UsuarioController extends Controller
 {
     public function inicio() {
-        $usuario = Auth::user()->usuario;
+        $usuario = Auth::user();
         return view('principal.index', compact('usuario'));
     }
 }

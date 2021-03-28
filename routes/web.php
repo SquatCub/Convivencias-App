@@ -26,13 +26,19 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 Route::group(['middleware' => ['auth']], function () {
     /* Rutas para alumnos */
     Route::group(['middleware' => ['usuario']], function () {
-        Route::get('/usuario', 'Sesion\UsuarioController@inicio')->name('inicio.usuario');
+        Route::get('/index', 'Sesion\UsuarioController@inicio')->name('inicio.usuario');
     });
     Route::group(['middleware' => ['admin']], function () {
             Route::get('/admin', 'Sesion\AdminController@inicio')->name('inicio.admin');
     });
     Route::group(['middleware' => ['root']], function () {
         Route::get('/root', 'Sesion\RootController@inicio')->name('inicio.root');
+
+        Route::get('/root/administradores', 'Sesion\RootController@administradores')->name('root.admins');
+
+        Route::get('/root/secciones', 'Sesion\RootController@secciones')->name('root.seccions');
+        Route::get('/root/secciones/nuevo', 'Sesion\RootController@newSeccion')->name('seccion.new');
+        Route::post('/root/secciones/crear', 'Sesion\RootController@createSeccion')->name('seccion.create');
 });
 });
 //Route::get('/', 'General\SolicitudController@index')->name('index');

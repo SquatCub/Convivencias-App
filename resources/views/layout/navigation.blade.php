@@ -1,6 +1,10 @@
 @section('navigation')
 <nav>
+    @if(isset($usuario))
+    <a href="{{ route ('inicio.usuario') }}">Inicio</a>
+    @else 
     <a href="{{ route ('index') }}">Inicio</a>
+    @endif
     <a href="">Categorias</a>
     <a href="">Actividades</a>
     @if(isset($usuario))

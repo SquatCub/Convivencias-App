@@ -8,4 +8,5 @@ class Area extends Model
 {
     protected $table = 'area';
     protected $primaryKey = 'id';
+    protected $fillable = ['id', 'nombre'];
 }
