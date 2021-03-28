@@ -1,24 +1,13 @@
-@extends('login.layout')
+@extends('layout.layout')
 @section('titulo') Convivencias - Inicia sesión o registrate @endsection
 @section('section')
-@if($opcion == '')
-<div class="panel-body">
-    <h1 class="text-center">Bienvenido a la pagina de Convivencias en linea</h1>
-    <br> 
-    <ul>
-        <li><a href="{{ url('login/') }}">Inicio</a></li>
-        <li><a href="{{ url('login/iniciar') }}">Inicia sesion</a></li>
-        <li><a href="{{ url('login/registro') }}">Registrate</a></li>
-    </ul>
-</div>
-@elseif($opcion == 'iniciar')
+
+@if($opcion == 'iniciar')
+@section('navigation')
+    @include('layout.navigation')
+@endsection
 <form action="{{ route('login') }}" method="POST">
     {{ csrf_field() }}
-    <ul>
-        <li><a href="{{ url('login/') }}">Inicio</a></li>
-        <li><a href="{{ url('login/iniciar') }}">Inicia sesion</a></li>
-        <li><a href="{{ url('login/registro') }}">Registrate</a></li>
-    </ul>
     <p class="text-center">Ingresa a la pagina si ya cuentas con tu usuario y contraseña, si no es así puedes registrarte en la sección de registro</p> 
     <br>
     <label for="usuario">Nombre de usuario</label> 
@@ -35,13 +24,11 @@
     <button type="submit"> Acceder</button>
 </form>
 @elseif($opcion == 'registro')
+@section('navigation')
+    @include('layout.navigation')
+@endsection
 <form action="" method="POST">
     @csrf
-    <ul>
-        <li><a href="{{ url('login/') }}">Inicio</a></li>
-        <li><a href="{{ url('login/iniciar') }}">Inicia sesion</a></li>
-        <li><a href="{{ url('login/registro') }}">Registrate</a></li>
-    </ul>
     <p class="text-center">Ingresa tus datos para poder registrarte en el sistema, debes ingresar tus datos correctamente y adjuntar los archivos para validar tu información. Una vez que mandes la solicitud y se apruebe, se te contactará y podrás iniciar sesión para usar la página</p> 
     <br> 
     <div class="form-group">

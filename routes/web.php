@@ -10,16 +10,30 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/login','LoginController@index');
-Route::get('/', function() {
-    return redirect('/login');
-});
+//  -   -   -   -   -   Vista principal
+Route::get('/','General\LandingController@index')->name("index");
+
+//  -   -   -   -   -   Vistas login y registro
 Route::get('/login/{opcion?}', function($opcion = "") {
     return view('login.index', compact('opcion'));
-})->name('index');
-//  -   -   -   -   -   
+});
+//  -   -   -   -   -   Controlador para iniciar sesion / cerrar
 Route::post('/login_usuario', 'Auth\LoginController@login')->name('login');
-Route::post('/login_registro', 'Auth\LoginController@loginRegistro')->name('login_registro');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
+
+//Middleware
+Route::group(['middleware' => ['auth']], function () {
+    /* Rutas para alumnos */
+    Route::group(['middleware' => ['usuario']], function () {
+        Route::get('/usuario', 'Sesion\UsuarioController@inicio')->name('inicio.usuario');
+    });
+    Route::group(['middleware' => ['admin']], function () {
+            Route::get('/admin', 'Sesion\AdminController@inicio')->name('inicio.admin');
+    });
+    Route::group(['middleware' => ['root']], function () {
+        Route::get('/root', 'Sesion\RootController@inicio')->name('inicio.root');
+});
+});
 //Route::get('/', 'General\SolicitudController@index')->name('index');
 //Route::post('enviar-solicitud', 'General\SolicitudController@enviarSolicitud')->name('enviar');

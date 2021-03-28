@@ -16,13 +16,13 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             switch (Auth::user()->tipoUsuario()) {
                 case 'U':
-                    return "Usuario";
+                    return redirect()->route('inicio.usuario');
                     break;
                 case 'A':
-                    return "Admin";
+                    return redirect()->route('inicio.admin');
                     break;
                 case 'R':
-                    return "Root";
+                    return redirect()->route('inicio.root');
                     break;
                 default:
                     return redirect()->back()->withErrors(['usuario' => trans('auth.failed')])
@@ -33,5 +33,10 @@ class LoginController extends Controller
         
         return redirect()->back()->withErrors(['usuario' => trans('auth.failed')])
         ->withInput(['usuario' => $credentials['usuario']]);
+    }
+
+    public function logout() {
+        Auth::logout();
+        return redirect('/');
     }
 }
