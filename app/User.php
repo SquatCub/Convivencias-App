@@ -21,7 +21,7 @@ class User extends Authenticatable
         'password',
     ];
 
-    public function usuario(){
+    public function normal(){
         return $this->hasOne('App\Models\Usuario', 'id_usuario');
     }
     public function admin(){
@@ -36,7 +36,7 @@ class User extends Authenticatable
             return 'R';
         } else if ($this->admin) {
             return 'A';
-        } else if ($this->usuario) {
+        } else if ($this->normal) {
             return 'U';
         }
         return 'O';

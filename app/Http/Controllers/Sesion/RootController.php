@@ -12,7 +12,7 @@ use App\Models\Area;
 class RootController extends Controller
 {
     public function inicio() {
-        $root = Auth::user();
+        $root = Auth::user()->root;
         return view('root.index', compact('root'));
     }
 

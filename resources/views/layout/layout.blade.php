@@ -10,8 +10,6 @@
 <body>
     @yield('navigation')
     <br>
-    <div class="container">
-        @yield('section')
-    </div>
+    @yield('section')
 </body>
 </html>

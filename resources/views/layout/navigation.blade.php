@@ -7,7 +7,7 @@
     @endif
     <a href="">Categorias</a>
     <a href="">Actividades</a>
-    @if(isset($usuario))
+    @if(isset($usuario->normal))
         <a href="{{ url('logout') }}">Cerrar sesión</a>
     @else
         <a href="{{ url ('login/registro') }}">Registrarse</a>
