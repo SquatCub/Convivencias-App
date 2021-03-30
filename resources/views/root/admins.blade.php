@@ -2,6 +2,18 @@
 @section('titulo') Panel Super-Usuario @endsection
 @section('section')
 @include('root.navigation')
+
+@if(session()->has('message'))
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+<div class="container card">
+<strong>Correcto</strong>  {{ session()->get('message') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+</div>
+@endif
+
 <div class="container card">
 <br>
     <h1>Administradores</h1>
@@ -31,5 +43,6 @@
         </tbody>
     </table>
 </div>
+
 
 @endsection

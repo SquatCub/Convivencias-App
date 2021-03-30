@@ -28,6 +28,9 @@
             </div>
             <div class="col-2">
                 <input type="text" class="form-control" name="username" placeholder="Nombre de usuario" required>
+                <small id="passwordHelpBlock" class="form-text text-muted">
+                    Ej. Juanito321
+                </small>
             </div>
         </div>
         <br>

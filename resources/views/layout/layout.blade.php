@@ -11,5 +11,7 @@
     @yield('navigation')
     <br>
     @yield('section')
+
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

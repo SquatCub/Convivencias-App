@@ -17,8 +17,8 @@ class CreateRootTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('apellido_paterno');
-            $table->string('apellido_materno');
-            $table->unsignedBigInteger('id_usuario');
+            $table->string('apellido_materno')->nullable();;
+            $table->unsignedBigInteger('id_usuario')->onDelete('cascade');
             $table->foreign('id_usuario')->references('id')->on('users');
             $table->timestamps();
         });

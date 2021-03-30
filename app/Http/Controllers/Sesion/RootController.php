@@ -41,12 +41,12 @@ class RootController extends Controller
             }else{
                 if($user = User::create(["usuario"=>$r->username, "password"=>bcrypt($r->password)])) {
                     if($admin = Admin::create(["nombre"=>$r->nombre, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "id_usuario"=>$user->id, "id_area"=>$r->id_area])) {
-                        return redirect()->route('root.admins')->with('mensaje', 'Administrador creado con exito');
+                        return redirect()->route('root.admins')->with('message', 'Administrador creado con exito');
                     } else {
-                        return back()->with('error', 'No se pudo crear el administrador');
+                        return back()->with('message', 'No se pudo crear el administrador');
                     }
                 } else {
-                    return back()->with('error', 'No se pudo crear el administrador');
+                    return back()->with('message', 'No se pudo crear el administrador');
                 }
             }
         } catch (Exception $error) {
