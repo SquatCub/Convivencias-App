@@ -5,7 +5,7 @@
 <br>
 <div class="container text-center card">
     <h1>Bienvenido {{$root->nombre}} {{$root->apellido_paterno}} {{$root->apellido_materno}}</h1>
-    <h3>En esta pagina puedes gestionar Administradores, Secciones y Super Usuarios</h3>
+    <h3>En esta pagina puedes gestionar Administradores, Secciones y Superusuarios</h3>
 </div>
 
 @endsection

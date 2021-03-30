@@ -35,6 +35,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/root', 'Sesion\RootController@inicio')->name('inicio.root');
 
         Route::get('/root/administradores', 'Sesion\RootController@administradores')->name('root.admins');
+        Route::get('/root/administradores/nuevo', 'Sesion\RootController@newAdmin')->name('admin.new');
+        Route::post('/root/administradores/crear', 'Sesion\RootController@createAdmin')->name('admin.create');
 
         Route::get('/root/secciones', 'Sesion\RootController@secciones')->name('root.seccions');
         Route::get('/root/secciones/nuevo', 'Sesion\RootController@newSeccion')->name('seccion.new');

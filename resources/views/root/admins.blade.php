@@ -6,7 +6,7 @@
 <br>
     <h1>Administradores</h1>
     <div class="text-right">
-        <a href="{{ route ('seccion.new') }}" class="btn btn-warning">Crear nuevo administrador</a>
+        <a href="{{ route ('admin.new') }}" class="btn btn-warning">Crear nuevo administrador</a>
     </div>
     <br>
 

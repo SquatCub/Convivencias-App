@@ -16,6 +16,9 @@
         <a class="nav-link" href="{{ route ('root.seccions') }}">Secciones</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{{ route ('root.admins') }}">Superusuarios</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{{ url('logout') }}">Cerrar sesión</a>
       </li>
     </ul>
