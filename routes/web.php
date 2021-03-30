@@ -33,15 +33,21 @@ Route::group(['middleware' => ['auth']], function () {
     });
     Route::group(['middleware' => ['root']], function () {
         Route::get('/root', 'Sesion\RootController@inicio')->name('inicio.root');
-
+        #   -   -   -   -   -   -   Funciones para Administradores
         Route::get('/root/administradores', 'Sesion\RootController@administradores')->name('root.admins');
         Route::get('/root/administradores/nuevo', 'Sesion\RootController@newAdmin')->name('admin.new');
         Route::post('/root/administradores/crear', 'Sesion\RootController@createAdmin')->name('admin.create');
         Route::delete('/root/administradores/eliminar/{id}', 'Sesion\RootController@deleteAdmin')->name('admin.eliminar');
-
+        #   -   -   -   -   -   -   Funciones para Secciones
         Route::get('/root/secciones', 'Sesion\RootController@secciones')->name('root.seccions');
         Route::get('/root/secciones/nuevo', 'Sesion\RootController@newSeccion')->name('seccion.new');
         Route::post('/root/secciones/crear', 'Sesion\RootController@createSeccion')->name('seccion.create');
+        Route::delete('/root/secciones/eliminar/{id}', 'Sesion\RootController@deleteSeccion')->name('seccion.eliminar');
+        #   -   -   -   -   -   -   Funciones para Superusuarios
+        Route::get('/root/superusuarios', 'Sesion\RootController@superusers')->name('root.superusers');
+        Route::get('/root/superusuarios/nuevo', 'Sesion\RootController@newRoot')->name('root.new');
+        Route::post('/root/superusuarios/crear', 'Sesion\RootController@createRoot')->name('root.create');
+        Route::delete('/root/superusuarios/eliminar/{id}', 'Sesion\RootController@deleteRoot')->name('root.eliminar');
 });
 });
 //Route::get('/', 'General\SolicitudController@index')->name('index');

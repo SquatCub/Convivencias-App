@@ -4,9 +4,9 @@
 @include('root.navigation')
 <div class="container card">
 <br>
-    <h1>Administradores</h1>
+    <h1>Superusuarios</h1>
     <div class="text-right">
-        <a href="{{ route ('admin.new') }}" class="btn btn-warning">Crear nuevo administrador</a>
+        <a href="{{ route ('root.new') }}" class="btn btn-success">Crear nuevo superusuario</a>
     </div>
     <br>
 
@@ -16,26 +16,28 @@
                 <th scope="col">#</th>
                 <th scope="col">Nombre completo</th>
                 <th scope="col">Usuario</th>
-                <th scope="col">Área</th>
                 <th scope="col">Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($admins as $admin)
+            @foreach($roots as $root)
             <tr>
             <td scope="row">{{ $loop->iteration }}</td>
-            <td scope="row">{{ $admin->nombre }} {{ $admin->apellido_paterno }} {{ $admin->apellido_materno }}</td>
-            <td scope="row">{{ $admin->user->usuario }}</td>
-            <td scope="row">{{ $admin->area->nombre }}</td>
-            <td scope="row"><a href="" class="btn btn-primary btn-sm">Editar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $admin->user->id }}">Eliminar</a></td>
+            <td scope="row">{{ $root->nombre }} {{ $root->apellido_paterno }} {{ $root->apellido_materno }}</td>
+            <td scope="row">{{ $root->user->usuario }}</td>
+            <td scope="row"><a href="" class="btn btn-primary btn-sm">Editar</a>
+            @if(Auth::user()->root->id_usuario != $root->id_usuario) 
+            <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $root->user->id }}">Eliminar</a>
+            @endif
+            </td>
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
 
-@foreach ($admins as $admin)
-<div class="modal fade" id="modalDelete{{ $admin->user->id }}" tabindex="-1" role="dialog">
+@foreach ($roots as $root)
+<div class="modal fade" id="modalDelete{{ $root->user->id }}" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
@@ -45,12 +47,11 @@
         </button>
       </div>
       <div class="modal-body">
-            <h4>¿Está seguro de querer eliminar el administrador?</h4><br>
-            <h5><b>Nombre:</b> {{ $admin->nombre }} {{ $admin->apellido_paterno }} {{ $admin->apellido_materno }}</h5>
-            <h5><b>Área:</b> {{ $admin->area->nombre }}</h5>
+            <h4>¿Está seguro de querer eliminar el rootistrador?</h4><br>
+            <h5><b>Nombre:</b> {{ $root->nombre }} {{ $root->apellido_paterno }} {{ $root->apellido_materno }}</h5>
       </div>
       <div class="modal-footer">
-        <form action="{{ route('admin.eliminar', $admin->user->id) }}" method="POST">
+        <form action="{{ route('root.eliminar', $root->user->id) }}" method="POST">
             @method('DELETE')
             @csrf
             <button type="button" class="btn btn-default btn-raised" data-dismiss="modal">Cancelar</button>
