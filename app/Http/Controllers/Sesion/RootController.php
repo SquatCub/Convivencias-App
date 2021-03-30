@@ -53,6 +53,21 @@ class RootController extends Controller
             return back()->with('error', 'Hubo un error');
         }
     }
+    public function deleteAdmin($id) {
+        if(!$id){
+            return back()->with('message', 'Hubo un error en la solicitud');
+        }
+        try {
+            if(User::findOrFail($id)){
+                User::destroy($id);
+                return back()->with('message', 'Administrador eliminado');            
+            } else {
+                return back()->with('message', 'Recurso no encontrado');
+            }
+        } catch(Exception $e) {
+            return back()->with('message', 'No es posible eliminar al administrador');
+        }
+    }
     
     #   -   -   -   -   -   -   Funciones para Secciones
     public function secciones() {
