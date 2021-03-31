@@ -27,7 +27,7 @@
             <td scope="row">{{ $admin->nombre }} {{ $admin->apellido_paterno }} {{ $admin->apellido_materno }}</td>
             <td scope="row">{{ $admin->user->usuario }}</td>
             <td scope="row">{{ $admin->area->nombre }}</td>
-            <td scope="row"><a href="" class="btn btn-primary btn-sm">Editar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $admin->user->id }}">Eliminar</a></td>
+            <td scope="row"><a href="{{ route ('admin.editar', $admin) }}" class="btn btn-primary btn-sm">Editar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $admin->user->id }}">Eliminar</a></td>
             </tr>
             @endforeach
         </tbody>

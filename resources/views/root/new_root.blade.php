@@ -48,6 +48,7 @@
 
         <br>
         <div class="col-sm-12 text-right">
+            <a href="{{ url()->previous() }}" class="btn btn-secondary btn-raised btn-sm">Cancelar</a>
             <button type="submit" class="btn btn-primary btn-raised btn-sm">Guardar</button>
         </div>
         <br>

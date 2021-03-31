@@ -23,7 +23,7 @@
                 <tr>
                 <td scope="row">{{ $loop->iteration }}</td>
                 <td scope="row">{{ $area->nombre }}</td>
-                <td scope="row"><a href="" class="btn btn-primary btn-sm">Editar</a> <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $area->id }}">Eliminar</a></td>
+                <td scope="row"><a href="{{ route ('seccion.editar', $area) }}" class="btn btn-primary btn-sm">Editar</a> <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $area->id }}">Eliminar</a></td>
                 </tr>
                 @endforeach
             </tbody>
