@@ -75,7 +75,7 @@ class RootController extends Controller
             $admin = Admin::findOrFail($r->id_admin);
             if ($usuario->usuario == $r->username || !($user = User::where('usuario',$r->username)->count()>0)) {
                 $usuario->usuario=$r->username;
-                $usuario->password=$r->password;
+                $usuario->password=bcrypt($r->password);
                 $usuario->save();
                 $admin->nombre=$r->nombre;
                 $admin->apellido_paterno=$r->paterno;
@@ -204,6 +204,39 @@ class RootController extends Controller
                 } else {
                     return back()->with('error', 'No se pudo crear el superusuario');
                 }
+            }
+        } catch (Exception $error) {
+            return back()->with('error', 'Hubo un error');
+        }
+    }
+    public function editRoot($id) {
+        $root = Root::findOrFail($id);
+        return view('root.edit_root', compact('root'));
+    }
+    public function updateRoot(Request $r) {
+        $v = Validator::make($r->all(), [
+            'nombre' => 'required',
+            'materno' => 'required',
+            'paterno' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'id_usuario' => 'required',
+            'id_root' => 'required'
+        ]);
+        try {
+            $usuario = User::findOrFail($r->id_usuario);
+            $root = Root::findOrFail($r->id_root);
+            if ($usuario->usuario == $r->username || !($user = User::where('usuario',$r->username)->count()>0)) {
+                $usuario->usuario=$r->username;
+                $usuario->password=bcrypt($r->password);
+                $usuario->save();
+                $root->nombre=$r->nombre;
+                $root->apellido_paterno=$r->paterno;
+                $root->apellido_materno=$r->materno;
+                $root->save();
+                return redirect()->route('root.superusers')->with('message', 'Superusuario actualizado con exito');
+            } else {
+                return back()->with('error', 'Ya existe un usuario con este álias');
             }
         } catch (Exception $error) {
             return back()->with('error', 'Hubo un error');

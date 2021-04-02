@@ -25,7 +25,7 @@
             <td scope="row">{{ $loop->iteration }}</td>
             <td scope="row">{{ $root->nombre }} {{ $root->apellido_paterno }} {{ $root->apellido_materno }}</td>
             <td scope="row">{{ $root->user->usuario }}</td>
-            <td scope="row"><a href="" class="btn btn-primary btn-sm">Editar</a>
+            <td scope="row"><a href="{{ route ('root.editar', $root) }}" class="btn btn-primary btn-sm">Editar</a>
             @if(Auth::user()->root->id_usuario != $root->id_usuario) 
             <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $root->user->id }}">Eliminar</a>
             @endif

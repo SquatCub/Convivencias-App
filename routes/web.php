@@ -37,20 +37,22 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('/root/administradores', 'Sesion\RootController@administradores')->name('root.admins');
         Route::get('/root/administradores/nuevo', 'Sesion\RootController@newAdmin')->name('admin.new');
         Route::post('/root/administradores/crear', 'Sesion\RootController@createAdmin')->name('admin.create');
-        Route::get('/root/administradores/editar/{id}','Sesion\RootController@editAdmin')->name('admin.editar');
+        Route::get('/root/administradores/editar/{id}', 'Sesion\RootController@editAdmin')->name('admin.editar');
         Route::post('/root/administradores/update', 'Sesion\RootController@updateAdmin')->name('admin.update');
         Route::delete('/root/administradores/eliminar/{id}', 'Sesion\RootController@deleteAdmin')->name('admin.eliminar');
         #   -   -   -   -   -   -   Funciones para Secciones
         Route::get('/root/secciones', 'Sesion\RootController@secciones')->name('root.seccions');
         Route::get('/root/secciones/nuevo', 'Sesion\RootController@newSeccion')->name('seccion.new');
         Route::post('/root/secciones/crear', 'Sesion\RootController@createSeccion')->name('seccion.create');
-        Route::get('/root/secciones/editar/{id}','Sesion\RootController@editSeccion')->name('seccion.editar');
+        Route::get('/root/secciones/editar/{id}', 'Sesion\RootController@editSeccion')->name('seccion.editar');
         Route::post('/root/secciones/update','Sesion\RootController@updateSeccion')->name('seccion.update');
         Route::delete('/root/secciones/eliminar/{id}', 'Sesion\RootController@deleteSeccion')->name('seccion.eliminar');
         #   -   -   -   -   -   -   Funciones para Superusuarios
         Route::get('/root/superusuarios', 'Sesion\RootController@superusers')->name('root.superusers');
         Route::get('/root/superusuarios/nuevo', 'Sesion\RootController@newRoot')->name('root.new');
         Route::post('/root/superusuarios/crear', 'Sesion\RootController@createRoot')->name('root.create');
+        Route::get('/root/superusuarios/editar/{id}', 'Sesion\RootController@editRoot')->name('root.editar');
+        Route::post('/root/superusuarios/update', 'Sesion\RootController@updateRoot')->name('root.update');
         Route::delete('/root/superusuarios/eliminar/{id}', 'Sesion\RootController@deleteRoot')->name('root.eliminar');
 });
 });
