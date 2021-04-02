@@ -19,6 +19,8 @@ class CreateActividadTable extends Migration
             $table->string("descripcion");
             $table->string("imagen");
             $table->string("video_url");
+            $table->unsignedBigInteger('id_categoria');
+            $table->foreign('id_categoria')->references('id')->on('categoria')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -16,7 +16,6 @@
                     <input class="form-control" autofocus type="text" name="username" placeholder="Nombre de usuario (Ej. Juan123)">
                 </div>
                 <h4>Datos de contacto (Por este medio se te enviará tu contraseña)</h4>
-                
                     <input type="file" name="acta" id="acta" accept="image/x-png,image/gif,image/jpeg">
                 </div>
                 <br>

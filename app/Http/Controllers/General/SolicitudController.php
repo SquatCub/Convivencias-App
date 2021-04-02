@@ -21,7 +21,7 @@ class SolicitudController extends Controller
         $imgName = time().'.'.$request->acta->getClientOriginalExtension();
         $request->acta->move(public_path('images'), $imgName);
 
-        if($solicitud = Solicitud::create(["username"=>$request->username, "img_url"=>$imgName])){
+        if($solicitud = Solicitud::create(["username"=>$request->username, "img_url"=>"categorias/"+$imgName])){
             return redirect()->route('index');
         } else {
             return ("Nop");

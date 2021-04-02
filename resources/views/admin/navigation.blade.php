@@ -10,10 +10,10 @@
         <a class="nav-link" href="{{ route ('inicio.root') }}">Inicio</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{{ route ('root.admins') }}">Categorías</a>
+        <a class="nav-link" href="{{ route ('admin.categorias') }}">Categorías</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{{ route ('root.seccions') }}">Actividades</a>
+        <a class="nav-link" href="{{ route ('admin.actividades') }}">Actividades</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{{ route ('root.superusers') }}">Usuarios</a>

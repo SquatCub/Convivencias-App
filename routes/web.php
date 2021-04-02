@@ -32,6 +32,12 @@ Route::group(['middleware' => ['auth']], function () {
     #   -   -   -   -   -   -   Funciones para administradores
     Route::group(['middleware' => ['admin']], function () {
             Route::get('/admin', 'Sesion\AdminController@inicio')->name('inicio.admin');
+            #   -   -   -   -   -   -   Funciones para Categorias
+            Route::get('/admin/categorias', 'Sesion\AdminController@categorias')->name('admin.categorias');
+            Route::get('/admin/categorias/nuevo', 'Sesion\AdminController@newCategoria')->name('categoria.new');
+            Route::post('/admin/categorias/crear', 'Sesion\AdminController@createCategoria')->name('categoria.create');
+            #   -   -   -   -   -   -   Funciones para Actividades
+            Route::get('/admin/actividades', 'Sesion\AdminController@actividades')->name('admin.actividades');
     });
     #   -   -   -   -   -   -   Funciones para superusuarios
     Route::group(['middleware' => ['root']], function () {
