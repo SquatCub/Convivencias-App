@@ -9,13 +9,14 @@
         <a href="{{ route ('categoria.new') }}" class="btn btn-success text-white">Añadir nueva categoría</a>
     </div>
     <br>
-    <div class="container">
+    <div class="container table-responsive">
         <table id="myTable" class="table table-hover text-center">
             <thead class="thead-dark">
                 <tr>
                     <th scope="col"># <button id="0" class="btn btn-sm sort" onclick="sortTable(0)">^</button></th>
                     <th scope="col">Nombre <button id="1" class="btn btn-sm sort" onclick="sortTable(1)">^</button></th>
                     <th scope="col">Descripción <button id="2" class="btn btn-sm sort" onclick="sortTable(2)">^</button></th>
+                    <th scope="col">Imagen</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -25,6 +26,7 @@
                 <td scope="row">{{ $loop->iteration }}</td>
                 <td scope="row">{{ $categoria->nombre }}</td>
                 <td class="desc" scope="row">{{ $categoria->descripcion }}</td>
+                <td scope="row"><img src="/images/{{$categoria->imagen}}" width="50" alt=""></td>
                 <td scope="row"><a href="{{ route ('seccion.editar', $categoria) }}" class="btn btn-primary btn-sm">Editar</a> <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $categoria->id }}">Eliminar</a></td>
                 </tr>
                 @endforeach
@@ -32,6 +34,35 @@
         </table>
     </div>
 </div>
+@foreach ($categorias as $categoria)
+<div class="modal fade" id="modalDelete{{ $categoria->id }}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white">
+        <h5 class="modal-title">Confirmación de eliminación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <h4>¿Está seguro de querer eliminar la categoría?</h4><br>
+            <h5><b>Nombre:</b> {{ $categoria->nombre }}</h5>
+            <hr>
+            <b>Esta acción no se podrá deshacer.</b>
+            <b>No podrás eliminar categorias que estén asignadas a actividades. Necesitas eliminar las actividades primero.</b>
+      </div>
+      <div class="modal-footer">
+        <form action="{{ route('categoria.eliminar', $categoria) }}" method="POST">
+            @method('DELETE')
+            @csrf
+            <button type="button" class="btn btn-default btn-raised" data-dismiss="modal">Cancelar</button>
+            <button type="sumbmit" class="btn btn-warning btn-raised" id="cursos-confirm-delete">Eliminar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+@endforeach
 <script>
     desc = document.querySelectorAll('.desc');
     desc.forEach(element=> {

@@ -10,28 +10,30 @@
     </div>
     <br>
 
-    <table id="myTable" class="table table-hover text-center">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">#  <button id="0" class="btn btn-sm sort" onclick="sortTable(0)">^</button></th>
-                <th scope="col">Nombre completo  <button id="1" class="btn btn-sm sort" onclick="sortTable(1)">^</button></th>
-                <th scope="col">Usuario  <button id="2" class="btn btn-sm sort" onclick="sortTable(2)">^</button></th>
-                <th scope="col">Área  <button id="3" class="btn btn-sm sort" onclick="sortTable(3)">^</button></th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="id01">
-            @foreach($admins as $admin)
-            <tr>
-            <td scope="row">{{ $loop->iteration }}</td>
-            <td scope="row">{{ $admin->nombre }} {{ $admin->apellido_paterno }} {{ $admin->apellido_materno }}</td>
-            <td scope="row">{{ $admin->user->usuario }}</td>
-            <td class="area" scope="row">{{ $admin->area->nombre }}</td>
-            <td scope="row"><a href="{{ route ('admin.editar', $admin) }}" class="btn btn-primary btn-sm">Editar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $admin->user->id }}">Eliminar</a></td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="table-responsive">
+      <table id="myTable" class="table table-hover text-center">
+          <thead class="thead-dark">
+              <tr>
+                  <th scope="col">#  <button id="0" class="btn btn-sm sort" onclick="sortTable(0)">^</button></th>
+                  <th scope="col">Nombre completo  <button id="1" class="btn btn-sm sort" onclick="sortTable(1)">^</button></th>
+                  <th scope="col">Usuario  <button id="2" class="btn btn-sm sort" onclick="sortTable(2)">^</button></th>
+                  <th scope="col">Área  <button id="3" class="btn btn-sm sort" onclick="sortTable(3)">^</button></th>
+                  <th scope="col">Acciones</th>
+              </tr>
+          </thead>
+          <tbody id="id01">
+              @foreach($admins as $admin)
+              <tr>
+              <td scope="row">{{ $loop->iteration }}</td>
+              <td scope="row">{{ $admin->nombre }} {{ $admin->apellido_paterno }} {{ $admin->apellido_materno }}</td>
+              <td scope="row">{{ $admin->user->usuario }}</td>
+              <td class="area" scope="row">{{ $admin->area->nombre }}</td>
+              <td scope="row"><a href="{{ route ('admin.editar', $admin) }}" class="btn btn-primary btn-sm">Editar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $admin->user->id }}">Eliminar</a></td>
+              </tr>
+              @endforeach
+          </tbody>
+      </table>
+    </div>
 </div>
 
 @foreach ($admins as $admin)

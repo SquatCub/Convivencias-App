@@ -9,16 +9,16 @@
     <form action="{{ route ('root.update') }}" method="post">
         @csrf <!-- Seguridad laravel -->
         
-        <div class="row">
-            <div class="col">
+        <div class="row text-left">
+            <div class="col-md-4 col-sm-6">
                 <span>Nombre(s)</span>
                 <input type="text" class="form-control" name="nombre" placeholder="Nombre(s)" value="{{ $root->nombre }}" required>
             </div>
-            <div class="col">
+            <div class="col-md-4 col-sm-6">
                 <span>Apellido paterno</span>
                 <input type="text" class="form-control" name="paterno" placeholder="Apellido Paterno" value="{{ $root->apellido_paterno }}" required>
             </div>
-            <div class="col">
+            <div class="col-md-4 col-sm-6">
                 <span>Apellido materno</span>
                 <input type="text" class="form-control" name="materno" placeholder="Apellido Materno" value="{{ $root->apellido_materno }}">
             </div>

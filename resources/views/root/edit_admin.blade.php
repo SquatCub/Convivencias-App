@@ -9,16 +9,16 @@
     <form action="{{ route ('admin.update') }}" method="post">
         @csrf <!-- Seguridad laravel -->
         
-        <div class="row">
-            <div class="col">
+        <div class="row text-left">
+            <div class="col-md-4 col-sm-6">
                 <span>Nombre(s)</span>
                 <input type="text" class="form-control" name="nombre" placeholder="Nombre(s)" value="{{ $admin->nombre }}" required>
             </div>
-            <div class="col">
+            <div class="col-md-4 col-sm-6">
                 <span>Apellido paterno</span>
                 <input type="text" class="form-control" name="paterno" placeholder="Apellido Paterno" value="{{ $admin->apellido_paterno }}" required>
             </div>
-            <div class="col">
+            <div class="col-md-4 col-sm-6">
                 <span>Apellido materno</span>
                 <input type="text" class="form-control" name="materno" placeholder="Apellido Materno" value="{{ $admin->apellido_materno }}">
             </div>
@@ -51,17 +51,16 @@
         </div>
         <br>
         <div class="row">
-            <div class="col-1">
+            <div class="col-md-1 col-sm-1">
                 <label for="password">Area: </label>
             </div>
-            <div class="col-3">
+            <div class="col-md-2 col-sm-6">
                 <select class="form-control" name="id_area" required>
                     <option value="{{$admin->area->id}}">{{$admin->area->nombre}}</option>
                     @foreach($areas as $area)
                     @if($area->id != $admin->area->id)
                     <option value="{{$area->id}}">{{$area->nombre}}</option>
                     @endif
-                    
                     @endforeach
                 </select> 
             </div>

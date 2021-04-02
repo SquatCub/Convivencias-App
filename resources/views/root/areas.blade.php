@@ -9,7 +9,7 @@
         <a href="{{ route ('seccion.new') }}" class="btn btn-success text-white">Añadir nueva sección</a>
     </div>
     <br>
-    <div class="container">
+    <div class="container table-responsive">
         <table id="myTable" class="table table-hover text-center">
             <thead class="thead-dark">
                 <tr>

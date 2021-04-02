@@ -9,31 +9,32 @@
         <a href="{{ route ('root.new') }}" class="btn btn-success">Crear nuevo superusuario</a>
     </div>
     <br>
-
-    <table id="myTable" class="table table-hover text-center">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col"># <button id="0" class="btn btn-sm sort" onclick="sortTable(0)">^</button></th>
-                <th scope="col">Nombre completo <button id="1" class="btn btn-sm sort" onclick="sortTable(1)">^</button></th>
-                <th scope="col">Usuario <button id="2" class="btn btn-sm sort" onclick="sortTable(2)">^</button></th>
-                <th scope="col">Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($roots as $root)
-            <tr>
-            <td scope="row">{{ $loop->iteration }}</td>
-            <td scope="row">{{ $root->nombre }} {{ $root->apellido_paterno }} {{ $root->apellido_materno }}</td>
-            <td scope="row">{{ $root->user->usuario }}</td>
-            <td scope="row"><a href="{{ route ('root.editar', $root) }}" class="btn btn-primary btn-sm">Editar</a>
-            @if(Auth::user()->root->id_usuario != $root->id_usuario) 
-            <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $root->user->id }}">Eliminar</a>
-            @endif
-            </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
+    <div class="table-responsive">
+      <table id="myTable" class="table table-hover text-center">
+          <thead class="thead-dark">
+              <tr>
+                  <th scope="col"># <button id="0" class="btn btn-sm sort" onclick="sortTable(0)">^</button></th>
+                  <th scope="col">Nombre completo <button id="1" class="btn btn-sm sort" onclick="sortTable(1)">^</button></th>
+                  <th scope="col">Usuario <button id="2" class="btn btn-sm sort" onclick="sortTable(2)">^</button></th>
+                  <th scope="col">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              @foreach($roots as $root)
+              <tr>
+              <td scope="row">{{ $loop->iteration }}</td>
+              <td scope="row">{{ $root->nombre }} {{ $root->apellido_paterno }} {{ $root->apellido_materno }}</td>
+              <td scope="row">{{ $root->user->usuario }}</td>
+              <td scope="row"><a href="{{ route ('root.editar', $root) }}" class="btn btn-primary btn-sm">Editar</a>
+              @if(Auth::user()->root->id_usuario != $root->id_usuario) 
+              <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $root->user->id }}">Eliminar</a>
+              @endif
+              </td>
+              </tr>
+              @endforeach
+          </tbody>
+      </table>
+    </div>
 </div>
 
 @foreach ($roots as $root)

@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/categorias', 'Sesion\AdminController@categorias')->name('admin.categorias');
             Route::get('/admin/categorias/nuevo', 'Sesion\AdminController@newCategoria')->name('categoria.new');
             Route::post('/admin/categorias/crear', 'Sesion\AdminController@createCategoria')->name('categoria.create');
+            Route::delete('/admin/categorias/eliminar/{id}', 'Sesion\AdminController@deleteCategoria')->name('categoria.eliminar');
             #   -   -   -   -   -   -   Funciones para Actividades
             Route::get('/admin/actividades', 'Sesion\AdminController@actividades')->name('admin.actividades');
     });
