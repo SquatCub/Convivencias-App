@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Auth;
 use Validator;
 use App\Models\Admin;
+use App\Models\Usuario;
 use App\Models\Area;
 use App\Models\Root;
 use App\User;
@@ -165,9 +166,12 @@ class RootController extends Controller
             return back()->with('error', 'Hubo un error en la solicitud');
         }
         try {
-            if(Area::findOrFail($id)) {
+            if($area = Area::findOrFail($id)) {
+                if(Admin::where('id_area', $area->id)->count()>0 || Usuario::where('id_area', $area->id)->count()>0) {
+                    return back()->with('error', 'No se puede eliminar la sección porque hay usuarios asignados a ella.');
+                }
                 Area::destroy($id);
-                return back()->with('message', 'Sección eliminada');            
+                return back()->with('message', 'Sección eliminada');   
             } else {
                 return back()->with('error', 'Recurso no encontrado');
             }

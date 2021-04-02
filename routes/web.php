@@ -25,12 +25,15 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 //Middleware
 Route::group(['middleware' => ['auth']], function () {
     /* Rutas para alumnos */
+    #   -   -   -   -   -   -   Funciones para usuarios normales
     Route::group(['middleware' => ['usuario']], function () {
         Route::get('/index', 'Sesion\UsuarioController@inicio')->name('inicio.usuario');
     });
+    #   -   -   -   -   -   -   Funciones para administradores
     Route::group(['middleware' => ['admin']], function () {
             Route::get('/admin', 'Sesion\AdminController@inicio')->name('inicio.admin');
     });
+    #   -   -   -   -   -   -   Funciones para superusuarios
     Route::group(['middleware' => ['root']], function () {
         Route::get('/root', 'Sesion\RootController@inicio')->name('inicio.root');
         #   -   -   -   -   -   -   Funciones para Administradores
