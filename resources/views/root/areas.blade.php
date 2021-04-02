@@ -10,11 +10,11 @@
     </div>
     <br>
     <div class="container">
-        <table class="table table-hover text-center">
+        <table id="myTable" class="table table-hover text-center">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col"># <button id="0" class="btn btn-sm sort" onclick="sortTable(0)">^</button></th>
+                    <th scope="col">Nombre <button id="1" class="btn btn-sm sort" onclick="sortTable(1)">^</button></th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
