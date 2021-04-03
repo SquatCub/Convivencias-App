@@ -6,7 +6,7 @@
 @section('navigation')
     @include('layout.navigation')
 @endsection
-<form action="{{ route('login') }}" method="POST">
+<form action="{{ route('log') }}" method="POST">
     {{ csrf_field() }}
     <p class="text-center">Ingresa a la pagina si ya cuentas con tu usuario y contraseña, si no es así puedes registrarte en la sección de registro</p> 
     <br>

@@ -18,7 +18,7 @@ Route::get('/login/{opcion?}', function($opcion = "") {
     return view('login.index', compact('opcion'));
 });
 //  -   -   -   -   -   Controlador para iniciar sesion / cerrar
-Route::post('/login_usuario', 'Auth\LoginController@login')->name('login');
+Route::post('/login_usuario', 'Auth\LoginController@login')->name('log');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 
