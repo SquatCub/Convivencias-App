@@ -14,9 +14,8 @@
 Route::get('/','General\LandingController@index')->name("index");
 
 //  -   -   -   -   -   Vistas login y registro
-Route::get('/login/{opcion?}', function($opcion = "") {
-    return view('login.index', compact('opcion'));
-});
+Route::get('/login/{opcion}','General\LandingController@login');
+
 //  -   -   -   -   -   Controlador para iniciar sesion / cerrar
 Route::post('/login_usuario', 'Auth\LoginController@login')->name('log');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -42,6 +41,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/actividades/nuevo', 'Sesion\AdminController@newActividad')->name('actividad.new');
             Route::post('/admin/actividades/crear', 'Sesion\AdminController@createActividad')->name('actividad.create');
             Route::delete('/admin/actividades/eliminar/{id}', 'Sesion\AdminController@deleteActividad')->name('actividad.eliminar');
+            #   -   -   -   -   -   -   Funciones para Usuarios
+            Route::get('/admin/usuarios', 'Sesion\AdminController@usuarios')->name('admin.usuarios');
+            #   -   -   -   -   -   -   Funciones para Solicitudes
+            Route::get('/admin/usuarios/solicitudes', 'Sesion\AdminController@solicitudes')->name('admin.solicitudes');
     });
     #   -   -   -   -   -   -   Funciones para superusuarios
     Route::group(['middleware' => ['root']], function () {

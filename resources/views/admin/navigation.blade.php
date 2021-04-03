@@ -16,7 +16,7 @@
         <a class="nav-link" href="{{ route ('admin.actividades') }}">Actividades</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{{ route ('root.superusers') }}">Usuarios</a>
+        <a class="nav-link" href="{{ route ('admin.usuarios') }}">Usuarios</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link" href="{{ url('logout') }}">Cerrar sesión</a>

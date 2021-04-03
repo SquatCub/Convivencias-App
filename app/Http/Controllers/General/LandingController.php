@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Auth;
 use App\Models\Categoria;
+use App\Models\Area;
 
 class LandingController extends Controller
 {
@@ -16,5 +17,9 @@ class LandingController extends Controller
         } else {
             return view('principal.index', compact('categorias'));
         }
+    }
+    public function login($opcion) {
+        $secciones = Area::all();
+        return view('login.index', compact('secciones', 'opcion'));
     }
 }

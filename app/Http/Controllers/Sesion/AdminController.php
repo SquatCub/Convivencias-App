@@ -9,6 +9,8 @@ use Auth;
 use Validator;
 use App\Models\Categoria;
 use App\Models\Actividad;
+use App\Models\Usuario;
+use App\Models\Solicitud;
 
 class AdminController extends Controller
 {
@@ -121,4 +123,15 @@ class AdminController extends Controller
             return back()->with('error', 'No es posible eliminar la actividad');
         }
     }
+    #   -   -   -   -   -   -   Funciones para Usuarios
+    public function usuarios() {
+        $usuarios = Usuario::all();
+        $categorias = Categoria::all();
+        return view('admin.usuarios', compact('usuarios', 'categorias'));
+    }
+    public function solicitudes() {
+        $solicitudes = Solicitud::all();
+        return view('admin.solicitudes', compact('solicitudes'));
+    }
+
 }

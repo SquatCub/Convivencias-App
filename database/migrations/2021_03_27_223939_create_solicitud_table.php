@@ -22,6 +22,8 @@ class CreateSolicitudTable extends Migration
             $table->string('contraseña');
             $table->string('url_acta');
             $table->string('url_comprobante');
+            $table->string('email')->nullable();
+            $table->string('telefono')->nullable();
             $table->unsignedBigInteger('id_area');
             $table->foreign('id_area')->references('id')->on('area');
             $table->timestamps();
