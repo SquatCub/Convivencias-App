@@ -8,9 +8,9 @@ class Actividad extends Model
 {
     protected $table = 'actividad';
     protected $primaryKey = 'id';
-    protected $fillable = ['id', 'nombre', 'descripcion', 'imagen', 'video_url'];
+    protected $fillable = ['id', 'nombre', 'descripcion', 'imagen', 'video_url', 'id_categoria'];
 
     public function categoria() {
-        return $this->belongsTo(Categoria::class, 'id', 'id_categoria');
+        return $this->hasOne(Categoria::class, 'id', 'id_categoria');
     }
 }

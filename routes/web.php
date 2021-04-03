@@ -39,6 +39,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/admin/categorias/eliminar/{id}', 'Sesion\AdminController@deleteCategoria')->name('categoria.eliminar');
             #   -   -   -   -   -   -   Funciones para Actividades
             Route::get('/admin/actividades', 'Sesion\AdminController@actividades')->name('admin.actividades');
+            Route::get('/admin/actividades/nuevo', 'Sesion\AdminController@newActividad')->name('actividad.new');
+            Route::post('/admin/actividades/crear', 'Sesion\AdminController@createActividad')->name('actividad.create');
+            Route::delete('/admin/actividades/eliminar/{id}', 'Sesion\AdminController@deleteActividad')->name('actividad.eliminar');
     });
     #   -   -   -   -   -   -   Funciones para superusuarios
     Route::group(['middleware' => ['root']], function () {

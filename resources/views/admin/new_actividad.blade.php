@@ -4,9 +4,9 @@
 @include('admin.navigation')
 
 <div class="container text-center card">
-    <h1>Crear nueva categoría</h1>
+    <h1>Crear nueva actividad</h1>
 
-    <form action="{{ route ('categoria.create') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route ('actividad.create') }}" method="post" enctype="multipart/form-data">
         @csrf <!-- Seguridad laravel -->
         <div class="col-sm-12">
             <div class="panel panel-default">
@@ -14,14 +14,29 @@
                 <div class="panel-body">
                     <div class="col-sm-12">
                         <div class="form-group label-floating">
-                            <label for="no_de_control" class="control-label">Nombre de la categoría</label>
+                            <label for="no_de_control" class="control-label">Nombre de la actividad</label>
                             <input type="text" class="form-control text-center" name="nombre" id="nombre_categoría">
+                        </div>
+                        <div class="form-group label-floating">
+                            <label for="no_de_control" class="control-label">Categoría</label>
+                            <select class="form-control" name="id_categoria" required>
+                                <option value="" disabled="disabled" selected></option>
+                                @foreach($categorias as $categoria)
+                                <option value="{{$categoria->id}}">{{$categoria->nombre}}</option>
+                                @endforeach
+                            </select> 
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group label-floating">
                             <label for="no_de_control" class="control-label">Descripción</label>
                             <textarea type="text" rows="2" class="form-control" name="descripcion"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group label-floating">
+                            <label for="no_de_control" class="control-label">Enlace del video (YouTube)</label>
+                            <input type="text" class="form-control" name="url"> 
                         </div>
                     </div>
                     <div class="col-sm-12 text-center">
