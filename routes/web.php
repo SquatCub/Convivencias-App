@@ -27,7 +27,7 @@ Route::group(['middleware' => ['auth']], function () {
     /* Rutas para alumnos */
     #   -   -   -   -   -   -   Funciones para usuarios normales
     Route::group(['middleware' => ['usuario']], function () {
-        Route::get('/index', 'Sesion\UsuarioController@inicio')->name('inicio.usuario');
+        Route::get('/index', 'General\LandingController@index')->name('inicio.usuario');
     });
     #   -   -   -   -   -   -   Funciones para administradores
     Route::group(['middleware' => ['admin']], function () {
