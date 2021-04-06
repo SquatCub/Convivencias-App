@@ -50,6 +50,40 @@ class AdminController extends Controller
             return back()->with('error', 'Hubo un error');
         }
      }
+     public function editCategoria($id) {
+         $categoria = Categoria::findOrFail($id);
+         return view ('admin.edit_categoria', compact('categoria'));
+     }
+     public function updateCategoria(Request $r) {
+        $v = Validator::make($r->all(), [
+            'id' => 'required',
+            'nombre' => 'required',
+            'descripcion' => 'required',
+            'imagen' => 'required',
+        ]);
+        try {
+            $categoria = Categoria::findOrFail($r->id);
+            if ($categoria->nombre == $r->nombre || !($repetido = Categoria::where('nombre', $r->nombre)->count()>0)) {
+                $categoria->nombre=$r->nombre;
+                $categoria->descripcion=$r->descripcion;
+                if(!isset($r->imagen)) {
+                    $categoria->imagen=$categoria->imagen;
+                } else {
+                    File::delete("images/".$categoria->imagen);
+                    $imgName = time().'.'.$r->imagen->getClientOriginalExtension();
+                    $path = "categorias/".$imgName;
+                    $r->imagen->move(public_path('images/categorias'), $imgName);
+                    $categoria->imagen=$path;
+                }    
+                $categoria->save();
+                return redirect()->route('admin.categorias')->with('message', 'Categoría actualizada con éxito');
+            } else {
+                return back()->with('error', 'Ya existe una categoría con este nombre');
+            }
+        } catch (Exception $error) {
+            return back()->with('error', 'Hubo un error');
+        }
+     }
      public function deleteCategoria($id) {
         if(!$id) {
             return back()->with('error', 'Hubo un error en la solicitud');
@@ -101,6 +135,44 @@ class AdminController extends Controller
                      return back()->with('error', 'No se pudo crear la actividad');
                  }
                 //return $r;
+            }
+        } catch (Exception $error) {
+            return back()->with('error', 'Hubo un error');
+        }
+    }
+    public function editActividad($id) {
+        $categorias = Categoria::all();
+        $actividad = Actividad::findOrFail($id);
+        return view ('admin.edit_actividad', compact('actividad', 'categorias'));
+    }
+    public function updateActividad(Request $r) {
+        $v = Validator::make($r->all(), [
+            'nombre' => 'required',
+            'id_actividad' => 'required',
+            'id_categoria' => 'required',
+            'descripcion' => 'required',
+            'url' => 'required',
+            'imagen' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048'
+        ]);
+
+        try {
+            $actividad = Actividad::findOrFail($r->id_actividad);
+            if ($actividad->nombre == $r->nombre || !($repetido = Actividad::where('nombre', $r->nombre)->count()>0)) {
+                $actividad->nombre=$r->nombre;
+                $actividad->descripcion=$r->descripcion;
+                if(!isset($r->imagen)) {
+                    $actividad->imagen=$actividad->imagen;
+                } else {
+                    File::delete("images/".$actividad->imagen);
+                    $imgName = time().'.'.$r->imagen->getClientOriginalExtension();
+                    $path = "actividades/".$imgName;
+                    $r->imagen->move(public_path('images/actividades'), $imgName);
+                    $actividad->imagen=$path;
+                }    
+                $actividad->save();
+                return redirect()->route('admin.actividades')->with('message', 'Actividad actualizada con éxito');
+            } else {
+                return back()->with('error', 'Ya existe una actividad con este nombre');
             }
         } catch (Exception $error) {
             return back()->with('error', 'Hubo un error');

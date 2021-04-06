@@ -37,12 +37,16 @@ Route::group(['middleware' => ['auth']], function () {
             #   -   -   -   -   -   -   Funciones para Categorias
             Route::get('/admin/categorias', 'Sesion\AdminController@categorias')->name('admin.categorias');
             Route::get('/admin/categorias/nuevo', 'Sesion\AdminController@newCategoria')->name('categoria.new');
+            Route::get('/admin/categorias/editar/{id}', 'Sesion\AdminController@editCategoria')->name('categoria.edit');
+            Route::post('/admin/categorias/update', 'Sesion\AdminController@updateCategoria')->name('categoria.update');
             Route::post('/admin/categorias/crear', 'Sesion\AdminController@createCategoria')->name('categoria.create');
             Route::delete('/admin/categorias/eliminar/{id}', 'Sesion\AdminController@deleteCategoria')->name('categoria.eliminar');
             #   -   -   -   -   -   -   Funciones para Actividades
             Route::get('/admin/actividades', 'Sesion\AdminController@actividades')->name('admin.actividades');
             Route::get('/admin/actividades/nuevo', 'Sesion\AdminController@newActividad')->name('actividad.new');
             Route::post('/admin/actividades/crear', 'Sesion\AdminController@createActividad')->name('actividad.create');
+            Route::get('/admin/actividades/editar/{id}', 'Sesion\AdminController@editActividad')->name('actividad.edit');
+            Route::post('/admin/actividades/update', 'Sesion\AdminController@updateActividad')->name('actividad.update');
             Route::delete('/admin/actividades/eliminar/{id}', 'Sesion\AdminController@deleteActividad')->name('actividad.eliminar');
             #   -   -   -   -   -   -   Funciones para Usuarios
             Route::get('/admin/usuarios', 'Sesion\AdminController@usuarios')->name('admin.usuarios');
