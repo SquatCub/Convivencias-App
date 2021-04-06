@@ -4,7 +4,7 @@
 @include('root.navigation')
 <div class="container card">
 <br>
-    <h1>Solicitudes</h1>
+    <h1>Usuarios -> Solicitudes</h1>
     <div class="text-right">
         <a href="{{ route ('admin.usuarios') }}" class="btn btn-light">Regresar</a>
     </div>
@@ -26,7 +26,7 @@
               <td scope="row">{{ $loop->iteration }}</td>
               <td scope="row">{{ $solicitud->nombre }} {{ $solicitud->apellido_paterno }} {{ $solicitud->apellido_materno }}</td>
               <td class="area" scope="row">{{ $solicitud->area->nombre }}</td>
-              <td scope="row"><a href="{{ route ('admin.editar', $solicitud) }}" class="btn btn-primary btn-sm">Editar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $solicitud->user->id }}">Eliminar</a></td>
+              <td scope="row"><a href="{{ route ('admin.editar', $solicitud) }}" class="btn btn-primary btn-sm">Editar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $solicitud->id }}">Eliminar</a></td>
               </tr>
               @endforeach
           </tbody>
@@ -35,7 +35,7 @@
 </div>
 
 @foreach ($solicitudes as $solicitud)
-<div class="modal fade" id="modalDelete{{ $solicitud->user->id }}" tabindex="-1" role="dialog">
+<div class="modal fade" id="modalDelete{{ $solicitud->id }}" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
@@ -50,7 +50,7 @@
             <h5><b>Área:</b> {{ $solicitud->area->nombre }}</h5>
       </div>
       <div class="modal-footer">
-        <form action="{{ route('admin.eliminar', $solicitud->user->id) }}" method="POST">
+        <form action="{{ route('admin.eliminar', $solicitud->id) }}" method="POST">
             @method('DELETE')
             @csrf
             <button type="button" class="btn btn-default btn-raised" data-dismiss="modal">Cancelar</button>

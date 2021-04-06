@@ -17,7 +17,7 @@ class CreateSolicitudTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('apellido_paterno');
-            $table->string('apellido_materno');
+            $table->string('apellido_materno')->nullable();
             $table->string('usuario');
             $table->string('contraseña');
             $table->string('url_acta');

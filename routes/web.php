@@ -14,6 +14,9 @@
 Route::get('/','General\LandingController@index')->name("index");
 
 //  -   -   -   -   -   Vistas login y registro
+// Registro
+Route::post('enviar-solicitud', 'General\SolicitudController@enviarSolicitud')->name('enviar');
+// Login
 Route::get('/login/{opcion}','General\LandingController@login');
 
 //  -   -   -   -   -   Controlador para iniciar sesion / cerrar

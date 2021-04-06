@@ -5,6 +5,7 @@ namespace App\Http\Controllers\General;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Solicitud;
+use App\User;
 use Validator;
 
 class SolicitudController extends Controller
@@ -13,18 +14,37 @@ class SolicitudController extends Controller
         return view('welcome');
     }
 
-    public function enviarSolicitud(Request $request) {
-        $v = Validator::make($request->all(), [
+    public function enviarSolicitud(Request $r) {
+        $v = Validator::make($r->all(), [
+            'name' => 'required',
+            'paterno' => 'required',
+            'id_seccion' => 'required',
             'username' => 'required',
-            'img_url' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048'
+            'password' => 'required',
+            'phone' => 'required',
+            'acta' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048',
+            'comprobante' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048'
         ]);
-        $imgName = time().'.'.$request->acta->getClientOriginalExtension();
-        $request->acta->move(public_path('images'), $imgName);
+        try {
+            if($usuario = User::where('usuario', $r->username)->count()>0) {
+                return back()->with('error', 'Ya existe un usuario con este álias');
+            } else {
+                $acta = time().'.'.$r->acta->getClientOriginalExtension();
+                $comprobante = time().'.'.$r->comprobante->getClientOriginalExtension();
 
-        if($solicitud = Solicitud::create(["username"=>$request->username, "img_url"=>"categorias/"+$imgName])){
-            return redirect()->route('index');
-        } else {
-            return ("Nop");
+                $pathActa = "actas/".$acta;
+                $pathComprobante = "comprobantes/".$comprobante;
+
+                if($solicitud = Solicitud::create(["nombre"=>$r->name, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "usuario"=>$r->username, "contraseña"=>$r->password, "url_acta"=>$pathActa,  "url_comprobante"=>$pathComprobante,  "id_area"=>$r->id_seccion])){
+                    $r->acta->move(public_path('images/actas/'), $acta);
+                    $r->comprobante->move(public_path('images/comprobantes/'), $comprobante);
+                    return ("redirect()->route('index')");
+                } else {
+                    return ("Nop");
+                }
+            }
+        } catch(Exception $error) {
+            return back()->with('error', 'Hubo un error');
         }
     }
 }

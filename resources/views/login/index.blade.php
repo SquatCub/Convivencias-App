@@ -8,6 +8,7 @@
     @endsection
     <form action="{{ route('log') }}" method="POST">
         {{ csrf_field() }}
+        <h1>Inicia sesión</h1>
         <p>Ingresa a la pagina si ya cuentas con tu usuario y contraseña, si no es así puedes registrarte en la sección de registro</p> 
         <br>
         <label for="usuario">Nombre de usuario</label> 
@@ -27,20 +28,21 @@
     @section('navigation')
         @include('layout.navigation')
     @endsection
-    <form action="" method="POST">
+    <form action="{{ route('enviar') }}" method="POST" enctype="multipart/form-data">
         @csrf
+        <h1>Envia solicitud para registrarte</h1>
         <p>Ingresa tus datos para poder registrarte en el sistema, debes ingresar tus datos correctamente y adjuntar los archivos para validar tu información. Una vez que mandes la solicitud y se apruebe, se te contactará y podrás iniciar sesión para usar la página</p> 
         <br> 
         <div class="form-group">
-            <input class="form-control" autofocus type="text" name="name" placeholder="Nombre(s)">
+            <input class="form-control col-md-5 col-sm-12" autofocus type="text" name="name" placeholder="Nombre(s)">
         </div>
         <div class="form-group">
-            <input class="form-control" autofocus type="text" name="paterno" placeholder="Apellido paterno">
-            <input class="form-control" autofocus type="text" name="materno" placeholder="Apellido materno">
+            <input class="form-control col-md-5 col-sm-12" autofocus type="text" name="paterno" placeholder="Apellido paterno">
+            <input class="form-control col-md-5 col-sm-12" autofocus type="text" name="materno" placeholder="Apellido materno">
         </div>
         <div class="form-group label-floating">
             <label for="no_de_control" class="control-label">Sección</label>
-            <select class="form-control" name="id_categoria" required>
+            <select class="form-control col-md-5 col-sm-12" name="id_seccion" required>
                     <option value="" disabled="disabled" selected></option>
                     @foreach($secciones as $seccion)
                     <option value="{{$seccion->id}}">{{$seccion->nombre}}</option>
@@ -48,17 +50,18 @@
             </select> 
         </div>
         <div class="form-group">
-            <input class="form-control" autofocus type="text" name="username" placeholder="Nombre de usuario (Ej. Juan123)">
+            <input class="form-control col-md-5 col-sm-12" required autofocus type="text" name="username" placeholder="Nombre de usuario (Ej. Juan123)">
         </div>
         <div class="form-group">
-            <input class="form-control" type="password" name="password" placeholder="Contraseña">
+            <input class="form-control col-md-5 col-sm-12" required type="password" name="password" placeholder="Contraseña">
         </div>
-        <h4>Datos de contacto (Por este medio se te enviará tu contraseña)</h4>
+        <hr>
+        <h4>Datos de contacto (Por este medio se te enviará tu Confirmación)</h4>
         <div class="form-group">
-            <input class="form-control" type="phone" name="phone" placeholder="Número de teléfono">
+            <input class="form-control col-md-5 col-sm-12" required type="phone" name="phone" placeholder="Número de teléfono">
         </div>
         <div class="form-group">
-            <input class="form-control" type="email" name="email" placeholder="Correo electrónico">
+            <input class="form-control col-md-5 col-sm-12" type="email" name="email" placeholder="Correo electrónico">
         </div>
         <h4>Acta de nacimiento</h4>
         <div class="form-group">
@@ -77,7 +80,8 @@
             <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="70" id="output2"/>
         </div>
         <br>
-        <button data-action='submit'>Enviar solicitud</button>
+        <button class="btn btn-success" data-action='submit'>Enviar solicitud</button>
+        <br><br>
     </form>
     <script>
     var loadFile1 = function(event) {
