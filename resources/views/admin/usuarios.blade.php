@@ -1,7 +1,7 @@
 @extends('layout.layout')
 @section('titulo') Panel Super-Usuario @endsection
 @section('section')
-@include('root.navigation')
+@include('admin.navigation')
 <div class="container card">
 <br>
     <h1>Usuarios</h1>

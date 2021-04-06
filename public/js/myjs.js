@@ -1,14 +1,11 @@
 function sortTable(num) {
     const btns = document.querySelectorAll('.sort');
-
     btns.forEach(element => {
         //console.log(element)
         element.innerHTML = "^"
     });
-
     btn = document.getElementById(num);
     btn.innerHTML = "v"
-
     var table, rows, switching, i, x, y, shouldSwitch;
     table = document.getElementById("myTable");
     switching = true;
