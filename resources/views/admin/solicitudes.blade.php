@@ -1,15 +1,14 @@
 @extends('layout.layout')
-@section('titulo') Panel Super-solicitud @endsection
+@section('titulo') Panel Administrador - Solicitudes @endsection
 @section('section')
 @include('admin.navigation')
 <div class="container card">
 <br>
-    <h1>Usuarios -> Solicitudes</h1>
+    <h1>Solicitudes pendientes</h1>
     <div class="text-right">
         <a href="{{ route ('admin.usuarios') }}" class="btn btn-light">Regresar</a>
     </div>
     <br>
-
     <div class="table-responsive">
       <table id="myTable" class="table table-hover text-center">
           <thead class="thead-dark">
@@ -24,13 +23,13 @@
           </thead>
           <tbody id="id01">
               @foreach($solicitudes as $solicitud)
-              <tr>
+              <tr id="id{{ $solicitud->id }}">
               <td scope="row">{{ $loop->iteration }}</td>
               <td scope="row">{{ $solicitud->nombre }} {{ $solicitud->apellido_paterno }} {{ $solicitud->apellido_materno }}</td>
               <td class="area" scope="row">{{ $solicitud->area->nombre }}</td>
               <td scope="row"><img class="myImg" id="myImg{{$solicitud->url_acta}}" src="/images/{{$solicitud->url_acta}}" width="50" alt=""></td>
               <td scope="row"><img class="myImg" id="myImg{{$solicitud->url_comprobante}}" src="/images/{{$solicitud->url_comprobante}}" width="50" alt=""></td>
-              <td scope="row"><a href="{{ route ('admin.editar', $solicitud) }}" class="btn btn-primary btn-sm">Aceptar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $solicitud->id }}">Eliminar</a></td>
+              <td scope="row"><a class="btn btn-primary btn-sm text-white" data-toggle="modal" data-target="#modalAccept{{ $solicitud->id }}">Aceptar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $solicitud->id }}">Rechazar</a></td>
               </tr>
               @endforeach
           </tbody>
@@ -47,17 +46,18 @@
   <div id="caption"></div>
 </div>
 @foreach ($solicitudes as $solicitud)
+<!-- Modals para eliminacion -->
 <div class="modal fade" id="modalDelete{{ $solicitud->id }}" tabindex="-1" role="dialog">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header bg-danger text-white">
-        <h5 class="modal-title">Confirmación de eliminación</h5>
+        <h5 class="modal-title">Confirmación de rechazo</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-            <h4>¿Está seguro de querer eliminar el solicitudistrador?</h4><br>
+            <h4>¿Está seguro de querer eliminar la solicitud?</h4><br>
             <h5><b>Nombre:</b> {{ $solicitud->nombre }} {{ $solicitud->apellido_paterno }} {{ $solicitud->apellido_materno }}</h5>
             <h5><b>Área:</b> {{ $solicitud->area->nombre }}</h5>
       </div>
@@ -72,31 +72,120 @@
     </div>
   </div>
 </div>
+<!-- Modals para pre-aceptar -->
+<div class="modal fade" id="modalAccept{{ $solicitud->id }}" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white">
+        <h5 class="modal-title">Confirmación de solicitud</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+            <h4>¿Aceptar usuario?</h4><br>
+            <p>Por favor verifica que todos sus datos sean correctos, revisa los documentos anexados</p>
+            <h5><b>Nombre:</b> {{ $solicitud->nombre }} {{ $solicitud->apellido_paterno }} {{ $solicitud->apellido_materno }}</h5>
+            <h5><b>Área:</b> {{ $solicitud->area->nombre }}</h5>
+            <h6>Usuario: {{ $solicitud->usuario }}</h6>
+            <h6>Contraseña: {{ $solicitud->contraseña }}</h6>
+            <h6>Usuario: {{ $solicitud->usuario }}</h6>
+      </div>
+      <div class="modal-footer">
+        <!-- <form action="" method="POST"> -->
+            <!-- @csrf -->
+            <button type="button" class="btn btn-default btn-raised" data-dismiss="modal">Cancelar</button>
+            <button type="sumbmit" class="btn btn-success btn-raised accept" data-id="{{ $solicitud->id }}">Aceptar</button>
+        <!-- </form> -->
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Script para visualizar las imagenes en solicitudes -->
 <script>
-  // Get the modal
   var modal = document.getElementById("myModal");
-  // Get the image and insert it inside the modal - use its "alt" text as a caption
   var img1 = document.getElementById("myImg{{$solicitud->url_acta}}");
   var img2 = document.getElementById("myImg{{$solicitud->url_comprobante}}");
   var modalImg = document.getElementById("img01");
   var captionText = document.getElementById("caption");
-  img1.onclick = function(){
+  img1.onclick = function() {
     modal.style.display = "block";
     modalImg.src = this.src;
     captionText.innerHTML = this.alt;
   }
-  img2.onclick = function(){
+  img2.onclick = function() {
     modal.style.display = "block";
     modalImg.src = this.src;
     captionText.innerHTML = this.alt;
   }
-  // Get the <span> element that closes the modal
   var span = document.getElementsByClassName("close")[0];
-  // When the user clicks on <span> (x), close the modal
   span.onclick = function() {
     modal.style.display = "none";
   }
 </script>
 @endforeach
-
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("JS Active")
+    btnAccept();
+});
+  function btnAccept() {
+      var token = '{{ csrf_token() }}';
+      document.querySelectorAll('.accept').forEach(btn => {
+          btn.onclick = function () {
+               fetch('/admin/usuarios/solicitudes/aceptar', {
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": token
+                  },
+                  method: 'post',
+                  body: JSON.stringify({
+                    solicitud_id: btn.dataset.id,
+                    })
+               })
+               .then(response => response.json())
+               .then(result => {
+                if (result.error) {
+                    console.log(`Error at like: ${result.error}`);
+                }
+                 console.log(result[0])
+                 if(result[0].telefono == null) {
+                    result[0].telefono = "No registrado"
+                 }
+                 if(result[0].email == null) {
+                    result[0].email = "No registrado"
+                 }
+                 modal = document.getElementById('modalAccept'+btn.dataset.id);
+                 modal.innerHTML = `
+                 <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                      <h5 class="modal-title">Solicitud aceptada</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                          <h4>Notifica al usuario que ha sido registrado mediante sus datos de contacto</h4><br>
+                          <h5><b>Nombre:</b> ${result[0].nombre} ${result[0].apellido_paterno} ${result[0].apellido_materno}</h5>
+                          <h5><b>Sección:</b> ${result[1].nombre}</h5>
+                          <h5><b>Usuario:</b> ${result[0].usuario}</h5>
+                          <h5><b>Contraseña:</b> ${result[0].contraseña}</h5>
+                          <h5><b>Telefono:</b> ${result[0].telefono}</h5>
+                          <h5><b>Correo:</b> ${result[0].email}</h5>
+                    </div>
+                    <div class="modal-footer">
+                          <!-- @csrf -->
+                          <button type="button" class="btn btn-default btn-raised">Cerrar</button>
+                    </div>
+                  </div>
+                </div>`;
+                document.getElementById("id"+btn.dataset.id).remove();
+               });
+          }
+      });   
+  }
+</script>
 @endsection

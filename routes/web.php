@@ -52,6 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/usuarios', 'Sesion\AdminController@usuarios')->name('admin.usuarios');
             #   -   -   -   -   -   -   Funciones para Solicitudes
             Route::get('/admin/usuarios/solicitudes', 'Sesion\AdminController@solicitudes')->name('admin.solicitudes');
+            Route::post('/admin/usuarios/solicitudes/aceptar', 'Sesion\AdminController@acceptSolicitud')->name('solicitudes.accept');
     });
     #   -   -   -   -   -   -   Funciones para superusuarios
     Route::group(['middleware' => ['root']], function () {

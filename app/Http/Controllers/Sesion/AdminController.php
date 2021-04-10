@@ -10,7 +10,9 @@ use Validator;
 use App\Models\Categoria;
 use App\Models\Actividad;
 use App\Models\Usuario;
+use App\User;
 use App\Models\Solicitud;
+use App\Models\Area;
 
 class AdminController extends Controller
 {
@@ -204,6 +206,29 @@ class AdminController extends Controller
     public function solicitudes() {
         $solicitudes = Solicitud::all();
         return view('admin.solicitudes', compact('solicitudes'));
+    }
+    public function acceptSolicitud(Request $r) {
+        $solicitud = Solicitud::where('id', $r->solicitud_id)->get();
+        $area = Area::where('id', $solicitud[0]->id_area)->get();
+
+        try {
+            if ($user = User::where('usuario', $solicitud[0]->usuario)->count()>0) {
+                return back()->with('error', 'Ya existe un usuario con este álias');
+            } else {
+                if ($user = User::create(["usuario"=>$solicitud[0]->usuario, "password"=>bcrypt($solicitud[0]->contraseña)])) {
+                    if ($usuario = Usuario::create(["nombre"=>$solicitud[0]->nombre, "apellido_paterno"=>$solicitud[0]->apellido_paterno, "apellido_materno"=>$solicitud[0]->apellido_materno, "id_usuario"=>$user->id, "id_area"=>$solicitud[0]->id_area])) {
+                        Solicitud::destroy($r->solicitud_id);
+                        return response()->json([0 => $solicitud[0], 1 => $area[0]]);
+                    } else {
+                        return back()->with('error', 'No se pudo crear el administrador');
+                    }
+                } else {
+                    return back()->with('error', 'No se pudo crear el usuario');
+                }
+            }
+        } catch (Exception $error) {
+            return back()->with('error', 'Hubo un error');
+        }
     }
 
 }

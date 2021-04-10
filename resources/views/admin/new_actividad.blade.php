@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('titulo') Panel Super-Usuario @endsection
+@section('titulo') Crear nueva actividad @endsection
 @section('section')
 @include('admin.navigation')
 
