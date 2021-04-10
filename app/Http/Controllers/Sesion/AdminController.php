@@ -207,17 +207,36 @@ class AdminController extends Controller
         $solicitudes = Solicitud::all();
         return view('admin.solicitudes', compact('solicitudes'));
     }
+    public function checkUsername(Request $r) {
+        if ($user = User::where('usuario', $r->username)->count()>0) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Usuario no disponible',
+            ]);
+        } else {
+            return response()->json([
+                'status' => 'correcto',
+                'message' => 'Usuario disponible',
+            ]);
+        }
+    }
     public function acceptSolicitud(Request $r) {
         $solicitud = Solicitud::where('id', $r->solicitud_id)->get();
         $area = Area::where('id', $solicitud[0]->id_area)->get();
 
         try {
-            if ($user = User::where('usuario', $solicitud[0]->usuario)->count()>0) {
-                return back()->with('error', 'Ya existe un usuario con este álias');
+            if ($user = User::where('usuario', $r->username)->count()>0) {
+                return response()->json([
+                    'status' => 'Error',
+                    'message' => 'Usuario no disponible',
+                ]);
             } else {
-                if ($user = User::create(["usuario"=>$solicitud[0]->usuario, "password"=>bcrypt($solicitud[0]->contraseña)])) {
+                if ($user = User::create(["usuario"=>$r->username, "password"=>bcrypt($solicitud[0]->contraseña)])) {
                     if ($usuario = Usuario::create(["nombre"=>$solicitud[0]->nombre, "apellido_paterno"=>$solicitud[0]->apellido_paterno, "apellido_materno"=>$solicitud[0]->apellido_materno, "id_usuario"=>$user->id, "id_area"=>$solicitud[0]->id_area])) {
+                        File::delete("images/".$solicitud[0]->url_acta);
+                        File::delete("images/".$solicitud[0]->url_comprobante);
                         Solicitud::destroy($r->solicitud_id);
+                        $solicitud[0]->usuario = $r->username;
                         return response()->json([0 => $solicitud[0], 1 => $area[0]]);
                     } else {
                         return back()->with('error', 'No se pudo crear el administrador');

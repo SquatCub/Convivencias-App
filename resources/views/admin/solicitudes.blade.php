@@ -87,9 +87,11 @@
             <p>Por favor verifica que todos sus datos sean correctos, revisa los documentos anexados</p>
             <h5><b>Nombre:</b> {{ $solicitud->nombre }} {{ $solicitud->apellido_paterno }} {{ $solicitud->apellido_materno }}</h5>
             <h5><b>Área:</b> {{ $solicitud->area->nombre }}</h5>
-            <h6>Usuario: {{ $solicitud->usuario }}</h6>
+            <h6>Usuario: <input type="text" id="field{{ $solicitud->id }}" value="{{ $solicitud->usuario }}"></h6> 
             <h6>Contraseña: {{ $solicitud->contraseña }}</h6>
-            <h6>Usuario: {{ $solicitud->usuario }}</h6>
+            <hr>
+            <button class="btn btn-warning check" data-id="{{ $solicitud->id }}">Comprobar usuario</button>
+            <p id="status{{$solicitud->id}}"></p>
       </div>
       <div class="modal-footer">
         <!-- <form action="" method="POST"> -->
@@ -128,11 +130,17 @@
 document.addEventListener('DOMContentLoaded', function() {
     console.log("JS Active")
     btnAccept();
+    btnCheck();
 });
   function btnAccept() {
       var token = '{{ csrf_token() }}';
       document.querySelectorAll('.accept').forEach(btn => {
           btn.onclick = function () {
+            let message = document.getElementById("status"+btn.dataset.id);
+            if(message.innerHTML == "" || message.innerHTML == "Usuario no disponible"){
+              message.innerHTML = "Verifica que el usuario este disponible";
+            } else {
+              let usr = document.getElementById("field"+btn.dataset.id);
                fetch('/admin/usuarios/solicitudes/aceptar', {
                   headers: {
                     "Content-Type": "application/json",
@@ -143,6 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
                   method: 'post',
                   body: JSON.stringify({
                     solicitud_id: btn.dataset.id,
+                    username: usr.value
                     })
                })
                .then(response => response.json())
@@ -151,12 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log(`Error at like: ${result.error}`);
                 }
                  console.log(result[0])
-                 if(result[0].telefono == null) {
-                    result[0].telefono = "No registrado"
-                 }
-                 if(result[0].email == null) {
-                    result[0].email = "No registrado"
-                 }
+                 
                  modal = document.getElementById('modalAccept'+btn.dataset.id);
                  modal.innerHTML = `
                  <div class="modal-dialog" role="document">
@@ -178,11 +182,43 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div class="modal-footer">
                           <!-- @csrf -->
-                          <button type="button" class="btn btn-default btn-raised">Cerrar</button>
+                          <button type="button" class="btn btn-default btn-raised" data-dismiss="modal">Cerrar</button>
                     </div>
                   </div>
                 </div>`;
                 document.getElementById("id"+btn.dataset.id).remove();
+               });
+            }
+          }
+      });   
+  }
+  function btnCheck() {
+    var token = '{{ csrf_token() }}';
+      document.querySelectorAll('.check').forEach(btn => {
+          btn.onclick = function () {
+            let usr = document.getElementById("field"+btn.dataset.id);
+               fetch('/admin/usuarios/solicitudes/check', {
+                  headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": token
+                  },
+                  method: 'post',
+                  body: JSON.stringify({
+                    username: usr.value,
+                    })
+               })
+               .then(response => response.json())
+               .then(result => {
+                  let message = document.getElementById("status"+btn.dataset.id);
+                  message.removeAttribute('class');
+                  if(result.status == "error") {
+                    message.classList.add("text-danger");
+                  } else {
+                    message.classList.add("text-success");
+                  }
+                  message.innerHTML = `${result.message}`;
                });
           }
       });   

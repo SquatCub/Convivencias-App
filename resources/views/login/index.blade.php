@@ -28,7 +28,7 @@
     @section('navigation')
         @include('layout.navigation')
     @endsection
-    <form action="{{ route('enviar') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('enviar') }}" method="POST" enctype="multipart/form-data"  onsubmit="myButton.disabled = true; return true;">
         @csrf
         <h1>Envia solicitud para registrarte</h1>
         <p>Ingresa tus datos para poder registrarte en el sistema, debes ingresar tus datos correctamente y adjuntar los archivos para validar tu información. Una vez que mandes la solicitud y se apruebe, se te contactará y podrás iniciar sesión para usar la página</p> 
@@ -80,7 +80,7 @@
             <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="70" id="output2"/>
         </div>
         <br>
-        <button class="btn btn-success" data-action='submit'>Enviar solicitud</button>
+        <button class="btn btn-success" id="submitbutton" name="myButton" type="submit">Enviar solicitud</button>
         <br><br>
     </form>
     <script>
