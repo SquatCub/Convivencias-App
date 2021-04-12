@@ -34,3 +34,4 @@ Homestead.json
 /.vagrant
 .phpunit.result.cache
 public/images/
+*.png
