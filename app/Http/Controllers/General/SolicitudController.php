@@ -35,7 +35,7 @@ class SolicitudController extends Controller
                 $pathActa = "actas/".$acta;
                 $pathComprobante = "comprobantes/".$comprobante;
 
-                if($solicitud = Solicitud::create(["nombre"=>$r->name, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "usuario"=>$r->username, "contraseña"=>$r->password, "url_acta"=>$pathActa,  "url_comprobante"=>$pathComprobante,  "id_area"=>$r->id_seccion])){
+                if($solicitud = Solicitud::create(["nombre"=>$r->name, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "usuario"=>$r->username, "contraseña"=>$r->password, "url_acta"=>$pathActa,  "url_comprobante"=>$pathComprobante,  "id_area"=>$r->id_seccion, "email"=>$r->email, "telefono"=>$r->phone])){
                     $r->acta->move(public_path('images/actas/'), $acta);
                     $r->comprobante->move(public_path('images/comprobantes/'), $comprobante);
                     return redirect()->route('index');

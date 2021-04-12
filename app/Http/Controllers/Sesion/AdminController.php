@@ -237,6 +237,9 @@ class AdminController extends Controller
                         File::delete("images/".$solicitud[0]->url_comprobante);
                         Solicitud::destroy($r->solicitud_id);
                         $solicitud[0]->usuario = $r->username;
+                        if (!$solicitud[0]->email) {
+                            $solicitud[0]->email = "No registrado";
+                        }
                         return response()->json([0 => $solicitud[0], 1 => $area[0]]);
                     } else {
                         return back()->with('error', 'No se pudo crear el administrador');
