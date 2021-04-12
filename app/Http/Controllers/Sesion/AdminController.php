@@ -200,8 +200,38 @@ class AdminController extends Controller
     #   -   -   -   -   -   -   Funciones para Usuarios
     public function usuarios() {
         $usuarios = Usuario::all();
-        $categorias = Categoria::all();
-        return view('admin.usuarios', compact('usuarios', 'categorias'));
+        return view('admin.usuarios', compact('usuarios'));
+    }
+    public function newUsuario() {
+        $areas = Area::all();
+        return view('admin.new_usuario', compact('areas'));
+    }
+    public function createUsuario(Request $r) {
+        $v = Validator::make($r->all(), [
+            'nombre' => 'required',
+            'materno' => 'required',
+            'paterno' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'id_area' => 'required'
+        ]);
+        try {
+            if ($user = User::where('usuario',$r->username)->count()>0) {
+                return back()->with('error', 'Ya existe un usuario con este álias');
+            } else {
+                if ($user = User::create(["usuario"=>$r->username, "password"=>bcrypt($r->password)])) {
+                    if ($usuario = Usuario::create(["nombre"=>$r->nombre, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "id_usuario"=>$user->id, "id_area"=>$r->id_area])) {
+                        return redirect()->route('admin.usuarios')->with('message', 'Usuario creado con exito');
+                    } else {
+                        return back()->with('error', 'No se pudo crear el usuario');
+                    }
+                } else {
+                    return back()->with('error', 'No se pudo crear el usuario');
+                }
+            }
+        } catch (Exception $error) {
+            return back()->with('error', 'Hubo un error');
+        }
     }
     public function solicitudes() {
         $solicitudes = Solicitud::all();

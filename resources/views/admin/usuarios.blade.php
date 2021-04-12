@@ -7,7 +7,7 @@
     <h1>Usuarios</h1>
     <div class="text-right">
         <a href="{{ route ('admin.solicitudes') }}" class="btn btn-info text-white">Solicitudes</a>
-        <a href="{{ route ('admin.new') }}" class="btn btn-success">Crear nuevo usuario</a>
+        <a href="{{ route ('usuario.new') }}" class="btn btn-success">Crear nuevo usuario</a>
     </div>
     <br>
 

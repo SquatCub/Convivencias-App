@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::delete('/admin/actividades/eliminar/{id}', 'Sesion\AdminController@deleteActividad')->name('actividad.eliminar');
             #   -   -   -   -   -   -   Funciones para Usuarios
             Route::get('/admin/usuarios', 'Sesion\AdminController@usuarios')->name('admin.usuarios');
+            Route::get('/admin/usuarios/nuevo', 'Sesion\AdminController@newUsuario')->name('usuario.new');
+            Route::post('/admin/usuarios/crear', 'Sesion\AdminController@createUsuario')->name('usuario.create');
             #   -   -   -   -   -   -   Funciones para Solicitudes
             Route::get('/admin/usuarios/solicitudes', 'Sesion\AdminController@solicitudes')->name('admin.solicitudes');
             Route::post('/admin/usuarios/solicitudes/aceptar', 'Sesion\AdminController@acceptSolicitud')->name('solicitudes.accept');
