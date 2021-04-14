@@ -22,7 +22,7 @@
             {!! $errors->first('password', '<span class="help-block">:message</span>') !!}
         </div>
         <br>
-        <button type="submit"> Acceder</button>
+        <button class="btn btn-success" type="submit"> Acceder</button>
     </form>
     @elseif($opcion == 'registro')
     @section('navigation')

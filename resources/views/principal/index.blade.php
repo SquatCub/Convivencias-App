@@ -5,7 +5,7 @@
 @endsection
 @section('section')
 <div class="container text-center">
-    <h1 class="display-4">Bienvenidos</h1>
+    <h1 class="display-4 titulo2">Bienvenidos</h1>
     <h3>Aquí podrás realizar muchos</h3>
     <h3>tipos de actividades</h3>
     <img class="img-fluid" src="/images/app/hands.png" alt="principal">
@@ -18,8 +18,8 @@
     <div class="container">
         <div class="text-center text-white">
             <h1>Categorías</h1>
-            <p class="d-sm-block d-md-none">Desliza para ver más</p>
-            <img class="d-sm-block d-md-none" src="/images/app/arrow.png" width="130"  alt="first-arrow">
+            <p class="d-sm-block d-md-block d-lg-none">Desliza para ver más</p>
+            <img class="img-fluid d-sm-block d-md-block d-lg-none" src="/images/app/arrow.png" width="130"  alt="first-arrow">
         </div>
         
         <div class="table-responsive table-borderless">
@@ -69,8 +69,8 @@
     <div class="container">
         <div class="text-center text-white">
             <h1>Actividades</h1>
-            <p class="d-sm-block d-md-none">Desliza para ver más</p>
-            <img class="d-sm-block d-md-none" src="/images/app/arrow.png" width="130" alt="first-arrow">
+            <p class="d-sm-block d-md-block d-lg-none">Desliza para ver más</p>
+            <img class="img-fluid d-sm-block d-md-block d-lg-none" src="/images/app/arrow.png" width="130" alt="first-arrow">
         </div>
         <div class="table-responsive table-borderless">
             <table id="myTable" class="table text-center">

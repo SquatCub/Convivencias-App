@@ -79,9 +79,18 @@ input[type="file"] {
     cursor: pointer;
 }
 
-
+.btn  {
+    border-radius: 100px;
+}
 /* Custom card for landing page */
-
+.titulo {
+    font-weight: bold;
+    color: rgb(180, 5, 180);
+}
+.titulo2 {
+    color: rgb(216, 78, 54);
+    font-weight: bolder;
+}
 
 #categoria {
     background-color: dodgerblue;
@@ -89,7 +98,10 @@ input[type="file"] {
 #actividad {
     background-color: rgb(25, 145, 125);
 }
+
+/* Cards para categorias y actividades */
 .wrapper {
+    cursor: pointer;
     width: 300px;
     height: 500px;
     margin: auto;

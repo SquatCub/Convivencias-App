@@ -24,4 +24,13 @@ class LandingController extends Controller
         $secciones = Area::all();
         return view('login.index', compact('secciones', 'opcion'));
     }
+
+    public function categorias() {
+        $categorias = Categoria::all();
+        return view('principal.categorias', compact('categorias'));
+    }
+    public function actividades() {
+        $actividades = Actividad::all();
+        return view('principal.actividades', compact('actividades'));
+    }
 }

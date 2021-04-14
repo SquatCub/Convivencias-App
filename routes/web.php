@@ -12,6 +12,8 @@
 */
 //  -   -   -   -   -   Vista principal
 Route::get('/','General\LandingController@index')->name("index");
+Route::get('/categorias','General\LandingController@categorias')->name("categorias");
+Route::get('/actividades','General\LandingController@actividades')->name("actividades");
 
 //  -   -   -   -   -   Vistas login y registro
 // Registro
