@@ -5,7 +5,7 @@
 @endsection
 @section('section')
 <div class="container text-center">
-    @if(Auth::user())
+    @if(isset(Auth::user()->normal))
         <h1 class="display-4 titulo2">Bienvenido {{Auth::user()->normal->nombre}} {{Auth::user()->normal->apellido_paterno}}</h1>
     @else
         <h1 class="display-4 titulo2">Bienvenidos</h1>

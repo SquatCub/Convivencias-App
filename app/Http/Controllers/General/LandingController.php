@@ -34,7 +34,10 @@ class LandingController extends Controller
         return view('principal.actividades', compact('actividades'));
     }
     public function verActividad($actividad) {
-        $actividad = Actividad::where('nombre', $actividad)->first();
-        return view('principal.ver_actividad', compact('actividad'));
+        if($actividad = Actividad::where('nombre', $actividad)->first()) {
+            return view('principal.ver_actividad', compact('actividad'));
+        } else {
+            return view('principal.no_encontrado');
+        }
     }
 }
