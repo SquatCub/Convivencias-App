@@ -34,6 +34,8 @@ Route::group(['middleware' => ['auth']], function () {
     #   -   -   -   -   -   -   Funciones para usuarios normales
     Route::group(['middleware' => ['usuario']], function () {
         Route::get('/index', 'General\LandingController@index')->name('inicio.usuario');
+
+        Route::post('/usuario/compartir', 'Sesion\UsuarioController@createComentario')->name('comentario.create');
     });
     #   -   -   -   -   -   -   Funciones para administradores
     Route::group(['middleware' => ['admin']], function () {

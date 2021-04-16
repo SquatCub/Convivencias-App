@@ -18,6 +18,8 @@ class CreateComentarioTable extends Migration
             $table->string("imagen");
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('users');
+            $table->unsignedBigInteger('id_actividad');
+            $table->foreign('id_actividad')->references('id')->on('actividad');
             $table->timestamps();
         });
     }

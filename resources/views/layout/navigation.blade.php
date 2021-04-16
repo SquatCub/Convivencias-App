@@ -48,4 +48,25 @@
       @endif
     </ul>
 <br>
+@if(session()->has('message'))
+<br>
+<div class="container alert alert-success alert-dismissible fade show" role="alert">
+<div class="container card">
+<strong>Correcto</strong>  {{ session()->get('message') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+</div>
+@elseif(session()->has('error'))
+<br>
+<div class="container alert alert-danger alert-dismissible fade show" role="alert">
+<div class="container card">
+<strong>Error</strong>  {{ session()->get('error') }}
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+</div>
+@endif
 @endsection
