@@ -25,7 +25,7 @@ class UsuarioController extends Controller
         ]);
 
         try {
-            if ($comentario = Comentario::where('id_usuario',$r->id_usuario)->count()>0) {
+            if ($comentario = Comentario::where('id_usuario',$r->id_usuario)->where('id_actividad', $r->id_actividad)->count()>0) {
                 return back()->with('error', 'Ya compartiste anteriormente');
             } else {
                  $imgName = time().'.'.$r->imagen->getClientOriginalExtension();

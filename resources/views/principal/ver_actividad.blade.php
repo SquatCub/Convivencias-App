@@ -74,7 +74,7 @@
             <br>
             <div class="row">
                 @foreach($comentarios as $comentario)
-                <div id="myImg{{$comentario->imagen}}" class="col">
+                <div class="col myImg{{$comentario->imagen}} d-none d-md-block">
                     <div class="wrapper-photo">
                         <div class="container">
                             <div class="photo-top" style="background: url('/images/{{$comentario->imagen}}') no-repeat center center;">
@@ -82,6 +82,18 @@
                             <div class="photo-bottom">
                                 <h4>Por: {{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} {{$comentario->usuario->apellido_materno}}</h4>
                                 <h5>De: {{$comentario->usuario->area->nombre}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col myImg{{$comentario->imagen}} d-sm-block d-md-none d-lg-none">
+                    <div class="wrapper-photo-sm">
+                        <div class="container">
+                            <div class="photo-top" style="background: url('/images/{{$comentario->imagen}}') no-repeat center center;">
+                            </div>
+                            <div class="photo-bottom">
+                                <h6>Por: {{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}}</h6>
+                                <h7>De: {{$comentario->usuario->area->nombre}}</h7>
                             </div>
                         </div>
                     </div>
@@ -127,10 +139,15 @@
 <!-- Script para visualizar las imagenes -->
 <script>
   var modal = document.getElementById("myModal");
-  var img1 = document.getElementById("myImg{{$comentario->imagen}}");
+  var img1 = document.getElementsByClassName("myImg{{$comentario->imagen}}");
   var modalImg = document.getElementById("img01");
   var captionText = document.getElementById("caption");
-  img1.onclick = function() {
+  img1[0].onclick = function() {
+    modal.style.display = "block";
+    modalImg.src = '/images/{{$comentario->imagen}}';
+    captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
+  }
+  img1[1].onclick = function() {
     modal.style.display = "block";
     modalImg.src = '/images/{{$comentario->imagen}}';
     captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
