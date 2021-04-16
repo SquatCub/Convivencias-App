@@ -16,22 +16,48 @@
     </div>
     <br>
 <br>
-
-<div class="text-center">
+<div class="container">
+    <div class="video-container">
         <iframe width="560" height="315" src="https://www.youtube.com/embed/{{$actividad->video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
-    <br>
+</div>
+
+<br>
 <div id="categoria">
     <div class="container">
     <br>
         <div class="text-center text-white">
             <h1>Comparte tu trabajo</h1>
-            <h2>Sube una foto de tu tabajo para que todos puedan verla</h2>
-            <!-- @if(Auth::user())
-            <h1>Logeado</h1>
+            @if(Auth::user())
+            <h2>Sube una foto de tu tabajo para que todos puedan verla</h2><br>
+            <form action="" method="post" enctype="multipart/form-data">
+                <div class="text-center">
+                    <div class="d-flex justify-content-center align-items-center text-center">
+                        <div class="mr-3">
+                            <div class="wrapper-upload">
+                                <div class="container">
+                                    <div class="upload-top" style="background: url('/images/app/upload.png') no-repeat center center;">
+                                    </div>
+                                    <div class="upload-bottom">
+                                        <h4>Seleccionar</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ml-3">
+                            <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="100" id="output"/>
+                        </div>
+                    </div>
+                    <br>
+                    <div>
+                        <button class="btn btn-success btn-lg">Compartir</button>
+                    </div>
+                </div>
+            </form>
             @else
-            <h2>Necesitas estar registrado e iniciar sesión para compartir tu trabajo</h2>
-            @endif -->
+            <h2 class="text-warning">Necesitas estar registrado e iniciar sesión para compartir tu trabajo</h2>
+            <br>
+            @endif
         </div>
     </div>
     <br>

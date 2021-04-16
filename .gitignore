@@ -33,5 +33,7 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-public/images/
-*.png
+public/images/actas
+public/images/actividades
+public/images/categorias
+public/images/comprobantes
