@@ -22,7 +22,7 @@
                         <div class="top" style="background: url('/images/{{$categoria->imagen}}') no-repeat center center;">
                         </div>
                         <div class="bottom">
-                            <h1>{{$categoria->nombre}}</h1>
+                            <h2>{{$categoria->nombre}}</h2>
                         </div>
                     </div>
                 </div>

@@ -39,7 +39,7 @@
                     <div class="col-sm-12">
                         <div class="form-group label-floating">
                             <label for="no_de_control" class="control-label">Enlace del video (YouTube)</label>
-                            <input type="text" class="form-control" name="url" value="{{$actividad->video_url}}"> 
+                            <input type="text" class="form-control" name="url" value="https://youtu.be/{{$actividad->video_url}}"> 
                         </div>
                     </div>
                     <div class="col-sm-12 text-center">

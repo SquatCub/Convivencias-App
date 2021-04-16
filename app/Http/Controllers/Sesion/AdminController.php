@@ -123,14 +123,14 @@ class AdminController extends Controller
             'url' => 'required',
             'imagen' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048'
         ]);
-
+        $url = getUrl($r->url);
         try {
             if ($actividad = Actividad::where('nombre',$r->nombre)->count()>0) {
                 return back()->with('error', 'Ya existe una actividad con este nombre');
             } else {
                  $imgName = time().'.'.$r->imagen->getClientOriginalExtension();
                  $path = "actividades/".$imgName;
-                 if ($actividad = Actividad::create(["nombre"=>$r->nombre, "descripcion"=>$r->descripcion, "imagen"=>$path, "video_url"=>$r->url, "id_categoria"=>$r->id_categoria])) {
+                 if ($actividad = Actividad::create(["nombre"=>$r->nombre, "descripcion"=>$r->descripcion, "imagen"=>$path, "video_url"=>$url, "id_categoria"=>$r->id_categoria])) {
                      $r->imagen->move(public_path('images/actividades'), $imgName);
                      return redirect()->route('admin.actividades')->with('message', 'Actividad creada con exito');
                  } else {
@@ -156,7 +156,7 @@ class AdminController extends Controller
             'url' => 'required',
             'imagen' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048'
         ]);
-
+        $url = getUrl($r->url);
         try {
             $actividad = Actividad::findOrFail($r->id_actividad);
             if ($actividad->nombre == $r->nombre || !($repetido = Actividad::where('nombre', $r->nombre)->count()>0)) {
@@ -170,7 +170,8 @@ class AdminController extends Controller
                     $path = "actividades/".$imgName;
                     $r->imagen->move(public_path('images/actividades'), $imgName);
                     $actividad->imagen=$path;
-                }    
+                }
+                $actividad->video_url = $url;
                 $actividad->save();
                 return redirect()->route('admin.actividades')->with('message', 'Actividad actualizada con éxito');
             } else {
@@ -283,4 +284,19 @@ class AdminController extends Controller
         }
     }
 
+    
+
+}
+//  Funcion para recortar el URL del video compartido
+function getUrl($video_url) {
+    $url= "";
+    $len = strlen($video_url);
+    for ($i = $len-1; $i >= 0; $i--) {
+        if($video_url[$i] == "/" || $video_url[$i] == "=") {
+            break;
+        }
+        $url .= $video_url[$i];
+    }
+    $url = strrev($url);
+    return $url;
 }

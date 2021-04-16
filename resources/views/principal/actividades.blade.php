@@ -13,19 +13,17 @@
 </div>
 <div id="actividad">
     <br><br>
-    <div class="container">
+    <div class="container text-center">
         <div class="row">
             @foreach($actividades as $actividad)
             <a href="{{ route ('verActividad', $actividad->nombre) }}">
-            
-            
             <div class="col-md-4">
                 <div class="wrapper">
                     <div class="container">
                         <div class="top" style="background: url('/images/{{$actividad->imagen}}') no-repeat center center;">
                         </div>
                         <div class="bottom">
-                            <h1>{{$actividad->nombre}}</h1>
+                            <h2>{{$actividad->nombre}}</h2>
                         </div>
                     </div>
                 </div>
