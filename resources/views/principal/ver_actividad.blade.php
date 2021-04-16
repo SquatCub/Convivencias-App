@@ -66,6 +66,32 @@
     </div>
     <br>
 </div>
+<div id="actividad">
+    <div class="container">
+    <br>
+        <div class="text-center text-white">
+            <h1>Galería de trabajos</h1>
+            <br>
+            <div class="row">
+                @foreach($comentarios as $comentario)
+                <div id="myImg{{$comentario->imagen}}" class="col">
+                    <div class="wrapper-photo">
+                        <div class="container">
+                            <div class="photo-top" style="background: url('/images/{{$comentario->imagen}}') no-repeat center center;">
+                            </div>
+                            <div class="photo-bottom">
+                                <h4>Por: {{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} {{$comentario->usuario->apellido_materno}}</h4>
+                                <h5>De: {{$comentario->usuario->area->nombre}}</h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            
+        </div>
+    </div>
+</div>
 <script>
     desc = document.querySelectorAll('.fecha');
     desc.forEach(element=> {
@@ -87,4 +113,32 @@
     }
   };
 </script>
+<!-- The Modal -->
+<div id="myModal" class="modal-img">
+  <!-- The Close Button -->
+  <span class="close">&times;</span>
+  <!-- Modal Content (The Image) -->
+  <img class="modal-img-content" id="img01">
+  <!-- Modal Caption (Image Text) -->
+  <div id="caption"></div>
+</div>
+
+@foreach($comentarios as $comentario)
+<!-- Script para visualizar las imagenes -->
+<script>
+  var modal = document.getElementById("myModal");
+  var img1 = document.getElementById("myImg{{$comentario->imagen}}");
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+  img1.onclick = function() {
+    modal.style.display = "block";
+    modalImg.src = '/images/{{$comentario->imagen}}';
+    captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
+  }
+  var span = document.getElementsByClassName("close")[0];
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+</script>
+@endforeach
 @endsection

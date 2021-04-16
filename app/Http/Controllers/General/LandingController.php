@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Categoria;
 use App\Models\Actividad;
 use App\Models\Area;
+use App\Models\Comentario;
 
 class LandingController extends Controller
 {
@@ -35,7 +36,8 @@ class LandingController extends Controller
     }
     public function verActividad($actividad) {
         if($actividad = Actividad::where('nombre', $actividad)->first()) {
-            return view('principal.ver_actividad', compact('actividad'));
+            $comentarios = Comentario::where('id_actividad', $actividad->id)->get();
+            return view('principal.ver_actividad', compact('actividad', 'comentarios'));
         } else {
             return view('principal.no_encontrado');
         }
