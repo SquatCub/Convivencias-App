@@ -13,7 +13,7 @@ class LandingController extends Controller
 {
     public function index() {
         $categorias = Categoria::all()->take(2);
-        $actividades = Actividad::all();
+        $actividades = Actividad::all()->take(2);
         if($usuario = Auth::user()) {
             return view('principal.index', compact('usuario', 'categorias', 'actividades'));
         } else {

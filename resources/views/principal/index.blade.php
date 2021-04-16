@@ -5,13 +5,15 @@
 @endsection
 @section('section')
 <div class="container text-center">
-    <h1 class="display-4 titulo2">Bienvenidos</h1>
+    @if(Auth::user())
+        <h1 class="display-4 titulo2">Bienvenido {{Auth::user()->normal->nombre}} {{Auth::user()->normal->apellido_paterno}}</h1>
+    @else
+        <h1 class="display-4 titulo2">Bienvenidos</h1>
+    @endif
     <h3>Aquí podrás realizar muchos</h3>
     <h3>tipos de actividades</h3>
     <img class="img-fluid" src="/images/app/hands.png" alt="principal">
-    @if(isset($usuario->normal))
-    <h1>Iniciaste sesion como usuario</h1>
-    @endif
+    
 </div>
 <div id="categoria">
     <br><br>
@@ -35,27 +37,31 @@
                     <tr>
                     @foreach($categorias as $categoria)
                         <td scope="row">
-                            <div class="wrapper">
-                                <div class="container">
-                                    <div class="top" style="background: url('/images/{{$categoria->imagen}}') no-repeat center center;">
-                                    </div>
-                                    <div class="bottom">
-                                        <h2>{{$categoria->nombre}}</h2>
+                            <a href="{{ route ('verActividad', $categoria->nombre) }}">
+                                <div class="wrapper">
+                                    <div class="container">
+                                        <div class="top" style="background: url('/images/{{$categoria->imagen}}') no-repeat center center;">
+                                        </div>
+                                        <div class="bottom">
+                                            <h2>{{$categoria->nombre}}</h2>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </td>
                     @endforeach
                         <td scope="row">
-                            <div class="wrapper">
-                                <div class="container">
-                                    <div class="top" style="background: url('/images/app/plus.png') no-repeat center center;">
-                                    </div>
-                                    <div class="bottom">
-                                        <h1>Ver Más</h1>
+                            <a href="{{ url ('categorias') }}">
+                                <div class="wrapper">
+                                    <div class="container">
+                                        <div class="top" style="background: url('/images/app/plus.png') no-repeat center center;">
+                                        </div>
+                                        <div class="bottom">
+                                            <h1>Ver Más</h1>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </td>
                     </tr>
                 </tbody>
@@ -85,27 +91,31 @@
                     <tr>
                     @foreach($actividades as $actividad)
                         <td scope="row">
-                            <div class="wrapper">
-                                <div class="container">
-                                    <div class="top" style="background: url('/images/{{$actividad->imagen}}') no-repeat center center;">
-                                    </div>
-                                    <div class="bottom">
-                                        <h2>{{$actividad->nombre}}</h2>
+                            <a href="{{ route ('verActividad', $actividad->nombre) }}">
+                                <div class="wrapper">
+                                    <div class="container">
+                                        <div class="top" style="background: url('/images/{{$actividad->imagen}}') no-repeat center center;">
+                                        </div>
+                                        <div class="bottom">
+                                            <h2>{{$actividad->nombre}}</h2>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </td>
                     @endforeach
                         <td scope="row">
-                            <div class="wrapper">
-                                <div class="container">
-                                    <div class="top" style="background: url('/images/app/plus.png') no-repeat center center;">
-                                    </div>
-                                    <div class="bottom">
-                                        <h1>Ver Más</h1>
+                            <a href="{{ url ('actividades') }}">
+                                <div class="wrapper">
+                                    <div class="container">
+                                        <div class="top" style="background: url('/images/app/plus.png') no-repeat center center;">
+                                        </div>
+                                        <div class="bottom">
+                                            <h1>Ver Más</h1>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
                         </td>
                     </tr>
                 </tbody>

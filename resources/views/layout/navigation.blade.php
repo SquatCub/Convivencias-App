@@ -8,7 +8,7 @@
     <div class="col">
       <h4 class="titulo">CONVIVENCIAS VIRTUALES</h4>
     </div>
-    @if(isset($usuario->normal))
+    @if(Auth::user())
     <div class="col">
         <a class="btn btn-sm btn-outline-danger" href="{{ url ('logout') }}">Salir</a>
     </div>
@@ -22,7 +22,7 @@
 <br>
     <ul class="nav justify-content-center">
       <li class="nav-item mr-2">
-      @if(isset($usuario))
+      @if(Auth::user())
         <a class="btn btn-primary nav-link" href="{{ route ('inicio.usuario') }}">Inicio</a>
       @else
         <a class="btn btn-primary nav-link" href="{{ route ('index') }}">Inicio</a>
@@ -34,7 +34,7 @@
       <li class="nav-item mr-2">
         <a class="btn btn-outline-primary nav-link" href="{{ url ('categorias') }}">Categorías</a>
       </li>
-      @if(!isset($usuario->normal))
+      @if(!Auth::user())
       <div class="d-sm-block d-md-none d-lg-none">
           <li class="nav-item mr-2 mt-2">
             <a class="btn btn-outline-primary nav-link" href="{{ url ('login/registro') }}">Registrarse</a>
