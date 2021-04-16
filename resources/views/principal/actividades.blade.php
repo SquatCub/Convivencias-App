@@ -16,6 +16,9 @@
     <div class="container">
         <div class="row">
             @foreach($actividades as $actividad)
+            <a href="{{ route ('verActividad', $actividad->nombre) }}">
+            
+            
             <div class="col-md-4">
                 <div class="wrapper">
                     <div class="container">
@@ -27,6 +30,7 @@
                     </div>
                 </div>
             </div>
+            </a>
             @endforeach
         </div>
     </div>

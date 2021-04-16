@@ -16,7 +16,7 @@
     <div class="container text-center">
         <div class="row">
             @foreach($categorias as $categoria)
-            <div class="col-md-4">
+            <div class="col-md-6 col-lg-4">
                 <div class="wrapper">
                     <div class="container">
                         <div class="top" style="background: url('/images/{{$categoria->imagen}}') no-repeat center center;">
