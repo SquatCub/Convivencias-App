@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout.layout2')
 @section('titulo') Panel Administrador - Usuarios @endsection
 @section('section')
 @include('admin.navigation')

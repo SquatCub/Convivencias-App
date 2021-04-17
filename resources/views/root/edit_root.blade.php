@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout.layout2')
 @section('titulo') Panel Super-Usuario @endsection
 @section('section')
 @include('root.navigation')

@@ -12,7 +12,6 @@
 <body>
     @yield('navigation')
     @yield('section')
-    @include('layout.footer')
     <script src="{{ asset('js/app.js') }}"></script>
     <script src="{{ asset('js/myjs.js') }}"></script>
     <script src="{{ asset('js/validation.js') }}"></script>

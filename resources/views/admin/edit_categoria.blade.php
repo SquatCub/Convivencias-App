@@ -1,4 +1,4 @@
-@extends('layout.layout')
+@extends('layout.layout2')
 @section('titulo') Editar categoría @endsection
 @section('section')
 @include('admin.navigation')

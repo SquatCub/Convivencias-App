@@ -124,9 +124,4 @@
     </div>
     <br>
 </div>
-
-<div class="bg-dark" id="footer">
-<br><br><br>
-</div>
-
 @endsection
