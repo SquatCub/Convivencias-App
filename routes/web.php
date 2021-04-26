@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/admin/categorias/update', 'Sesion\AdminController@updateCategoria')->name('categoria.update');
             Route::post('/admin/categorias/crear', 'Sesion\AdminController@createCategoria')->name('categoria.create');
             Route::delete('/admin/categorias/eliminar/{id}', 'Sesion\AdminController@deleteCategoria')->name('categoria.eliminar');
+
+            Route::get('/categoria/{categoria}/actividades', 'Sesion\AdminController@actividadCategoria')->name("categoria.actividades");
             #   -   -   -   -   -   -   Funciones para Actividades
             Route::get('/admin/actividades', 'Sesion\AdminController@actividades')->name('admin.actividades');
             Route::get('/admin/actividades/nuevo', 'Sesion\AdminController@newActividad')->name('actividad.new');
@@ -58,6 +60,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/usuarios', 'Sesion\AdminController@usuarios')->name('admin.usuarios');
             Route::get('/admin/usuarios/nuevo', 'Sesion\AdminController@newUsuario')->name('usuario.new');
             Route::post('/admin/usuarios/crear', 'Sesion\AdminController@createUsuario')->name('usuario.create');
+            Route::delete('/admin/usuarios/eliminar/{id}', 'Sesion\AdminController@deleteUsuario')->name('usuario.eliminar');
             #   -   -   -   -   -   -   Funciones para Solicitudes
             Route::get('/admin/usuarios/solicitudes', 'Sesion\AdminController@solicitudes')->name('admin.solicitudes');
             Route::post('/admin/usuarios/solicitudes/aceptar', 'Sesion\AdminController@acceptSolicitud')->name('solicitudes.accept');

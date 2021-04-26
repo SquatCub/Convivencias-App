@@ -48,12 +48,14 @@
         </button>
       </div>
       <div class="modal-body">
-            <h4>¿Está seguro de querer eliminar el usuarioistrador?</h4><br>
+            <h4>¿Está seguro de querer eliminar el usuario?</h4><br>
             <h5><b>Nombre:</b> {{ $usuario->nombre }} {{ $usuario->apellido_paterno }} {{ $usuario->apellido_materno }}</h5>
             <h5><b>Área:</b> {{ $usuario->area->nombre }}</h5>
+            <p>Se eliminarán las imagenes compartidas por el usuario.
+            Esta acción no se podrá deshacer</p>
       </div>
       <div class="modal-footer">
-        <form action="{{ route('admin.eliminar', $usuario->user->id) }}" method="POST">
+        <form action="{{ route('usuario.eliminar', $usuario->id) }}" method="POST">
             @method('DELETE')
             @csrf
             <button type="button" class="btn btn-default btn-raised" data-dismiss="modal">Cancelar</button>

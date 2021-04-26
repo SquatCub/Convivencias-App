@@ -31,7 +31,7 @@ class LandingController extends Controller
         return view('principal.categorias', compact('categorias'));
     }
     public function actividades() {
-        $actividades = Actividad::all();
+        $actividades = Actividad::orderBy('id', 'desc')->get();
         return view('principal.actividades', compact('actividades'));
     }
     public function verActividad($actividad) {

@@ -29,14 +29,14 @@
         <div class="text-center text-white">
             <h1>Comparte tu trabajo</h1>
             @if(Auth::user())
-            <h2>Sube una foto de tu tabajo para que todos puedan verla</h2><br>
+            <h2>Sube una foto de tu trabajo para que todos puedan verlo</h2><br>
             <form action="{{ route ('comentario.create') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="text-center">
                     <div class="d-flex justify-content-center align-items-center text-center">
                         <div class="mr-3">
                         <label>
-                        <input type="file" size="200" name="imagen" id="imagen" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg">
+                        <input type="file" required size="200" name="imagen" id="imagen" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg">
                             <div class="wrapper-upload">
                                 <div class="container">
                                     <div class="upload-top" style="background: url('/images/app/upload.png') no-repeat center center;">
@@ -55,7 +55,7 @@
                     <br>
                     <input type="hidden" name="id_actividad" value="{{$actividad->id}}" >
                     <input type="hidden" name="id_usuario" value="{{Auth::user()->id}}">
-                    <button type="submit" class="btn btn-success btn-lg">Compartir</button>
+                    <button id="share" type="submit" class="btn btn-success btn-lg" disabled>Compartir</button>
                 </div>
             </form>
             @else
@@ -119,9 +119,11 @@
 <script>
   var loadFile = event => {
     var output = document.getElementById('output');
+    
     output.src = URL.createObjectURL(event.target.files[0]);
     output.onload = function() {
       URL.revokeObjectURL(output.src) // free memory
+      document.getElementById("share").disabled = false;
     }
   };
 </script>

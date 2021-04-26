@@ -4,7 +4,11 @@
 @include('admin.navigation')
 <div class="container card">
     <br>
-    <h1>Actividades</h1>
+    <h1>Actividades @if(isset($categoria))
+    de {{$categoria->nombre}}
+    @endif</h1>
+    
+    
     <div class="text-right">
         <a href="{{ route ('actividad.new') }}" class="btn btn-success text-white">Añadir nueva actividad</a>
     </div>
@@ -29,7 +33,7 @@
                 <td scope="row">{{ $actividad->categoria->nombre }}</td>
                 <td class="desc" scope="row">{{ $actividad->descripcion }}</td>
                 <td scope="row"><img src="/images/{{$actividad->imagen}}" width="50" alt=""></td>
-                <td scope="row"><a href="{{ route ('actividad.edit', $actividad) }}" class="btn btn-primary btn-sm">Editar</a> <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $actividad->id }}">Eliminar</a></td>
+                <td scope="row"><a href="{{ route ('actividad.edit', $actividad) }}" class="btn btn-success btn-sm">Ver más</a> <a href="{{ route ('actividad.edit', $actividad) }}" class="btn btn-primary btn-sm">Editar</a> <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $actividad->id }}">Eliminar</a></td>
                 </tr>
                 @endforeach
             </tbody>

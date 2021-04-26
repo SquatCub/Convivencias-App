@@ -13,6 +13,7 @@ use App\Models\Usuario;
 use App\User;
 use App\Models\Solicitud;
 use App\Models\Area;
+use App\Models\Comentario;
 
 class AdminController extends Controller
 {
@@ -106,6 +107,15 @@ class AdminController extends Controller
             return back()->with('error', 'No es posible eliminar la categoría');
         }
      }
+
+     public function actividadCategoria($categoria) {
+        if($categoria = Categoria::where('nombre', $categoria)->first()) {
+            $actividades = Actividad::where('id_categoria', $categoria->id)->get();
+            return view('admin.actividades', compact('actividades','categoria'));
+        } else {
+            return view('principal.no_encontrado');
+        }
+    }
     #   -   -   -   -   -   -   Funciones para Actividades
     public function actividades() {
         $actividades = Actividad::all();
@@ -232,6 +242,27 @@ class AdminController extends Controller
             }
         } catch (Exception $error) {
             return back()->with('error', 'Hubo un error');
+        }
+    }
+    public function deleteUsuario($id) {
+        if(!$id){
+            return back()->with('error', 'Hubo un error en la solicitud');
+        }
+        try {
+            if($usuario = Usuario::findOrFail($id)){
+                $user = User::where('id', $usuario->id_usuario)->first();
+                
+                $comentarios = Comentario::where('id_usuario', $usuario->id_usuario)->get();
+                foreach ($comentarios as $comentario) {
+                    File::delete("images/".$comentario->imagen);
+                }
+                User::destroy($user->id);
+                return back()->with('message', 'Usuario eliminado');            
+            } else {
+                return back()->with('error', 'Recurso no encontrado');
+            }
+        } catch(Exception $e) {
+            return back()->with('error', 'No es posible eliminar al usuario');
         }
     }
     public function solicitudes() {

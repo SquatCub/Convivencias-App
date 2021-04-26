@@ -17,9 +17,9 @@ class CreateComentarioTable extends Migration
             $table->bigIncrements('id');
             $table->string("imagen");
             $table->unsignedBigInteger('id_usuario');
-            $table->foreign('id_usuario')->references('id')->on('users');
+            $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('id_actividad');
-            $table->foreign('id_actividad')->references('id')->on('actividad');
+            $table->foreign('id_actividad')->references('id')->on('actividad')->onDelete('cascade');
             $table->timestamps();
         });
     }
