@@ -1,5 +1,6 @@
 @section('navigation')
 <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+  <img src="https://0201.nccdn.net/1_2/000/000/0ad/535/82bd9199ec924570988980d85326d9ff.png" alt="logo" width="20" height="30" id="logo_sntsa">
   <a class="navbar-brand" href="{{ route ('inicio.root') }}">Panel Administrador</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -7,23 +8,24 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="{{ route ('inicio.admin') }}">Inicio</a>
+        <a class="nav-link btn btn-outline-success" href="{{ route ('inicio.admin') }}">Inicio</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{{ route ('admin.categorias') }}">Categorías</a>
+        <a class="nav-link btn btn-outline-success" href="{{ route ('admin.categorias') }}">Categorías</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{{ route ('admin.actividades') }}">Actividades</a>
+        <a class="nav-link btn btn-outline-success" href="{{ route ('admin.actividades') }}">Actividades</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{{ route ('admin.usuarios') }}">Usuarios</a>
+        <a class="nav-link btn btn-outline-success" href="{{ route ('admin.usuarios') }}">Usuarios</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{{ url('logout') }}">Cerrar sesión</a>
+        <a class="nav-link btn btn-outline-danger" href="{{ url('logout') }}">Cerrar sesión</a>
       </li>
     </ul>
   </div>
 </nav>
+<br>
 @if(session()->has('message'))
 <br>
 <div class="container alert alert-success alert-dismissible fade show" role="alert">

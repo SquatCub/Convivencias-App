@@ -7,7 +7,7 @@
     <title>Upload test</title>
 </head>
 <body>
-    <div class="container">
+    <div class="container text-center">
             <h1>Registrarse</h1>
             <h2>Se enviará la solicitud a un administrador, si este lo aprueba podrás ingresar a todas las funciones.</h2>
             <form method="POST" action="{{ route('enviar') }}" enctype="multipart/form-data">
