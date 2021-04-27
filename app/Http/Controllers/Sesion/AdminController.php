@@ -314,9 +314,24 @@ class AdminController extends Controller
             return back()->with('error', 'Hubo un error');
         }
     }
-
-    
-
+    public function deleteSolicitud($id) {
+        if(!$id) {
+            return back()->with('error', 'Hubo un error en la solicitud');
+        }
+        try {
+             if($solicitud = Solicitud::findOrFail($id)) {
+                $solicitud = Solicitud::findOrFail($id);
+                File::delete("images/".$solicitud->url_acta);
+                File::delete("images/".$solicitud->url_comprobante);
+                Solicitud::destroy($id);
+                return back()->with('message', 'Solicitud rechazada');   
+             } else {
+                 return back()->with('error', 'Recurso no encontrado');
+             }
+        } catch(Exception $e) {
+            return back()->with('error', 'No es posible eliminar la solicitud');
+        }
+    }
 }
 //  Funcion para recortar el URL del video compartido
 function getUrl($video_url) {

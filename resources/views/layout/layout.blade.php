@@ -7,6 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="/css/app.css">
     <link rel="stylesheet" href="/css/custom.css">
+    <link rel="icon" href="https://0201.nccdn.net/1_2/000/000/0ad/535/82bd9199ec924570988980d85326d9ff.png" type="image/png">
     <title>@yield('titulo')</title>
 </head>
 <body>

@@ -62,7 +62,7 @@
             <h5><b>Área:</b> {{ $solicitud->area->nombre }}</h5>
       </div>
       <div class="modal-footer">
-        <form action="{{ route('admin.eliminar', $solicitud->id) }}" method="POST">
+        <form action="{{ route('solicitud.eliminar', $solicitud->id) }}" method="POST">
             @method('DELETE')
             @csrf
             <button type="button" class="btn btn-default btn-raised" data-dismiss="modal">Cancelar</button>
