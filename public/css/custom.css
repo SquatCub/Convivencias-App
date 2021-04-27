@@ -92,11 +92,11 @@ input[type="file"] {
     font-weight: bolder;
 }
 
-#categoria {
+#actividad {
     background-color: dodgerblue;
 }
-#actividad {
-    background-color: rgb(25, 145, 125);
+#categoria {
+    background-color: rgb(43, 160, 140);
 }
 
 /* Cards para categorias y actividades */
