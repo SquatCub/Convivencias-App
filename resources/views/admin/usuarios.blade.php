@@ -29,7 +29,7 @@
               <td scope="row">{{ $usuario->nombre }} {{ $usuario->apellido_paterno }} {{ $usuario->apellido_materno }}</td>
               <td scope="row">{{ $usuario->user->usuario }}</td>
               <td class="area" scope="row">{{ $usuario->area->nombre }}</td>
-              <td scope="row"><a href="{{ route ('admin.editar', $usuario) }}" class="btn btn-primary btn-sm">Editar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $usuario->user->id }}">Eliminar</a></td>
+              <td scope="row"><a href="{{ route ('usuario.editar', $usuario) }}" class="btn btn-primary btn-sm">Editar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $usuario->user->id }}">Eliminar</a></td>
               </tr>
               @endforeach
           </tbody>

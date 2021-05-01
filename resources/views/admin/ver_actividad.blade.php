@@ -9,7 +9,15 @@
         <a href="{{ route ('actividad.edit', $actividad) }}" class="btn btn-warning btn-sm">Editar</a>
     </div>
     <h1>Nombre de la actividad: {{$actividad->nombre}}</h1>
-    <h2>Descripción: {{$actividad->descripcion}}</h2>
+    <h4>Categoría: {{$actividad->categoria->nombre}}</h4>
+    <h4>Descripción: {{$actividad->descripcion}}</h4>
+    <hr>
+    <h4>Video: </h4>
+    <div class="container">
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/{{$actividad->video_url}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
     <br>
 </div>
 <br>

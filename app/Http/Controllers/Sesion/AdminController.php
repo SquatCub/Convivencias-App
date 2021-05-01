@@ -266,6 +266,42 @@ class AdminController extends Controller
             return back()->with('error', 'Hubo un error');
         }
     }
+    public function editUsuario($id) {
+        $usuario = Usuario::findOrFail($id);
+        $areas = Area::all();
+        return view('admin.edit_usuario', compact('usuario', 'areas'));
+    }
+    public function updateUsuario(Request $r) {
+        $v = Validator::make($r->all(), [
+            'nombre' => 'required',
+            'materno' => 'required',
+            'paterno' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'id_area' => 'required',
+            'id_user' => 'required',
+            'id_usuario' => 'required'
+        ]);
+        try {
+            $user = User::findOrFail($r->id_user);
+            $usuario = Usuario::findOrFail($r->id_usuario);
+            if ($user->usuario == $r->username || !($new_user = User::where('usuario',$r->username)->count()>0)) {
+                $user->usuario=$r->username;
+                $user->password=bcrypt($r->password);
+                $user->save();
+                $usuario->nombre=$r->nombre;
+                $usuario->apellido_paterno=$r->paterno;
+                $usuario->apellido_materno=$r->materno;
+                $usuario->id_area=$r->id_area;
+                $usuario->save();
+                return redirect()->route('admin.usuarios')->with('message', 'Usuario actualizado con exito');
+            } else {
+                return back()->with('error', 'Ya existe un usuario con este álias');
+            }
+        } catch (Exception $error) {
+            return back()->with('error', 'Hubo un error');
+        }
+    }
     public function deleteUsuario($id) {
         if(!$id){
             return back()->with('error', 'Hubo un error en la solicitud');
