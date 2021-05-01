@@ -130,7 +130,7 @@
 <!-- The Modal -->
 <div id="myModal" class="modal-img">
   <!-- The Close Button -->
-  <span class="close">&times;</span>
+  <span class="close" id="close" on>&times;</span>
   <!-- Modal Content (The Image) -->
   <img class="modal-img-content" id="img01">
   <!-- Modal Caption (Image Text) -->
@@ -154,9 +154,10 @@
     modalImg.src = '/images/{{$comentario->imagen}}';
     captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
   }
-  var span = document.getElementsByClassName("close")[0];
+  var span = document.querySelector("#close");
   span.onclick = function() {
     modal.style.display = "none";
+    console.log("click")
   }
 </script>
 @endforeach

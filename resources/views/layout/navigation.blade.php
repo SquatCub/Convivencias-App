@@ -21,30 +21,26 @@
 </div>
 <br>
     <ul class="nav justify-content-center">
-      <li class="nav-item mr-2">
+      <li class="nav-item mr-1 p-1">
       @if(Auth::user())
         <a class="btn @if($opt == 'inicio') btn-primary @else btn-outline-primary @endif nav-link" href="{{ route ('inicio.usuario') }}">Inicio</a>
       @else
         <a class="btn @if($opt == 'inicio') btn-primary @else btn-outline-primary @endif nav-link" href="{{ route ('index') }}">Inicio</a>
       @endif
       </li>
-      <li class="nav-item mr-2">
+      <li class="nav-item mr-1 p-1">
         <a class="btn @if($opt == 'actividades') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('actividades') }}">Actividades</a>
       </li>
-      <li class="nav-item mr-2">
+      <li class="nav-item mr-1 p-1">
         <a class="btn @if($opt == 'categorias') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('categorias') }}">Categorías</a>
       </li>
+      <li class="nav-item mr-1 p-1">
+        <a class="btn @if($opt == 'galeria') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('galeria') }}">Galería</a>
+      </li>
       @if(!Auth::user())
-      <div class="d-sm-block d-md-none d-lg-none">
-          <li class="nav-item mr-2 mt-2">
-            <a class="btn @if($opt == 'registro') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('login/registro') }}">Registrarse</a>
-          </li>
-      </div>
-      <div class="d-none d-md-block">
-          <li class="nav-item mr-2">
-            <a class="btn @if($opt == 'registro') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('login/registro') }}">Registrarse</a>
-          </li>
-      </div>
+      <li class="nav-item mr-1 p-1">
+        <a class="btn @if($opt == 'registro') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('login/registro') }}">Registrarse</a>
+      </li>
       @endif
     </ul>
 <br>

@@ -14,9 +14,9 @@ use App\Models\Foto;
 class LandingController extends Controller
 {
     public function index() {
-        $categorias = Categoria::all()->take(2);
-        $actividades = Actividad::all()->take(2);
-        $fotos = Foto::all();
+        $categorias = Categoria::orderBy('id', 'desc')->take(2)->get();
+        $actividades = Actividad::orderBy('id', 'desc')->take(2)->get();
+        $fotos = Foto::orderBy('id', 'desc')->take(3)->get();
         $opt = "inicio";
         if($usuario = Auth::user()) {
             return view('principal.index', compact('usuario', 'categorias', 'actividades', 'fotos', 'opt'));
@@ -32,13 +32,13 @@ class LandingController extends Controller
             $opt = "login";
         }
         
-        $secciones = Area::all();
+        $secciones = Area::orderBy('nombre', 'asc')->get();
         return view('login.index', compact('secciones', 'opcion', 'opt'));
     }
 
     public function categorias() {
         $opt = "categorias";
-        $categorias = Categoria::all();
+        $categorias = Categoria::orderBy('id', 'desc')->get();
         return view('principal.categorias', compact('categorias', 'opt'));
     }
     public function verCategoria($categoria) {
@@ -63,5 +63,10 @@ class LandingController extends Controller
         } else {
             return view('principal.no_encontrado', compact('opt'));
         }
+    }
+    public function galeria() {
+        $opt = "galeria";
+        $fotos = Foto::orderBy('id', 'desc')->get();
+        return view('principal.galeria', compact('fotos', 'opt'));
     }
 }
