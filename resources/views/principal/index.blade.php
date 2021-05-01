@@ -12,8 +12,10 @@
     @endif
     <h3>Aquí podrás realizar muchos</h3>
     <h3>tipos de actividades</h3>
+    <audio controls>
+         <source src = "/audio/himno.mpeg" type = "audio/mpeg">
+      </audio>
     <img class="img-fluid" src="/images/app/hands.png" alt="principal">
-    
 </div>
 <div id="actividad">
     <br><br>
@@ -120,6 +122,45 @@
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+    <br>
+</div>
+<div id="galeria">
+    <div class="container text-white">
+        <div class="text-center">
+        <br><br>
+            <h1>Mira la galería de fotos</h1>
+            <br>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+        @foreach($fotos as $foto)
+            <li data-target="#carouselExampleIndicators" data-slide-to="{{$loop->iteration}}" class="active"></li>
+        @endforeach
+        </ol>
+        <div class="carousel-inner">
+        @foreach($fotos as $foto)
+        @if($loop->iteration == 1)
+        <div class="carousel-item active">
+            <img class="d-block w-100" src="/images/{{$foto->imagen}}" alt="{{$loop->iteration}}_slide">
+        </div>
+        @else
+        <div class="carousel-item">
+            <img class="d-block w-100" src="/images/{{$foto->imagen}}" alt="{{$loop->iteration}}_slide">
+        </div>
+        @endif
+            
+        @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
         </div>
     </div>
     <br>

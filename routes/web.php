@@ -72,6 +72,10 @@ Route::group(['middleware' => ['auth']], function () {
             Route::post('/admin/usuarios/solicitudes/aceptar', 'Sesion\AdminController@acceptSolicitud')->name('solicitudes.accept');
             Route::post('/admin/usuarios/solicitudes/check', 'Sesion\AdminController@checkUsername')->name('solicitudes.check');
             Route::delete('/admin/usuarios/solicitudes/eliminar/{id}', 'Sesion\AdminController@deleteSolicitud')->name('solicitud.eliminar');
+            #   -   -   -   -   -   -   Funciones para Fotos(Galeria)
+            Route::get('/admin/galeria', 'Sesion\AdminController@galeria')->name('admin.galeria');
+            Route::get('/admin/galeria/nuevo', 'Sesion\AdminController@newFoto')->name('foto.new');
+            Route::post('/admin/galeria/crear', 'Sesion\AdminController@createFoto')->name('foto.create');
     });
     #   -   -   -   -   -   -   Funciones para superusuarios
     Route::group(['middleware' => ['root']], function () {

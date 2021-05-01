@@ -98,6 +98,9 @@ input[type="file"] {
 #categoria {
     background-color: rgb(43, 160, 140);
 }
+#galeria {
+    background-color: slateblue;
+}
 
 /* Cards para categorias y actividades */
 .wrapper {

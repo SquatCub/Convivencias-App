@@ -14,6 +14,7 @@ use App\User;
 use App\Models\Solicitud;
 use App\Models\Area;
 use App\Models\Comentario;
+use App\Models\Foto;
 
 class AdminController extends Controller
 {
@@ -390,6 +391,33 @@ class AdminController extends Controller
             return back()->with('error', 'No es posible eliminar la solicitud');
         }
     }
+
+    #   -   -   -   -   -   -   Funciones para Galeria
+    public function galeria() {
+        $fotos = Foto::all();
+        return view('admin.galeria', compact('fotos'));
+    }
+    public function newFoto() {
+        return view('admin.new_foto');
+    }
+    public function createFoto(Request $r) {
+        $v = Validator::make($r->all(), [
+            'imagen' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048'
+        ]);
+
+        try {
+            $imgName = time().'.'.$r->imagen->getClientOriginalExtension();
+            $path = "galeria/".$imgName;
+            if ($foto = Foto::create(["imagen"=>$path])) {
+                    $r->imagen->move(public_path('images/galeria'), $imgName);
+                    return redirect()->route('admin.galeria')->with('message', 'Imagen añadída con éxito');
+            } else {
+                return back()->with('error', 'No se pudo agregar la imagen');
+            }
+        } catch (Exception $error) {
+            return back()->with('error', 'Hubo un error');
+        }
+     }
 }
 //  Funcion para recortar el URL del video compartido
 function getUrl($video_url) {

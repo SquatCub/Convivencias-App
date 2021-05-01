@@ -20,6 +20,9 @@
         <a class="nav-link btn btn-outline-success" href="{{ route ('admin.usuarios') }}">Usuarios</a>
       </li>
       <li class="nav-item active">
+        <a class="nav-link btn btn-outline-success" href="{{ route ('admin.galeria') }}">Galería</a>
+      </li>
+      <li class="nav-item active">
         <a class="nav-link btn btn-outline-danger" href="{{ url('logout') }}">Cerrar sesión</a>
       </li>
     </ul>

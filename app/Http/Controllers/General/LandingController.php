@@ -9,17 +9,19 @@ use App\Models\Categoria;
 use App\Models\Actividad;
 use App\Models\Area;
 use App\Models\Comentario;
+use App\Models\Foto;
 
 class LandingController extends Controller
 {
     public function index() {
         $categorias = Categoria::all()->take(2);
         $actividades = Actividad::all()->take(2);
+        $fotos = Foto::all();
         $opt = "inicio";
         if($usuario = Auth::user()) {
-            return view('principal.index', compact('usuario', 'categorias', 'actividades', 'opt'));
+            return view('principal.index', compact('usuario', 'categorias', 'actividades', 'fotos', 'opt'));
         } else {
-            return view('principal.index', compact('categorias', 'actividades', 'opt'));
+            return view('principal.index', compact('categorias', 'actividades', 'fotos', 'opt'));
         }
     }
     public function login($opcion) {
