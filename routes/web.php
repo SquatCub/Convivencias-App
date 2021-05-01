@@ -76,6 +76,7 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/galeria', 'Sesion\AdminController@galeria')->name('admin.galeria');
             Route::get('/admin/galeria/nuevo', 'Sesion\AdminController@newFoto')->name('foto.new');
             Route::post('/admin/galeria/crear', 'Sesion\AdminController@createFoto')->name('foto.create');
+            Route::delete('/admin/galeria/foto/eliminar/{id}', 'Sesion\AdminController@deleteFoto')->name('foto.eliminar');
     });
     #   -   -   -   -   -   -   Funciones para superusuarios
     Route::group(['middleware' => ['root']], function () {
