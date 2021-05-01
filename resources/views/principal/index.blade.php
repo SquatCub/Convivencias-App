@@ -91,7 +91,7 @@
                     <tr>
                     @foreach($categorias as $categoria)
                         <td scope="row">
-                            <a href="{{ route ('verActividad', $categoria->nombre) }}">
+                            <a href="{{ route ('verCategoria', $categoria->nombre) }}">
                                 <div class="wrapper">
                                     <div class="container">
                                         <div class="top" style="background: url('/images/{{$categoria->imagen}}') no-repeat center center;">

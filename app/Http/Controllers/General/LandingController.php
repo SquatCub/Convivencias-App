@@ -39,6 +39,15 @@ class LandingController extends Controller
         $categorias = Categoria::all();
         return view('principal.categorias', compact('categorias', 'opt'));
     }
+    public function verCategoria($categoria) {
+        $opt = "categorias";
+        if($categoria = Categoria::where('nombre', $categoria)->first()) {
+            $actividades = Actividad::where('id_categoria', $categoria->id)->get();
+            return view('principal.ver_categoria', compact('categoria', 'actividades', 'opt'));
+        } else {
+            return view('principal.no_encontrado', compact('opt'));
+        }
+    }
     public function actividades() {
         $opt = "actividades";
         $actividades = Actividad::orderBy('id', 'desc')->get();
