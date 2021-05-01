@@ -96,7 +96,7 @@
             <h5>Acta de nacimiento</h5>
             <div class="form-group">
                 <label class="custom-file-upload mr-3">
-                    <input type="file" size="200" name="acta" id="acta" onchange="loadFile1(event)" accept="image/x-png,image/gif,image/jpeg">
+                    <input required type="file" size="200" name="acta" id="acta" onchange="loadFile1(event)" accept="image/x-png,image/gif,image/jpeg">
                         Seleccionar acta
                 </label>
                 <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="70" id="output1"/>
@@ -104,7 +104,7 @@
             <h5>Comprobante de pago</h5>
             <div class="form-group">
                 <label class="custom-file-upload mr-3">
-                    <input type="file" size="200" name="comprobante" id="comprobante" onchange="loadFile2(event)" accept="image/x-png,image/gif,image/jpeg">
+                    <input required type="file" size="200" name="comprobante" id="comprobante" onchange="loadFile2(event)" accept="image/x-png,image/gif,image/jpeg">
                         Seleccionar comprobante
                 </label>
                 <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="70" id="output2"/>

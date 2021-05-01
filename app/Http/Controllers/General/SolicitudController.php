@@ -38,9 +38,9 @@ class SolicitudController extends Controller
                 if($solicitud = Solicitud::create(["nombre"=>$r->name, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "usuario"=>$r->username, "contraseña"=>$r->password, "url_acta"=>$pathActa,  "url_comprobante"=>$pathComprobante,  "id_area"=>$r->id_seccion, "email"=>$r->email, "telefono"=>$r->phone])){
                     $r->acta->move(public_path('images/actas/'), $acta);
                     $r->comprobante->move(public_path('images/comprobantes/'), $comprobante);
-                    return redirect()->route('index');
+                    return back()->with('message', 'Solicitud enviada con éxito');
                 } else {
-                    return ("Nop");
+                    return back()->with('error', 'Error al enviar la solicitud');
                 }
             }
         } catch(Exception $error) {
