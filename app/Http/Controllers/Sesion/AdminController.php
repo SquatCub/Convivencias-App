@@ -208,6 +208,28 @@ class AdminController extends Controller
             return back()->with('error', 'No es posible eliminar la actividad');
         }
     }
+    public function verActividad($id) {
+        $actividad = Actividad::findOrFail($id);
+        $comentarios = Comentario::where('id_actividad', $actividad->id)->get();
+        return view ('admin.ver_actividad', compact('actividad', 'comentarios'));
+    }
+    public function deleteComentario($id) {
+        if(!$id) {
+            return back()->with('error', 'Hubo un error en la solicitud');
+        }
+        try {
+             if($comentario = Comentario::findOrFail($id)) {
+                $comentario = Comentario::findOrFail($id);
+                File::delete("images/".$comentario->imagen);
+                Comentario::destroy($id);
+                return back()->with('message', 'Imagen eliminada correctamente');   
+             } else {
+                 return back()->with('error', 'Recurso no encontrado');
+             }
+        } catch(Exception $e) {
+            return back()->with('error', 'No es posible eliminar el comentario');
+        }
+    }
     #   -   -   -   -   -   -   Funciones para Usuarios
     public function usuarios() {
         $usuarios = Usuario::all();

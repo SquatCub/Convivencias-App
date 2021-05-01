@@ -33,7 +33,7 @@
                 <td scope="row">{{ $actividad->categoria->nombre }}</td>
                 <td class="desc" scope="row">{{ $actividad->descripcion }}</td>
                 <td scope="row"><img src="/images/{{$actividad->imagen}}" width="50" alt=""></td>
-                <td scope="row"><a href="{{ route ('actividad.edit', $actividad) }}" class="btn btn-success btn-sm">Ver más</a> <a href="{{ route ('actividad.edit', $actividad) }}" class="btn btn-primary btn-sm">Editar</a> <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $actividad->id }}">Eliminar</a></td>
+                <td scope="row"><a href="{{ route ('actividad.ver', $actividad) }}" class="btn btn-success btn-sm">Ver más</a> <a href="{{ route ('actividad.edit', $actividad) }}" class="btn btn-primary btn-sm">Editar</a> <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDelete{{ $actividad->id }}">Eliminar</a></td>
                 </tr>
                 @endforeach
             </tbody>

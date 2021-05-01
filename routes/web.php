@@ -56,6 +56,9 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/admin/actividades/editar/{id}', 'Sesion\AdminController@editActividad')->name('actividad.edit');
             Route::post('/admin/actividades/update', 'Sesion\AdminController@updateActividad')->name('actividad.update');
             Route::delete('/admin/actividades/eliminar/{id}', 'Sesion\AdminController@deleteActividad')->name('actividad.eliminar');
+
+            Route::get('/admin/actividades/ver/{id}', 'Sesion\AdminController@verActividad')->name('actividad.ver');
+            Route::delete('/admin/actividades/eliminar_comentario/{id}', 'Sesion\AdminController@deleteComentario')->name('comentario.eliminar');
             #   -   -   -   -   -   -   Funciones para Usuarios
             Route::get('/admin/usuarios', 'Sesion\AdminController@usuarios')->name('admin.usuarios');
             Route::get('/admin/usuarios/nuevo', 'Sesion\AdminController@newUsuario')->name('usuario.new');
