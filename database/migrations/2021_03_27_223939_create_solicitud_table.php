@@ -23,7 +23,10 @@ class CreateSolicitudTable extends Migration
             $table->string('url_acta');
             $table->string('url_comprobante');
             $table->string('email')->nullable();
-            $table->string('telefono')->nullable();
+            $table->string('telefono');
+            $table->string('edad');
+            $table->char('sexo');
+            $table->string('centro_trabajo');
             $table->unsignedBigInteger('id_area');
             $table->foreign('id_area')->references('id')->on('area');
             $table->timestamps();

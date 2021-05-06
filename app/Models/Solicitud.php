@@ -9,7 +9,7 @@ class Solicitud extends Model
 {
     protected $table = 'solicitud';
     protected $primaryKey = 'id';
-    protected $fillable = ['id', 'nombre', 'apellido_paterno', 'apellido_materno', 'usuario', 'contraseña', 'url_acta', 'url_comprobante', 'email', 'telefono', 'id_area'];
+    protected $fillable = ['id', 'nombre', 'apellido_paterno', 'apellido_materno', 'usuario', 'contraseña', 'url_acta', 'url_comprobante', 'email', 'telefono', 'id_area', 'edad', 'sexo', 'centro_trabajo'];
 
     public function area() {
         return $this->hasOne(Area::class, 'id', 'id_area');

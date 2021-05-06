@@ -17,7 +17,11 @@ class CreateUsuarioTable extends Migration
             $table->bigIncrements('id');
             $table->string('nombre');
             $table->string('apellido_paterno');
-            $table->string('apellido_materno')->nullable();;
+            $table->string('apellido_materno')->nullable();
+            $table->string('telefono');
+            $table->string('edad');
+            $table->string('sexo');
+            $table->string('centro_trabajo');
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('id_area');
