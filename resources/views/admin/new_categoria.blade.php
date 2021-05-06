@@ -27,10 +27,10 @@
                     <div class="col-sm-12 text-center">
                         <div class="form-group label-floating">
                             <label class="custom-file-upload mr-3">
-                                <input type="file" size="200" name="imagen" id="imagen" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg">
+                                <input type="file" size="200" name="imagen" id="imagen" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg" required>
                                 Seleccionar imagen
                             </label>
-                            <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="70" id="output"/>
+                            <img src="/images/app/notfound.png" alt="preview" width="70" id="output"/>
                         </div>
                     </div>
                 </div>

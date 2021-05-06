@@ -21,11 +21,11 @@ class RootController extends Controller
 
     #   -   -   -   -   -   -   Funciones para Administradores
     public function administradores() {
-        $admins = Admin::all();
+        $admins = Admin::orderBy('nombre', 'asc')->get();
         return view('root.admins', compact('admins'));
     }
     public function newAdmin() {
-        $areas = Area::all();
+        $areas = Area::orderBy('nombre', 'asc')->get();
         return view('root.new_admin', compact('areas'));
     }
     public function createAdmin(Request $r) {
@@ -57,7 +57,7 @@ class RootController extends Controller
     }
     public function editAdmin($id) {
         $admin = Admin::findOrFail($id);
-        $areas = Area::all();
+        $areas = Area::orderBy('nombre', 'asc')->get();
         return view('root.edit_admin', compact('admin', 'areas'));
     }
     public function updateAdmin(Request $r) {
@@ -109,7 +109,7 @@ class RootController extends Controller
     
     #   -   -   -   -   -   -   Funciones para Secciones
     public function secciones() {
-        $areas = Area::all();
+        $areas = Area::orderBy('nombre', 'asc')->get();
         return view('root.areas', compact('areas'));
     }
     public function newSeccion() {
@@ -124,9 +124,9 @@ class RootController extends Controller
                 return back()->with('error', 'Ya existe una seccion con este nombre');
             } else {
                 if ($area = Area::create($r->all())) {
-                    return redirect()->route('root.seccions')->with('message', 'Area creada con exito');
+                    return redirect()->route('root.seccions')->with('message', 'Sede creada con exito');
                 } else {
-                    return back()->with('error', 'No se pudo crear el area');
+                    return back()->with('error', 'No se pudo crear las sede');
                 }
             }
         } catch (Exception $error) {
@@ -150,12 +150,12 @@ class RootController extends Controller
                 if (!($areas = Area::where('nombre', $r->nombre)->count()>0)) {
                     $area->nombre=$r->nombre;
                     $area->save();
-                    return redirect()->route('root.seccions')->with('message', 'Area actualizada con exito');
+                    return redirect()->route('root.seccions')->with('message', 'Sede actualizada con exito');
                 } else {
-                    return back()->with('error', 'Ya existe una sección con este nombre');
+                    return back()->with('error', 'Ya existe una sede con este nombre');
                 }  
             } else {
-                return back()->with('error', 'No se pudo actualizar el área');
+                return back()->with('error', 'No se pudo actualizar la sede');
             }
         } catch (Exception $error) {
             return back()->with('error', 'Hubo un error desconocido');
@@ -168,20 +168,20 @@ class RootController extends Controller
         try {
             if($area = Area::findOrFail($id)) {
                 if(Admin::where('id_area', $area->id)->count()>0 || Usuario::where('id_area', $area->id)->count()>0) {
-                    return back()->with('error', 'No se puede eliminar la sección porque hay usuarios asignados a ella.');
+                    return back()->with('error', 'No se puede eliminar la sede porque hay usuarios asignados a ella.');
                 }
                 Area::destroy($id);
-                return back()->with('message', 'Sección eliminada');   
+                return back()->with('message', 'Sede eliminada');   
             } else {
                 return back()->with('error', 'Recurso no encontrado');
             }
         } catch(Exception $e) {
-            return back()->with('error', 'No es posible eliminar la sección');
+            return back()->with('error', 'No es posible eliminar la sede');
         }
     }
     #   -   -   -   -   -   -   Funciones para Superusuarios
     public function superusers() {
-        $roots = Root::all();
+        $roots = Root::orderBy('nombre', 'asc')->get();
         return view('root.superusuarios', compact('roots'));
     }
     public function newRoot() {

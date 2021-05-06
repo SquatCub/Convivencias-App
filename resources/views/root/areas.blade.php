@@ -6,7 +6,7 @@
     <br>
     <h1>Secciones</h1>
     <div class="text-right">
-        <a href="{{ route ('seccion.new') }}" class="btn btn-success text-white">Añadir nueva sección</a>
+        <a href="{{ route ('seccion.new') }}" class="btn btn-success text-white">Añadir nueva sede</a>
     </div>
     <br>
     <div class="container table-responsive">
@@ -42,11 +42,11 @@
         </button>
       </div>
       <div class="modal-body">
-            <h4>¿Está seguro de querer eliminar la sección?</h4><br>
+            <h4>¿Está seguro de querer eliminar la sede?</h4><br>
             <h5><b>Nombre:</b> {{ $area->nombre }}</h5>
             <hr>
             <b>Esta acción no se podrá deshacer.</b>
-            <b>No podrás eliminar secciones que estén asignadas a otros usuarios.</b>
+            <b>No podrás eliminar sedes que estén asignadas a otros usuarios.</b>
       </div>
       <div class="modal-footer">
         <form action="{{ route('seccion.eliminar', $area) }}" method="POST">

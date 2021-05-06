@@ -24,7 +24,7 @@ class AdminController extends Controller
     }
     #   -   -   -   -   -   -   Funciones para Categorias
      public function categorias() {
-        $categorias = Categoria::all();
+        $categorias = Categoria::orderBy('nombre', 'asc')->get();
         return view('admin.categorias', compact('categorias'));
      }
      public function newCategoria() {
@@ -119,11 +119,11 @@ class AdminController extends Controller
     }
     #   -   -   -   -   -   -   Funciones para Actividades
     public function actividades() {
-        $actividades = Actividad::all();
+        $actividades = Actividad::orderBy('nombre', 'asc')->get();
         return view ('admin.actividades', compact('actividades'));
     }
     public function newActividad() {
-        $categorias = Categoria::all();
+        $categorias = Categoria::orderBy('nombre', 'asc')->get();
         return view('admin.new_actividad', compact('categorias'));
     }
     public function createActividad(Request $r) {
@@ -154,7 +154,7 @@ class AdminController extends Controller
         }
     }
     public function editActividad($id) {
-        $categorias = Categoria::all();
+        $categorias = Categoria::orderBy('nombre', 'asc')->get();
         $actividad = Actividad::findOrFail($id);
         return view ('admin.edit_actividad', compact('actividad', 'categorias'));
     }
@@ -233,11 +233,11 @@ class AdminController extends Controller
     }
     #   -   -   -   -   -   -   Funciones para Usuarios
     public function usuarios() {
-        $usuarios = Usuario::all();
+        $usuarios = Usuario::orderBy('nombre', 'asc')->get();
         return view('admin.usuarios', compact('usuarios'));
     }
     public function newUsuario() {
-        $areas = Area::all();
+        $areas = Area::orderBy('nombre', 'asc')->get();
         return view('admin.new_usuario', compact('areas'));
     }
     public function createUsuario(Request $r) {
@@ -394,7 +394,7 @@ class AdminController extends Controller
 
     #   -   -   -   -   -   -   Funciones para Galeria
     public function galeria() {
-        $fotos = Foto::all();
+        $fotos = Foto::orderBy('id', 'desc')->get();
         return view('admin.galeria', compact('fotos'));
     }
     public function newFoto() {

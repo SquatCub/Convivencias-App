@@ -15,7 +15,7 @@
                     <div class="col-sm-12 text-center">
                         <div class="form-group label-floating">
                             <label class="custom-file-upload mr-3">
-                                <input type="file" size="200" name="imagen" id="imagen" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg">
+                                <input type="file" size="200" name="imagen" id="imagen" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg" required>
                                 Seleccionar imagen
                             </label><br><br>
                             Vista previa: <br>

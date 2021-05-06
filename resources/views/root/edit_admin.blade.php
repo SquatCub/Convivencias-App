@@ -52,7 +52,7 @@
         <br>
         <div class="row">
             <div class="col-md-1 col-sm-1">
-                <label for="password">Area: </label>
+                <label for="password">Sede: </label>
             </div>
             <div class="col-md-2 col-sm-6">
                 <select class="form-control" name="id_area" required>

@@ -14,7 +14,7 @@
         <a class="nav-link btn btn-outline-success" href="{{ route ('root.admins') }}">Administradores</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link btn btn-outline-success" href="{{ route ('root.seccions') }}">Secciones</a>
+        <a class="nav-link btn btn-outline-success" href="{{ route ('root.seccions') }}">Sedes</a>
       </li>
       <li class="nav-item active">
         <a class="nav-link btn btn-outline-success" href="{{ route ('root.superusers') }}">Superusuarios</a>

@@ -17,7 +17,7 @@
                   <th scope="col">#  <button id="0" class="btn btn-sm sort" onclick="sortTable(0)">^</button></th>
                   <th scope="col">Nombre completo  <button id="1" class="btn btn-sm sort" onclick="sortTable(1)">^</button></th>
                   <th scope="col">Usuario  <button id="2" class="btn btn-sm sort" onclick="sortTable(2)">^</button></th>
-                  <th scope="col">Área  <button id="3" class="btn btn-sm sort" onclick="sortTable(3)">^</button></th>
+                  <th scope="col">Sede  <button id="3" class="btn btn-sm sort" onclick="sortTable(3)">^</button></th>
                   <th scope="col">Acciones</th>
               </tr>
           </thead>
