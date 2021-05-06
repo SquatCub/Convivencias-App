@@ -1,24 +1,42 @@
 @section('navigation')
-<br>
+<div class="bg-primary box">
+  <div class="container">
+    <marquee behavior="scroll">
+      <div class="d-flex">
+        <div class="mr-10">
+          #OrgullosamenteSección21
+        </div>
+        <div class="mr-10">
+          #FabioMeza
+        </div>
+        <div class="mr-10">
+          #Ser21
+        </div> 
+      </div>
+    </marquee>  
+  </div>
+</div>
 <div class="container">
-<div class="row text-center">
-    <div class="col">
-      <img class="img-fluid" width="30" src="/images/app/logo_sntsa.webp" alt="logo_sntsa">
-    </div>
-    <div class="col">
-      <h4 class="titulo">CONVIVENCIAS VIRTUALES</h4>
-    </div>
-    @if(Auth::user())
-    <div class="col">
-        <a class="btn btn-sm btn-outline-danger" href="{{ url ('logout') }}">Salir</a>
-    </div>
-    @else
-    <div class="col">
-      <a class="btn btn-sm btn-success" href="{{ url ('login/iniciar') }}">Acceder</a>
-    </div>
-    @endif
+<br><br><br>
+  <div class="row text-center">
+      <div class="col">
+        <img class="img-fluid" width="30" src="/images/app/logo_sntsa.webp" alt="logo_sntsa">
+      </div>
+      <div class="col">
+        <h4 class="titulo">CONVIVENCIAS VIRTUALES</h4>
+      </div>
+      @if(Auth::user())
+      <div class="col">
+          <a class="btn btn-sm btn-outline-danger" href="{{ url ('logout') }}">Salir</a>
+      </div>
+      @else
+      <div class="col">
+        <a class="btn btn-sm btn-success" href="{{ url ('login/iniciar') }}">Acceder</a>
+      </div>
+      @endif
+  </div>
 </div>
-</div>
+
 <br>
     <ul class="nav justify-content-center">
       <li class="nav-item mr-1 p-1">
@@ -29,10 +47,10 @@
       @endif
       </li>
       <li class="nav-item mr-1 p-1">
-        <a class="btn @if($opt == 'actividades') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('actividades') }}">Actividades</a>
+        <a class="btn @if($opt == 'categorias') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('categorias') }}">Categorías</a>
       </li>
       <li class="nav-item mr-1 p-1">
-        <a class="btn @if($opt == 'categorias') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('categorias') }}">Categorías</a>
+        <a class="btn @if($opt == 'actividades') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('actividades') }}">Actividades</a>
       </li>
       <li class="nav-item mr-1 p-1">
         <a class="btn @if($opt == 'galeria') btn-primary @else btn-outline-primary @endif nav-link" href="{{ url ('galeria') }}">Galería</a>

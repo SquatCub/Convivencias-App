@@ -7,7 +7,7 @@
 <div class="container text-center">
     <h1 class="display-4 titulo2">Galería de fotos</h1>
 </div>
-<div id="actividad">
+<div id="galeria">
     <br><br>
     <div class="container text-center">
         <div class="row">
