@@ -49,7 +49,7 @@
                         </label>
                         </div>
                         <div class="ml-3">
-                            <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="100" id="output"/>
+                            <img src="/images/app/notfound.png" alt="preview" width="100" id="output"/>
                         </div>
                     </div>
                     <br>

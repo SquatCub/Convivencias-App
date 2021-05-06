@@ -45,25 +45,49 @@
         <h4>Datos personales</h4>
         <div class="row">
             <div class="col-md-4 col-sm-12">
-            <input class="form-control" autofocus type="text" name="name" placeholder="Nombre(s)">
+            <label for="Nombre" class="control-label">Nombre(s)</label>
+            <input class="form-control" autofocus type="text" name="name" placeholder="Nombre(s)" required>
             </div>
             <div class="col-md-4 col-sm-12">
-            <input class="form-control" autofocus type="text" name="paterno" placeholder="Apellido paterno">
+            <label for="paterno" class="control-label">Apellido paterno</label>
+            <input class="form-control" autofocus type="text" name="paterno" placeholder="Apellido paterno" required>
             </div>
             <div class="col-md-4 col-sm-12">
+            <label for="materno" class="control-label">Apellido materno</label>
             <input class="form-control" autofocus type="text" name="materno" placeholder="Apellido materno">
             </div>
         </div>
         <br>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+            <label for="edad" class="control-label">Edad</label>
+            <input class="form-control" autofocus type="number" name="edad" placeholder="Edad" required>
+            </div>
+            <div class="form-group col-md-4">
+            <label for="sexo" class="control-label">Sexo</label>
+            <select id="sede" class="form-control" name="sexo" required>
+                <option value="" disabled="disabled" selected></option>
+                <option value="F">Femenino</option>
+                <option value="M">Masculino</option>
+            </select>
+            </div>
+            <div class="form-group col-md-4">
+            <label for="centro" class="control-label">Centro de trabajo</label>
+            <input class="form-control" autofocus type="text" name="centro" placeholder="Ej. IMMS, Centro de salud, etc" required>
+            </div>
+        </div>
+
         <div class="form-group">
-            <label for="no_de_control" class="control-label">Sección</label>
+            <label for="no_de_control" class="control-label">Sede</label>
             <select class="form-control container col-md-3 col-sm-12" name="id_seccion" required>
-                    <option value="" disabled="disabled" selected></option>
-                    @foreach($secciones as $seccion)
-                    <option value="{{$seccion->id}}">{{$seccion->nombre}}</option>
-                    @endforeach
+                <option value="" disabled="disabled" selected></option>
+                @foreach($secciones as $seccion)
+                <option value="{{$seccion->id}}">{{$seccion->nombre}}</option>
+                @endforeach
             </select> 
         </div>
+        
         <hr>
         <h4>Datos de usuario (Con esto podrás iniciar sesión)</h4>
         <div class="form-row">
@@ -99,7 +123,7 @@
                     <input required type="file" size="200" name="acta" id="acta" onchange="loadFile1(event)" accept="image/x-png,image/gif,image/jpeg">
                         Seleccionar acta
                 </label>
-                <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="70" id="output1"/>
+                <img src="/images/app/notfound.png" alt="preview" width="70" id="output1"/>
             </div>
             <h5>Comprobante de pago</h5>
             <div class="form-group">
@@ -107,7 +131,7 @@
                     <input required type="file" size="200" name="comprobante" id="comprobante" onchange="loadFile2(event)" accept="image/x-png,image/gif,image/jpeg">
                         Seleccionar comprobante
                 </label>
-                <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="70" id="output2"/>
+                <img src="/images/app/notfound.png" alt="preview" width="70" id="output2"/>
             </div>
             <br>
             <button class="btn btn-success btn-lg" id="submitbutton" name="myButton" type="submit">Enviar solicitud</button>

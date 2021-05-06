@@ -22,6 +22,9 @@ class SolicitudController extends Controller
             'username' => 'required',
             'password' => 'required',
             'phone' => 'required',
+            'edad' => 'required',
+            'sexo' => 'required',
+            'centro' => 'required',
             'acta' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048',
             'comprobante' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048'
         ]);
@@ -35,7 +38,7 @@ class SolicitudController extends Controller
                 $pathActa = "actas/".$acta;
                 $pathComprobante = "comprobantes/".$comprobante;
 
-                if($solicitud = Solicitud::create(["nombre"=>$r->name, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "usuario"=>$r->username, "contraseña"=>$r->password, "url_acta"=>$pathActa,  "url_comprobante"=>$pathComprobante,  "id_area"=>$r->id_seccion, "email"=>$r->email, "telefono"=>$r->phone])){
+                if($solicitud = Solicitud::create(["nombre"=>$r->name, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "usuario"=>$r->username, "contraseña"=>$r->password, "url_acta"=>$pathActa,  "url_comprobante"=>$pathComprobante,  "id_area"=>$r->id_seccion, "email"=>$r->email, "telefono"=>$r->phone, "edad"=>$r->edad, "sexo"=>$r->sexo, "centro_trabajo"=>$r->centro])){
                     $r->acta->move(public_path('images/actas/'), $acta);
                     $r->comprobante->move(public_path('images/comprobantes/'), $comprobante);
                     return back()->with('message', 'Solicitud enviada con éxito');
