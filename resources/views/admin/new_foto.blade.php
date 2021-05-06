@@ -19,7 +19,7 @@
                                 Seleccionar imagen
                             </label><br><br>
                             Vista previa: <br>
-                            <img src="https://cdn.blankstyle.com/files/imagefield_default_images/notfound_0.png" alt="preview" width="300" id="output"/>
+                            <img src="/images/app/notfound.png" alt="preview" width="300" id="output"/>
                         </div>
                     </div>
                 </div>

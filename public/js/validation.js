@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                })
                .then(response => response.json())
                .then(result => {
+                 console.log("aqui")
                 if (result.error) {
                     console.log(`Error at like: ${result.error}`);
                 }

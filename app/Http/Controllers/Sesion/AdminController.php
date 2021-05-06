@@ -254,7 +254,7 @@ class AdminController extends Controller
                 return back()->with('error', 'Ya existe un usuario con este álias');
             } else {
                 if ($user = User::create(["usuario"=>$r->username, "password"=>bcrypt($r->password)])) {
-                    if ($usuario = Usuario::create(["nombre"=>$r->nombre, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "id_usuario"=>$user->id, "id_area"=>$r->id_area])) {
+                    if ($usuario = Usuario::create(["nombre"=>$r->nombre, "apellido_paterno"=>$r->paterno, "apellido_materno"=>$r->materno, "id_usuario"=>$user->id, "id_area"=>$r->id_area,"centro_trabajo"=>$r->centro, "telefono"=>$r->telefono, "edad"=>$r->edad, "sexo"=>$r->sexo])) {
                         return redirect()->route('admin.usuarios')->with('message', 'Usuario creado con exito');
                     } else {
                         return back()->with('error', 'No se pudo crear el usuario');
@@ -353,7 +353,7 @@ class AdminController extends Controller
                 ]);
             } else {
                 if ($user = User::create(["usuario"=>$r->username, "password"=>bcrypt($solicitud[0]->contraseña)])) {
-                    if ($usuario = Usuario::create(["nombre"=>$solicitud[0]->nombre, "apellido_paterno"=>$solicitud[0]->apellido_paterno, "apellido_materno"=>$solicitud[0]->apellido_materno, "id_usuario"=>$user->id, "id_area"=>$solicitud[0]->id_area])) {
+                    if ($usuario = Usuario::create(["nombre"=>$solicitud[0]->nombre, "apellido_paterno"=>$solicitud[0]->apellido_paterno, "apellido_materno"=>$solicitud[0]->apellido_materno, "id_usuario"=>$user->id, "id_area"=>$solicitud[0]->id_area,"centro_trabajo"=>$solicitud[0]->centro_trabajo, "telefono"=>$solicitud[0]->telefono, "edad"=>$solicitud[0]->edad, "sexo"=>$solicitud[0]->sexo])) {
                         File::delete("images/".$solicitud[0]->url_acta);
                         File::delete("images/".$solicitud[0]->url_comprobante);
                         Solicitud::destroy($r->solicitud_id);

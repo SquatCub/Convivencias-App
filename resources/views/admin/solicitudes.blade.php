@@ -14,8 +14,10 @@
           <thead class="thead-dark">
               <tr>
                   <th scope="col">#<button id="0" class="btn btn-sm sort" onclick="sortTable(0)">^</button></th>
-                  <th scope="col">Nombre<button id="1" class="btn btn-sm sort" onclick="sortTable(1)">^</button></th>
-                  <th scope="col">Área<button id="2" class="btn btn-sm sort" onclick="sortTable(2)">^</button></th>
+                  <th scope="col">Nombre <button id="1" class="btn btn-sm sort" onclick="sortTable(1)">^</button></th>
+                  <th scope="col">Sede <button id="2" class="btn btn-sm sort" onclick="sortTable(2)">^</button></th>
+                  <th scope="col">Sexo <button id="3" class="btn btn-sm sort" onclick="sortTable(3)">^</button></th>
+                  <th scope="col">Edad <button id="4" class="btn btn-sm sort" onclick="sortTable(4)">^</button></th>
                   <th scope="col">Acta</th>
                   <th scope="col">Comprobante </th>
                   <th scope="col">Acciones </th>
@@ -26,7 +28,9 @@
               <tr id="id{{ $solicitud->id }}">
               <td scope="row">{{ $loop->iteration }}</td>
               <td scope="row">{{ $solicitud->nombre }} {{ $solicitud->apellido_paterno }} {{ $solicitud->apellido_materno }}</td>
-              <td class="area" scope="row">{{ $solicitud->area->nombre }}</td>
+              <td scope="row">{{ $solicitud->area->nombre }}</td>
+              <td scope="row">{{ $solicitud->sexo }}</td>
+              <td scope="row">{{ $solicitud->edad }}</td>
               <td scope="row"><img class="myImg" id="myImg{{$solicitud->url_acta}}" src="/images/{{$solicitud->url_acta}}" width="50" alt=""></td>
               <td scope="row"><img class="myImg" id="myImg{{$solicitud->url_comprobante}}" src="/images/{{$solicitud->url_comprobante}}" width="50" alt=""></td>
               <td scope="row"><a class="btn btn-primary btn-sm text-white" data-toggle="modal" data-target="#modalAccept{{ $solicitud->id }}">Aceptar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $solicitud->id }}">Rechazar</a></td>

@@ -2,25 +2,48 @@
 @section('titulo') Crear nuevo usuario @endsection
 @section('section')
 @include('admin.navigation')
-<div class="container text-center card">
+<div class="container card">
     <br>
     <h1>Crear nuevo usuario</h1>
     <br>
     <form action="{{ route ('usuario.create') }}" method="post">
         @csrf <!-- Seguridad laravel -->
         
-        <div class="row text-left">
+        <div class="form-row">
             <div class="col-md-4 col-sm-6">
-                <span>Nombre(s)</span>
+                <label for="nombre" class="control-label">Nombre(s)</label>
                 <input type="text" class="form-control" name="nombre" placeholder="Nombre(s)" required>
             </div>
             <div class="col-md-4 col-sm-6">
-                <span>Apellido paterno</span>
+                <label for="paterno" class="control-label">Apellido paterno</label>
                 <input type="text" class="form-control" name="paterno" placeholder="Apellido Paterno" required>
             </div>
             <div class="col-md-4 col-sm-6">
-                <span>Apellido materno</span>
+                <label for="materno" class="control-label">Apellido materno</label>
                 <input type="text" class="form-control" name="materno" placeholder="Apellido Materno">
+            </div>
+        </div>
+        <br>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+            <label for="edad" class="control-label">Edad</label>
+            <input class="form-control" autofocus type="number" name="edad" placeholder="Edad" required>
+            </div>
+            <div class="form-group col-md-2">
+            <label for="sexo" class="control-label">Sexo</label>
+            <select id="sede" class="form-control" name="sexo" required>
+                <option value="" disabled="disabled" selected></option>
+                <option value="F">Femenino</option>
+                <option value="M">Masculino</option>
+            </select>
+            </div>
+            <div class="form-group col-md-4">
+            <label for="centro" class="control-label">Centro de trabajo</label>
+            <input class="form-control" autofocus type="text" name="centro" placeholder="Ej. IMMS, Centro de salud, etc" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="telefono" class="control-label">Teléfono</label>
+                <input id="inputPhone" class="form-control" required type="phone" name="telefono" placeholder="Número de celular">
             </div>
         </div>
         <br>
@@ -52,7 +75,7 @@
         <br>
         <div class="row">
             <div class="col-md-1 col-sm-1">
-                <label for="password">Area: </label>
+                <label for="password">Sede: </label>
             </div>
             <div class="col-md-2 col-sm-6">
                 <select class="form-control" name="id_area" required>
