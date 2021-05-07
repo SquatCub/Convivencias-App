@@ -25,7 +25,8 @@
     <h3>Imagenes compartidas</h3>
     <div class="row">
     @foreach($comentarios as $comentario)
-    <div class="col myImg{{$comentario->path}} d-none d-md-block">
+    @if($comentario->tipo=="imagen")
+    <div class="col" id="myImg{{$comentario->path}}">
         <div class="wrapper-photo">
             <div class="container">
                 <div class="photo-top" style="background: url('/images/{{$comentario->path}}') no-repeat center center;">
@@ -40,23 +41,22 @@
             </div>
         </div>
     </div>
-    <div class="col myImg{{$comentario->path}} d-sm-block d-md-none d-lg-none">
-        <div class="wrapper-photo-sm">
+    @elseif($comentario->tipo=="video")
+    <div class="col">
+        <div class="wrapper-photo">
             <div class="container">
-                <div class="photo-top" style="background: url('/images/{{$comentario->path}}') no-repeat center center;">
                     <div class="text-right">
-                        <button class="btn btn-sm btn-danger text-right" data-toggle="modal" data-target="#modalDelete{{ $comentario->id }}">Eliminar</button>
+                        <button class="btn btn-sm btn-danger text-right"  data-toggle="modal" data-target="#modalDelete{{ $comentario->id }}">Eliminar</button>
                     </div>
-                </div>
+                <video src="/videos/{{$comentario->path}}" controls width="300" height="350"></video>
                 <div class="photo-bottom">
-                    <h6>Por: {{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}}</h6>
-                    <h7>De: {{$comentario->usuario->area->nombre}}</h7>
+                    <h4>Por: {{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} {{$comentario->usuario->apellido_materno}}</h4>
+                    <h5>De: {{$comentario->usuario->area->nombre}}</h5>
                 </div>
             </div>
         </div>
     </div>
-
-
+    @endif
 
     <div class="modal fade" id="modalDelete{{ $comentario->id }}" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
@@ -68,11 +68,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <h4>¿Está seguro de querer la imagen?</h4><br>
+                    <h4>¿Está seguro de querer el archivo?</h4><br>
                     <h5><b>La compartió:</b> {{ $comentario->usuario->nombre }} {{ $comentario->usuario->apellido_paterno }} {{ $comentario->usuario->materno }} de {{ $comentario->usuario->area->nombre }}</h5>
                     <hr>
-                    <b>Esta acción no se podrá deshacer.</b>
-                    <b>Se eliminarán todas las imagenes que se compartieron en esta actividad.</b>
+                    <b>Esta acción no se podrá deshacer</b>
             </div>
             <div class="modal-footer">
                 <form action="{{ route('comentario.eliminar', $comentario) }}" method="POST">
@@ -102,15 +101,10 @@
 <!-- Script para visualizar las imagenes -->
 <script>
   var modal = document.getElementById("myModal");
-  var img1 = document.getElementsByClassName("myImg{{$comentario->path}}");
+  var img1 = document.getElementById("myImg{{$comentario->path}}");
   var modalImg = document.getElementById("img01");
   var captionText = document.getElementById("caption");
-  img1[0].onclick = function() {
-    modal.style.display = "block";
-    modalImg.src = '/images/{{$comentario->path}}';
-    captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
-  }
-  img1[1].onclick = function() {
+  img1.onclick = function() {
     modal.style.display = "block";
     modalImg.src = '/images/{{$comentario->path}}';
     captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";

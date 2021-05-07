@@ -221,7 +221,12 @@ class AdminController extends Controller
         try {
              if($comentario = Comentario::findOrFail($id)) {
                 $comentario = Comentario::findOrFail($id);
-                File::delete("images/".$comentario->path);
+                if($comentario->tipo == "imagen") {
+                    File::delete("images/".$comentario->path);
+                }
+                elseif ($comentario->tipo == "video") {
+                    File::delete("videos/".$comentario->path);
+                }
                 Comentario::destroy($id);
                 return back()->with('message', 'Imagen eliminada correctamente');   
              } else {
