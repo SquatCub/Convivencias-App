@@ -107,7 +107,7 @@
             <div class="row">
                 @foreach($comentarios as $comentario)
                 @if($comentario->tipo == "imagen")
-                <div class="col myImg{{$comentario->path}}">
+                <div class="col" id="myImg{{$comentario->path}}">
                     <div class="wrapper-photo">
                         <div class="container">
                             <div class="photo-top" style="background: url('/images/{{$comentario->path}}') no-repeat center center;">
@@ -177,17 +177,13 @@
 
 @foreach($comentarios as $comentario)
 <!-- Script para visualizar las imagenes -->
+@if($comentario->tipo=="imagen")
 <script>
   var modal = document.getElementById("myModal");
-  var img1 = document.getElementsByClassName("myImg{{$comentario->path}}");
+  var img1 = document.getElementById("myImg{{$comentario->path}}");
   var modalImg = document.getElementById("img01");
   var captionText = document.getElementById("caption");
-  img1[0].onclick = function() {
-    modal.style.display = "block";
-    modalImg.src = '/images/{{$comentario->path}}';
-    captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
-  }
-  img1[1].onclick = function() {
+  img1.onclick = function() {
     modal.style.display = "block";
     modalImg.src = '/images/{{$comentario->path}}';
     captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
@@ -198,5 +194,6 @@
     console.log("click")
   }
 </script>
+@endif
 @endforeach
 @endsection
