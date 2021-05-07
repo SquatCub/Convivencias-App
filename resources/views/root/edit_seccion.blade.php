@@ -4,7 +4,7 @@
 @include('root.navigation')
 
 <div class="container text-center card">
-    <h1>Editar nombre de la sección</h1>
+    <h1>Editar nombre de la sede</h1>
 
     <form action="{{ route ('seccion.update') }}" method="post">
         @csrf <!-- Seguridad laravel -->

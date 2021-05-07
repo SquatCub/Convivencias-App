@@ -8,7 +8,7 @@ class Comentario extends Model
 {
     protected $table = 'comentario';
     protected $primaryKey = 'id';
-    protected $fillable = ['id', 'imagen', 'id_usuario', 'id_actividad'];
+    protected $fillable = ['id', 'path', 'tipo', 'id_usuario', 'id_actividad'];
 
     public function user() {
         return $this->hasOne(User::class, 'id', 'id_usuario');

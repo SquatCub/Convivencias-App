@@ -221,7 +221,7 @@ class AdminController extends Controller
         try {
              if($comentario = Comentario::findOrFail($id)) {
                 $comentario = Comentario::findOrFail($id);
-                File::delete("images/".$comentario->imagen);
+                File::delete("images/".$comentario->path);
                 Comentario::destroy($id);
                 return back()->with('message', 'Imagen eliminada correctamente');   
              } else {
@@ -313,7 +313,8 @@ class AdminController extends Controller
                 
                 $comentarios = Comentario::where('id_usuario', $usuario->id_usuario)->get();
                 foreach ($comentarios as $comentario) {
-                    File::delete("images/".$comentario->imagen);
+                    File::delete("images/".$comentario->path);
+                    File::delete("videos/".$comentario->path);
                 }
                 User::destroy($user->id);
                 return back()->with('message', 'Usuario eliminado');            

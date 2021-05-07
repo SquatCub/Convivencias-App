@@ -19,7 +19,8 @@ class UsuarioController extends Controller
 
     public function createComentario(Request $r) {
         $v = Validator::make($r->all(), [
-            'imagen' => 'required|image|mimes:jped,png,jpg,gif,svg|max:2048',
+            'file' => 'required',
+            'tipo' => 'required',
             'id_actividad' => 'required',
             'id_usuario' => 'required'
         ]);
@@ -28,14 +29,27 @@ class UsuarioController extends Controller
             if ($comentario = Comentario::where('id_usuario',$r->id_usuario)->where('id_actividad', $r->id_actividad)->count()>0) {
                 return back()->with('error', 'Ya compartiste anteriormente');
             } else {
-                 $imgName = time().'.'.$r->imagen->getClientOriginalExtension();
-                 $path = "comentarios/".$imgName;
-                 if ($comentario = Comentario::create(["imagen"=>$path, "id_usuario"=>$r->id_usuario, "id_actividad"=>$r->id_actividad])) {
-                      $r->imagen->move(public_path('images/comentarios'), $imgName);
-                      return back()->with('message', 'Compartiste tu trabajo!');
-                 } else {
-                    return back()->with('error', 'No se pudo compartir');
+                if($r->tipo == "imagen") {
+                    $fileName = time().'.'.$r->file->getClientOriginalExtension();
+                    $path = "comentarios/".$fileName;
+                    if ($comentario = Comentario::create(["path"=>$path, "tipo"=>$r->tipo, "id_usuario"=>$r->id_usuario, "id_actividad"=>$r->id_actividad])) {
+                        $r->file->move(public_path('images/comentarios'), $fileName);
+                        return back()->with('message', 'Compartiste tu trabajo!');
+                    } else {
+                        return back()->with('error', 'No se pudo compartir');
+                    }
+                } else {
+                    $fileName = time().'.'.$r->file->getClientOriginalExtension();
+                    $path = "comentarios/".$fileName;
+                    if ($comentario = Comentario::create(["path"=>$path, "tipo"=>$r->tipo, "id_usuario"=>$r->id_usuario, "id_actividad"=>$r->id_actividad])) {
+                        $r->file->move(public_path('videos/comentarios'), $fileName);
+                        return back()->with('message', 'Compartiste tu trabajo!');
+                   } else {
+                      return back()->with('error', 'No se pudo compartir');
+                  }
                 }
+                 
+                 
             }
         } catch (Exception $error) {
             return back()->with('error', 'Hubo un error');

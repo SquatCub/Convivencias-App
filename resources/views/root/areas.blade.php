@@ -4,7 +4,7 @@
 @include('root.navigation')
 <div class="container card">
     <br>
-    <h1>Secciones</h1>
+    <h1>Sedes</h1>
     <div class="text-right">
         <a href="{{ route ('seccion.new') }}" class="btn btn-success text-white">Añadir nueva sede</a>
     </div>

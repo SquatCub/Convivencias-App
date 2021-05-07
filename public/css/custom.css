@@ -198,10 +198,10 @@ input[type="file"] {
     transition: transform 0.2s;
 }
 
-.wrapper-photo-sm {
+/* .wrapper-photo-sm {
     cursor: pointer;
-    width: 150px;
-    height: 250px;
+    width: 200px;
+    height: 350px;
     margin: auto;
     position: relative;
     overflow: hidden;
@@ -237,7 +237,7 @@ input[type="file"] {
     position: relative;
     float: left;
     transition: transform 0.2s;
-}
+} */
 /* Card para boton de subir imagen */
 .wrapper-upload {
     cursor: pointer;

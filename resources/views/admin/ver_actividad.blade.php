@@ -25,10 +25,10 @@
     <h3>Imagenes compartidas</h3>
     <div class="row">
     @foreach($comentarios as $comentario)
-    <div class="col myImg{{$comentario->imagen}} d-none d-md-block">
+    <div class="col myImg{{$comentario->path}} d-none d-md-block">
         <div class="wrapper-photo">
             <div class="container">
-                <div class="photo-top" style="background: url('/images/{{$comentario->imagen}}') no-repeat center center;">
+                <div class="photo-top" style="background: url('/images/{{$comentario->path}}') no-repeat center center;">
                     <div class="text-right">
                         <button class="btn btn-sm btn-danger text-right"  data-toggle="modal" data-target="#modalDelete{{ $comentario->id }}">Eliminar</button>
                     </div>
@@ -40,10 +40,10 @@
             </div>
         </div>
     </div>
-    <div class="col myImg{{$comentario->imagen}} d-sm-block d-md-none d-lg-none">
+    <div class="col myImg{{$comentario->path}} d-sm-block d-md-none d-lg-none">
         <div class="wrapper-photo-sm">
             <div class="container">
-                <div class="photo-top" style="background: url('/images/{{$comentario->imagen}}') no-repeat center center;">
+                <div class="photo-top" style="background: url('/images/{{$comentario->path}}') no-repeat center center;">
                     <div class="text-right">
                         <button class="btn btn-sm btn-danger text-right" data-toggle="modal" data-target="#modalDelete{{ $comentario->id }}">Eliminar</button>
                     </div>
@@ -102,17 +102,17 @@
 <!-- Script para visualizar las imagenes -->
 <script>
   var modal = document.getElementById("myModal");
-  var img1 = document.getElementsByClassName("myImg{{$comentario->imagen}}");
+  var img1 = document.getElementsByClassName("myImg{{$comentario->path}}");
   var modalImg = document.getElementById("img01");
   var captionText = document.getElementById("caption");
   img1[0].onclick = function() {
     modal.style.display = "block";
-    modalImg.src = '/images/{{$comentario->imagen}}';
+    modalImg.src = '/images/{{$comentario->path}}';
     captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
   }
   img1[1].onclick = function() {
     modal.style.display = "block";
-    modalImg.src = '/images/{{$comentario->imagen}}';
+    modalImg.src = '/images/{{$comentario->path}}';
     captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
   }
   var span = document.getElementsByClassName("close2")[0];

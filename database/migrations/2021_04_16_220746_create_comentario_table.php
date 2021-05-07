@@ -15,10 +15,11 @@ class CreateComentarioTable extends Migration
     {
         Schema::create('comentario', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string("imagen");
+            $table->string("path");
             $table->unsignedBigInteger('id_usuario');
             $table->foreign('id_usuario')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('id_actividad');
+            $table->char('tipo');
             $table->foreign('id_actividad')->references('id')->on('actividad')->onDelete('cascade');
             $table->timestamps();
         });

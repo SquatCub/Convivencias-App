@@ -36,7 +36,7 @@
                     <div class="d-flex justify-content-center align-items-center text-center">
                         <div class="mr-3">
                         <label>
-                        <input type="file" required size="200" name="imagen" id="imagen" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg">
+                        <input type="file" required size="200" name="file" id="imagen" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg">
                             <div class="wrapper-upload">
                                 <div class="container">
                                     <div class="upload-top" style="background: url('/images/app/upload.png') no-repeat center center;">
@@ -55,7 +55,39 @@
                     <br>
                     <input type="hidden" name="id_actividad" value="{{$actividad->id}}" >
                     <input type="hidden" name="id_usuario" value="{{Auth::user()->id}}">
+                    <input type="hidden" name="tipo" value="imagen">
                     <button id="share" type="submit" class="btn btn-success btn-lg" disabled>Compartir</button>
+                </div>
+            </form>
+            <br>
+            <h2>Sube un video</h2>
+            <form action="{{ route ('comentario.create') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="text-center">
+                    <div class="d-flex justify-content-center align-items-center text-center">
+                        <div class="mr-3">
+                        <label>
+                        <input type="file" required size="200" name="file" id="video" onchange="loadVideo(event)" accept="video/mp4, video/mov">
+                            <div class="wrapper-upload">
+                                <div class="container">
+                                    <div class="upload-top" style="background: url('/images/app/upload.png') no-repeat center center;">
+                                    </div>
+                                    <div class="upload-bottom">
+                                        <h4>Seleccionar</h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </label>
+                        </div>
+                        <br>
+                    </div>
+                    <span id="outputVideo">Ningún video seleccionado</span>
+                    <br>
+                    <br>
+                    <input type="hidden" name="id_actividad" value="{{$actividad->id}}" >
+                    <input type="hidden" name="id_usuario" value="{{Auth::user()->id}}">
+                    <input type="hidden" name="tipo" value="video">
+                    <button id="shareVideo" type="submit" class="btn btn-success btn-lg" disabled>Compartir</button>
                 </div>
             </form>
             @else
@@ -74,10 +106,11 @@
             <br>
             <div class="row">
                 @foreach($comentarios as $comentario)
-                <div class="col myImg{{$comentario->imagen}} d-none d-md-block">
+                @if($comentario->tipo == "imagen")
+                <div class="col myImg{{$comentario->path}}">
                     <div class="wrapper-photo">
                         <div class="container">
-                            <div class="photo-top" style="background: url('/images/{{$comentario->imagen}}') no-repeat center center;">
+                            <div class="photo-top" style="background: url('/images/{{$comentario->path}}') no-repeat center center;">
                             </div>
                             <div class="photo-bottom">
                                 <h4>Por: {{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} {{$comentario->usuario->apellido_materno}}</h4>
@@ -86,18 +119,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="col myImg{{$comentario->imagen}} d-sm-block d-md-none d-lg-none">
-                    <div class="wrapper-photo-sm">
+                @elseif($comentario->tipo == "video")
+                <div class="col myVid{{$comentario->path}}">
+                    <div class="wrapper-photo">
                         <div class="container">
-                            <div class="photo-top" style="background: url('/images/{{$comentario->imagen}}') no-repeat center center;">
-                            </div>
+                            <video src="/videos/{{$comentario->path}}" controls width="300" height="350"></video>
                             <div class="photo-bottom">
-                                <h6>Por: {{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}}</h6>
-                                <h7>De: {{$comentario->usuario->area->nombre}}</h7>
+                                <h4>Por: {{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} {{$comentario->usuario->apellido_materno}}</h4>
+                                <h5>De: {{$comentario->usuario->area->nombre}}</h5>
                             </div>
                         </div>
                     </div>
                 </div>
+                @endif
                 @endforeach
             </div>
             
@@ -119,12 +153,16 @@
 <script>
   var loadFile = event => {
     var output = document.getElementById('output');
-    
     output.src = URL.createObjectURL(event.target.files[0]);
     output.onload = function() {
       URL.revokeObjectURL(output.src) // free memory
       document.getElementById("share").disabled = false;
     }
+  };
+  var loadVideo = event => {
+    var output = document.getElementById('outputVideo');
+    output.innerHTML = event.target.files[0].name;
+    document.getElementById("shareVideo").disabled = false;
   };
 </script>
 <!-- The Modal -->
@@ -141,17 +179,17 @@
 <!-- Script para visualizar las imagenes -->
 <script>
   var modal = document.getElementById("myModal");
-  var img1 = document.getElementsByClassName("myImg{{$comentario->imagen}}");
+  var img1 = document.getElementsByClassName("myImg{{$comentario->path}}");
   var modalImg = document.getElementById("img01");
   var captionText = document.getElementById("caption");
   img1[0].onclick = function() {
     modal.style.display = "block";
-    modalImg.src = '/images/{{$comentario->imagen}}';
+    modalImg.src = '/images/{{$comentario->path}}';
     captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
   }
   img1[1].onclick = function() {
     modal.style.display = "block";
-    modalImg.src = '/images/{{$comentario->imagen}}';
+    modalImg.src = '/images/{{$comentario->path}}';
     captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
   }
   var span = document.querySelector("#close");
