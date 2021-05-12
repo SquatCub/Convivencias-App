@@ -16,7 +16,6 @@
             <div class="text-right" style="background: url('/images/{{$foto->imagen}}') no-repeat center center; width:300px; height:200px;background-size: cover;"><a class="btn btn-sm btn-danger text-white" data-toggle="modal" data-target="#modalDelete{{ $foto->id }}">Eliminar</a></div>
         </div>
     
-
         <!-- Modals para eliminacion -->
         <div class="modal fade" id="modalDelete{{ $foto->id }}" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">

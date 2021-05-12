@@ -7,8 +7,6 @@
     <h1>Actividades @if(isset($categoria))
     de {{$categoria->nombre}}
     @endif</h1>
-    
-    
     <div class="text-right">
         <a href="{{ route ('actividad.new') }}" class="btn btn-success text-white">Añadir nueva actividad</a>
     </div>
@@ -69,21 +67,4 @@
   </div>
 </div>
 @endforeach
-<script>
-    desc = document.querySelectorAll('.desc');
-    desc.forEach(element=> {
-        var aux = "";
-        var s = element.innerHTML;
-        var i = 0;
-        if (s.length < 30) {
-            aux+=s;
-        } else {
-            for (i = 0; i < 30; i++) {
-                aux+= s[i];
-            }
-        }
-        aux += '...';
-        element.innerHTML = aux;
-    });
-</script>
 @endsection

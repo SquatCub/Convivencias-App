@@ -24,7 +24,7 @@ class AdminController extends Controller
     }
     #   -   -   -   -   -   -   Funciones para Categorias
      public function categorias() {
-        $categorias = Categoria::orderBy('nombre', 'asc')->get();
+        $categorias = Categoria::orderBy('id', 'desc')->get();
         return view('admin.categorias', compact('categorias'));
      }
      public function newCategoria() {
@@ -121,7 +121,7 @@ class AdminController extends Controller
     }
     #   -   -   -   -   -   -   Funciones para Actividades
     public function actividades() {
-        $actividades = Actividad::orderBy('nombre', 'asc')->get();
+        $actividades = Actividad::orderBy('id', 'desc')->get();
         return view ('admin.actividades', compact('actividades'));
     }
     public function newActividad() {

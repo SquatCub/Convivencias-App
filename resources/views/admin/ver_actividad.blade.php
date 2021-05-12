@@ -29,7 +29,7 @@
     <div class="col" id="myImg{{$comentario->path}}">
         <div class="wrapper-photo">
             <div class="container">
-                <div class="photo-top" style="background: url('/images/{{$comentario->path}}') no-repeat center center;">
+                <div class="photo-top" onclick="showImg(this)" data-img="/images/{{$comentario->path}}" data-by="{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}" style="background: url('/images/{{$comentario->path}}') no-repeat center center;">
                     <div class="text-right">
                         <button class="btn btn-sm btn-danger text-right"  data-toggle="modal" data-target="#modalDelete{{ $comentario->id }}">Eliminar</button>
                     </div>
@@ -96,23 +96,4 @@
   <!-- Modal Caption (Image Text) -->
   <div id="caption"></div>
 </div>
-
-@foreach($comentarios as $comentario)
-<!-- Script para visualizar las imagenes -->
-<script>
-  var modal = document.getElementById("myModal");
-  var img1 = document.getElementById("myImg{{$comentario->path}}");
-  var modalImg = document.getElementById("img01");
-  var captionText = document.getElementById("caption");
-  img1.onclick = function() {
-    modal.style.display = "block";
-    modalImg.src = '/images/{{$comentario->path}}';
-    captionText.innerHTML = "<h1>{{$comentario->usuario->nombre}} {{$comentario->usuario->apellido_paterno}} de {{$comentario->usuario->area->nombre}}</h1>";
-  }
-  var span = document.getElementsByClassName("close2")[0];
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-</script>
-@endforeach
 @endsection

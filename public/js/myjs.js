@@ -1,7 +1,37 @@
+document.addEventListener('DOMContentLoaded', function() {
+  reduceDesc();
+});
+
+function reduceDesc() {
+  desc = document.querySelectorAll('.desc');
+    desc.forEach(element=> {
+        var aux = "";
+        var s = element.innerHTML;
+        var i = 0;
+        if (s.length < 30) {
+            aux+=s;
+        } else {
+            for (i = 0; i < 30; i++) {
+                aux+= s[i];
+            }
+        }
+        aux += '...';
+        element.innerHTML = aux;
+    });
+}
+
+function loadFile(event) {
+    var output = document.getElementById('output');
+    output.src = URL.createObjectURL(event.target.files[0]);
+    output.onload = function() {
+      URL.revokeObjectURL(output.src) // free memory
+    }
+}
+
+
 function sortTable(num) {
     const btns = document.querySelectorAll('.sort');
     btns.forEach(element => {
-        //console.log(element)
         element.innerHTML = "^"
     });
     btn = document.getElementById(num);
@@ -39,3 +69,29 @@ function sortTable(num) {
       }
     }
   }
+
+function showImage(element) {
+  var modal = document.getElementById("myModal");
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+  modal.style.display = "block";
+  modalImg.src = element.src;
+  captionText.innerHTML = element.alt;
+  var span = document.getElementsByClassName("close")[0];
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+}
+
+const showImg = element => {
+  var modal = document.getElementById("myModal");
+  var modalImg = document.getElementById("img01");
+  var captionText = document.getElementById("caption");
+    modal.style.display = "block";
+    modalImg.src = element.dataset.img;
+    captionText.innerHTML = `<h1>${element.dataset.by}</h1>`;
+  var span = document.getElementsByClassName("close2")[0];
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+}

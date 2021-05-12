@@ -65,21 +65,4 @@
   </div>
 </div>
 @endforeach
-<script>
-    desc = document.querySelectorAll('.desc');
-    desc.forEach(element=> {
-        var aux = "";
-        var s = element.innerHTML;
-        var i = 0;
-        if (s.length < 30) {
-            aux+=s;
-        } else {
-            for (i = 0; i < 30; i++) {
-                aux+= s[i];
-            }
-        }
-        aux += '...';
-        element.innerHTML = aux;
-    });
-</script>
 @endsection

@@ -31,8 +31,8 @@
               <td scope="row">{{ $solicitud->area->nombre }}</td>
               <td scope="row">{{ $solicitud->sexo }}</td>
               <td scope="row">{{ $solicitud->edad }}</td>
-              <td scope="row"><img class="myImg" id="myImg{{$solicitud->url_acta}}" src="/images/{{$solicitud->url_acta}}" width="50" alt=""></td>
-              <td scope="row"><img class="myImg" id="myImg{{$solicitud->url_comprobante}}" src="/images/{{$solicitud->url_comprobante}}" width="50" alt=""></td>
+              <td scope="row"><img class="myImg" onclick="showImage(this)" id="myImg{{$solicitud->url_acta}}" src="/images/{{$solicitud->url_acta}}" width="50" alt=""></td>
+              <td scope="row"><img class="myImg" onclick="showImage(this)" id="myImg{{$solicitud->url_comprobante}}" src="/images/{{$solicitud->url_comprobante}}" width="50" alt=""></td>
               <td scope="row"><a class="btn btn-primary btn-sm text-white" data-toggle="modal" data-target="#modalAccept{{ $solicitud->id }}">Aceptar</a> <a class="btn btn-danger btn-sm text-white" data-toggle="modal" data-target="#modalDelete{{ $solicitud->id }}">Rechazar</a></td>
               </tr>
               @endforeach
@@ -107,28 +107,5 @@
     </div>
   </div>
 </div>
-<!-- Script para visualizar las imagenes en solicitudes -->
-<script>
-  var modal = document.getElementById("myModal");
-  var img1 = document.getElementById("myImg{{$solicitud->url_acta}}");
-  var img2 = document.getElementById("myImg{{$solicitud->url_comprobante}}");
-  var modalImg = document.getElementById("img01");
-  var captionText = document.getElementById("caption");
-  img1.onclick = function() {
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
-  }
-  img2.onclick = function() {
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
-  }
-  var span = document.getElementsByClassName("close")[0];
-  span.onclick = function() {
-    modal.style.display = "none";
-  }
-</script>
 @endforeach
-
 @endsection

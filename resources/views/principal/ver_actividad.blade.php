@@ -36,7 +36,7 @@
                     <div class="d-flex justify-content-center align-items-center text-center">
                         <div class="mr-3">
                         <label>
-                        <input type="file" required size="200" name="file" id="imagen" onchange="loadFile(event)" accept="image/x-png,image/gif,image/jpeg">
+                        <input type="file" required size="200" name="file" id="imagen" onchange="loadImage(event)" accept="image/x-png,image/gif,image/jpeg">
                             <div class="wrapper-upload">
                                 <div class="container">
                                     <div class="upload-top" style="background: url('/images/app/upload.png') no-repeat center center;">
@@ -151,10 +151,11 @@
     });
 </script>
 <script>
-  var loadFile = event => {
-    var output = document.getElementById('output');
-    output.src = URL.createObjectURL(event.target.files[0]);
-    output.onload = function() {
+  var loadImage = event => {
+    var outputImg = document.getElementById('output');
+    outputImg.src = URL.createObjectURL(event.target.files[0]);
+    outputImg.onload = function() {
+        console.log("hecho")
       URL.revokeObjectURL(output.src) // free memory
       document.getElementById("share").disabled = false;
     }
