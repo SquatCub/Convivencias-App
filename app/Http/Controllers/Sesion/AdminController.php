@@ -238,7 +238,7 @@ class AdminController extends Controller
             return back()->with('error', 'No es posible eliminar el comentario');
         }
     }
-    #   -   -   -   -   -   -   Funciones para Usuarios
+    #   -   -   -   -   -   -   Funciones para manejo de Usuarios
     public function usuarios() {
         $usuarios = Usuario::orderBy('nombre', 'asc')->get();
         return view('admin.usuarios', compact('usuarios'));

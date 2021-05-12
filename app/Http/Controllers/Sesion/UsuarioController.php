@@ -16,7 +16,7 @@ class UsuarioController extends Controller
         $usuario = Auth::user();
         return view('principal.index', compact('usuario'));
     }
-
+    // Funcion para hacer un comentario
     public function createComentario(Request $r) {
         $v = Validator::make($r->all(), [
             'file' => 'required',
@@ -24,7 +24,6 @@ class UsuarioController extends Controller
             'id_actividad' => 'required',
             'id_usuario' => 'required'
         ]);
-
         try {
             if ($comentario = Comentario::where('id_usuario',$r->id_usuario)->where('id_actividad', $r->id_actividad)->count()>0) {
                 return back()->with('error', 'Ya compartiste anteriormente');

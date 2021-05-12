@@ -13,6 +13,7 @@ use App\Models\Foto;
 
 class LandingController extends Controller
 {
+    // Funcion de la pagina principal, obteniendo categorias, actividades y fotos de la galeria
     public function index() {
         $categorias = Categoria::orderBy('id', 'desc')
         ->where('estado', 1)
@@ -32,6 +33,7 @@ class LandingController extends Controller
             return view('principal.index', compact('categorias', 'actividades', 'fotos', 'opt'));
         }
     }
+    // Alternar entre login y registro
     public function login($opcion) {
         $opt = "";
         if($opcion == "registro") {
@@ -39,16 +41,16 @@ class LandingController extends Controller
         } else {
             $opt = "login";
         }
-        
         $secciones = Area::orderBy('nombre', 'asc')->get();
         return view('login.index', compact('secciones', 'opcion', 'opt'));
     }
-
+    //Obtener las categorias activas
     public function categorias() {
         $opt = "categorias";
         $categorias = Categoria::orderBy('id', 'desc')->get()->where('estado', 1);
         return view('principal.categorias', compact('categorias', 'opt'));
     }
+    //Obtener actividades de una categoria
     public function verCategoria($categoria) {
         $opt = "categorias";
         if($categoria = Categoria::where('nombre', $categoria)->first()) {
@@ -58,6 +60,7 @@ class LandingController extends Controller
             return view('principal.no_encontrado', compact('opt'));
         }
     }
+    //Obtener actividades con categorias activas
     public function actividades() {
         $opt = "actividades";
         $actividades = Actividad::select('actividad.*')
@@ -68,6 +71,7 @@ class LandingController extends Controller
         ->get();
         return view('principal.actividades', compact('actividades', 'opt'));
     }
+    //Abrir la actividad
     public function verActividad($actividad) {
         $opt = "actividades";
         if($actividad = Actividad::where('nombre', $actividad)->first()) {
@@ -77,6 +81,7 @@ class LandingController extends Controller
             return view('principal.no_encontrado', compact('opt'));
         }
     }
+    //Obtener galeria de imagenes
     public function galeria() {
         $opt = "galeria";
         $fotos = Foto::orderBy('id', 'desc')->get();

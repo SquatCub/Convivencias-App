@@ -13,7 +13,7 @@ class SolicitudController extends Controller
     public function index() {
         return view('welcome');
     }
-
+    // Funcion que envia la solicitud al modelo, para ser mostrada al administrador
     public function enviarSolicitud(Request $r) {
         $v = Validator::make($r->all(), [
             'name' => 'required',
