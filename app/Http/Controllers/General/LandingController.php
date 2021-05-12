@@ -14,7 +14,7 @@ use App\Models\Foto;
 class LandingController extends Controller
 {
     public function index() {
-        $categorias = Categoria::orderBy('id', 'desc')->take(2)->get();
+        $categorias = Categoria::orderBy('id', 'desc')->take(2)->where('estado', 1)->get();
         $actividades = Actividad::orderBy('id', 'desc')->take(2)->get();
         $fotos = Foto::orderBy('id', 'desc')->take(3)->get();
         $opt = "inicio";
@@ -38,7 +38,7 @@ class LandingController extends Controller
 
     public function categorias() {
         $opt = "categorias";
-        $categorias = Categoria::orderBy('id', 'desc')->get();
+        $categorias = Categoria::orderBy('id', 'desc')->get()->where('estado', 1);
         return view('principal.categorias', compact('categorias', 'opt'));
     }
     public function verCategoria($categoria) {
