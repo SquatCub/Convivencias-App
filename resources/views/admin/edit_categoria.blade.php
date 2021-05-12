@@ -25,6 +25,15 @@
                             <textarea type="text" rows="2" class="form-control" name="descripcion">{{$categoria->descripcion}}</textarea>
                         </div>
                     </div>
+                    <div class="col-sm-12">
+                        <div class="form-group label-floating">
+                            <label for="no_de_control" class="control-label">Estado</label>
+                            <select class="form-control" name="estado" required>
+                                <option @if($categoria->estado == 0) selected @endif value="0">Desactivado</option>
+                                <option @if($categoria->estado == 1) selected @endif value="1">Activado</option>
+                            </select> 
+                        </div>
+                    </div>
                     <div class="col-sm-12 text-center">
                         <div class="form-group label-floating">
                             <label class="custom-file-upload mr-3">

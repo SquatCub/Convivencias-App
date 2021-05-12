@@ -63,6 +63,7 @@ class AdminController extends Controller
             'id' => 'required',
             'nombre' => 'required',
             'descripcion' => 'required',
+            'estado' => 'required',
             'imagen' => 'required',
         ]);
         try {
@@ -70,6 +71,7 @@ class AdminController extends Controller
             if ($categoria->nombre == $r->nombre || !($repetido = Categoria::where('nombre', $r->nombre)->count()>0)) {
                 $categoria->nombre=$r->nombre;
                 $categoria->descripcion=$r->descripcion;
+                $categoria->estado=$r->estado;
                 if(!isset($r->imagen)) {
                     $categoria->imagen=$categoria->imagen;
                 } else {

@@ -14,8 +14,16 @@ use App\Models\Foto;
 class LandingController extends Controller
 {
     public function index() {
-        $categorias = Categoria::orderBy('id', 'desc')->take(2)->where('estado', 1)->get();
-        $actividades = Actividad::orderBy('id', 'desc')->take(2)->get();
+        $categorias = Categoria::orderBy('id', 'desc')
+        ->where('estado', 1)
+        ->take(2)
+        ->get();
+        $actividades = Actividad::select('actividad.*')
+        ->join('categoria', 'categoria.id', 'actividad.id_categoria')
+        ->where('categoria.estado', 1)
+        ->take(2)
+        ->orderBy('id', 'desc')
+        ->get();
         $fotos = Foto::orderBy('id', 'desc')->take(3)->get();
         $opt = "inicio";
         if($usuario = Auth::user()) {
@@ -52,7 +60,12 @@ class LandingController extends Controller
     }
     public function actividades() {
         $opt = "actividades";
-        $actividades = Actividad::orderBy('id', 'desc')->get();
+        $actividades = Actividad::select('actividad.*')
+        ->join('categoria', 'categoria.id', 'actividad.id_categoria')
+        ->where('categoria.estado', 1)
+        ->take(2)
+        ->orderBy('id', 'desc')
+        ->get();
         return view('principal.actividades', compact('actividades', 'opt'));
     }
     public function verActividad($actividad) {
